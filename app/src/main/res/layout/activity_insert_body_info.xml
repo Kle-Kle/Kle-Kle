@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40sp"
+            android:layout_marginLeft="40sp"
             android:text="신체 정보 입력"
             android:textSize="40sp" />
     </TableLayout>
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:text="cm" />
         </TableRow>
 
@@ -80,7 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:text="kg" />
         </TableRow>
     </TableLayout>
@@ -95,7 +95,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40sp"
+            android:layout_marginLeft="40sp"
             android:layout_marginTop="60dp"
             android:text="추가 입력 사항"
             android:textSize="25sp" />
@@ -103,7 +103,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40sp"
+            android:layout_marginLeft="40sp"
             android:text="팔 길이를 입력하시면\n더 정확한 추천이 가능합니다."
             android:textSize="17sp" />
     </TableLayout>
@@ -131,7 +131,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:text="cm" />
         </TableRow>
     </TableLayout>
