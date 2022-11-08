@@ -1,43 +1,38 @@
 package com.example.klekle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-
-public class LoginActivity extends AppCompatActivity {
+public class InsertBodyInfoActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private TextView goToRegister; // 툴바 우측에 위치한 "회원가입 하기" 링크
-    private EditText loginId, loginPw;
-    private Button btnLogin;
+    private EditText inputHeight, inputWeight, inputReach;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_insert_body_info);
 
         // 툴바 생성
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생성
 
-        // 계정이 없으신가요? link가 연결된 TextView 생성
-        goToRegister = (TextView) findViewById(R.id.go_to_register);
-        goToRegister.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        btnRegister = (Button) findViewById(R.id.btn_register);
 
-        goToRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // TextView 클릭 시 실행되는 부분
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            public void onClick(View view) {
+                // '계정 생성' 버튼 클릭 시 실행되는 부분
+                // 계정 생성 후, 다시 로그인 페이지로 연결
+                Intent intent = new Intent(InsertBodyInfoActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
