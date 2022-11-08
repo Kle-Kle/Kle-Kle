@@ -87,7 +87,7 @@
                 app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <EditText
-                android:id="@+id/et_id"
+                android:id="@+id/login_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="11"
@@ -105,7 +105,7 @@
 
             <EditText
                 android:layout_margin="1dp"
-                android:id="@+id/et_pass"
+                android:id="@+id/login_pw"
                 android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:ems="11"

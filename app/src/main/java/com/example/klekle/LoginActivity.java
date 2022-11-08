@@ -7,13 +7,17 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
 public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private TextView goToRegister;
+    private TextView goToRegister; // 툴바 우측에 위치한 "회원가입 하기" 링크
+    private EditText login_id, login_pw;
+    private Button btn_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
