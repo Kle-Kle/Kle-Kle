@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private TextView goToRegister; // 툴바 우측에 위치한 "회원가입 하기" 링크
+    private TextView goToRegister, goToFindpw;
     private EditText loginId, loginPw;
     private Button btnLogin;
 
@@ -40,14 +40,20 @@ public class LoginActivity extends AppCompatActivity {
 
         // 계정이 없으신가요? link가 연결된 TextView 생성
         goToRegister = (TextView) findViewById(R.id.go_to_register);
-        goToRegister.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-
         goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TextView 클릭 시 실행되는 부분
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        goToFindpw = (TextView) findViewById(R.id.go_to_findpw);
+        goToFindpw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 비밀번호 찾기 페이지로 연결
             }
         });
 
@@ -72,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String userpw = jasonObject.getString("userpw");
                                 String nickname = jasonObject.getString("nickname");
                                 Toast.makeText(getApplicationContext(), "어서오세요, " + nickname + "님!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, CameraActivity.class);
                                 intent.putExtra("log", "user");
                                 intent.putExtra("userid", userid);
                                 startActivity(intent);

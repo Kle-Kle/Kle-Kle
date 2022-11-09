@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">클클</string>
-    <string name="styled_text1" ><strike><b><i>KLE</i></b></strike>\n<strike><b><i>KLE</i></b></strike></string>
-    <string name="styled_text2" ><b>시작하기</b></string>
+    <string name="styled_text1"><strike><b><i>KLE</i></b></strike>\n<strike><b><i>KLE</i></b></strike></string>
+    <string name="styled_text2"><b>시작하기</b></string>
+    <string name="tv_take_photo">chalkak</string>
+    <string name="tv_description">Select a preset image or take a new photo</string>
+    <string name="tv_placeholder">Object detection klekle demo</string>
 </resources>
