@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.klekle.signup.RegisterActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,8 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
 
-                            else{//회원등록 실패한 경우
-                                Toast.makeText(getApplicationContext(), "로그인 정보를 다시 확인해 주세요.", Toast.LENGTH_SHORT).show();
+                            else{
+                                Snackbar.make(v, "로그인 정보를 다시 확인해 주세요.", Snackbar.LENGTH_SHORT).show();
                                 return;
                             }
                         } catch (JSONException e) {
