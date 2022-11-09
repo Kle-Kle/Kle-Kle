@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity" >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -92,7 +92,19 @@
                 android:layout_height="wrap_content"
                 android:ems="11"
                 android:hint="아이디"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:maxLength="20" />
+        </TableRow>
+
+        <TableRow>
+            <!-- error message - id -->
+            <TextView
+                android:id="@+id/error_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red_error"
+                android:text="" />
         </TableRow>
 
         <TableRow>
@@ -110,7 +122,19 @@
                 android:layout_height="match_parent"
                 android:ems="11"
                 android:hint="비밀번호"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="40" />
+        </TableRow>
+
+        <TableRow>
+            <!-- error message - pw -->
+            <TextView
+                android:id="@+id/error_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red_error"
+                android:text="" />
         </TableRow>
     </TableLayout>
 

@@ -10,8 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -39,6 +47,49 @@ public class LoginActivity extends AppCompatActivity {
                 // TextView 클릭 시 실행되는 부분
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        loginId = findViewById(R.id.login_id);
+        loginPw = findViewById(R.id.login_pw);
+        btnLogin = findViewById(R.id.btn_login);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String userid = loginId.getText().toString();
+                String userpw = loginPw.getText().toString();
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jasonObject = new JSONObject(response);
+                            boolean success = jasonObject.getBoolean("success");
+                            if (success) {//회원등록 성공한 경우
+                                String userid = jasonObject.getString("userid");
+                                String userpw = jasonObject.getString("userpw");
+                                String nickname = jasonObject.getString("nickname");
+                                Toast.makeText(getApplicationContext(), "어서오세요, " + nickname + "님!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("log", "user");
+                                intent.putExtra("userid", userid);
+                                startActivity(intent);
+                            }
+
+
+                            else{//회원등록 실패한 경우
+                                Toast.makeText(getApplicationContext(), "로그인 정보를 다시 확인해 주세요.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                LoginRequest loginRequest = new LoginRequest(userid, userpw, responseListener);
+                RequestQueue queue= Volley.newRequestQueue(LoginActivity.this);
+                queue.add(loginRequest);
             }
         });
     }

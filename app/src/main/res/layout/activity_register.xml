@@ -69,6 +69,17 @@
         </TableRow>
 
         <TableRow>
+            <!-- error message - id -->
+            <TextView
+                android:id="@+id/error_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red_error"
+                android:text="" />
+        </TableRow>
+
+        <TableRow>
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_pw"
@@ -77,6 +88,17 @@
                 android:ems="14"
                 android:hint="비밀번호"
                 android:inputType="textPassword" />
+        </TableRow>
+
+        <TableRow>
+            <!-- error message - pw -->
+            <TextView
+                android:id="@+id/error_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red_error"
+                android:text="" />
         </TableRow>
 
         <TableRow>
@@ -91,6 +113,17 @@
         </TableRow>
 
         <TableRow>
+            <!-- error message - pw check -->
+            <TextView
+                android:id="@+id/error_pwch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red_error"
+                android:text="" />
+        </TableRow>
+
+        <TableRow>
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_nickname"
@@ -99,6 +132,17 @@
                 android:ems="14"
                 android:hint="닉네임"
                 android:inputType="textPersonName" />
+        </TableRow>
+
+        <TableRow>
+            <!-- error message - nickname -->
+            <TextView
+                android:id="@+id/error_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red_error"
+                android:text="" />
         </TableRow>
     </TableLayout>
 
