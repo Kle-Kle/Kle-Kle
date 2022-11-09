@@ -82,9 +82,10 @@
         <TableRow>
             <ImageView
                 android:id="@+id/picto1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/user" />
 
             <EditText
                 android:id="@+id/login_id"
@@ -111,9 +112,11 @@
             <ImageView
                 android:layout_margin="1dp"
                 android:id="@+id/picto2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/key" />
+
 
             <EditText
                 android:layout_margin="1dp"
