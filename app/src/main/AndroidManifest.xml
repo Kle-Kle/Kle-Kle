@@ -18,13 +18,13 @@
             android:name=".AmendBodyInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".InsertBodyInfoActivity"
+            android:name=".signup.InsertBodyInfoActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".signup.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

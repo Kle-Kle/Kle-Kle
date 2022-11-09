@@ -1,4 +1,4 @@
-package com.example.klekle;
+package com.example.klekle.signup;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,14 +9,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.klekle.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,10 +30,23 @@ public class RegisterActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private boolean validate = false;
 
+    private FragmentManager fragmentManager;
+    private RegisterFragment registerFragment;
+    private InsertBodyInfoFragment insertBodyInfoFragment;
+    private FragmentTransaction transaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        fragmentManager = getSupportFragmentManager();
+
+        registerFragment = new RegisterFragment();
+        insertBodyInfoFragment = new InsertBodyInfoFragment();
+
+//        transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.frameLayout, registerFragment).commitAllowingStateLoss();
 
         // 툴바 생성
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,8 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                             boolean success=jasonObject.getBoolean("success");//Register2 php에 sucess
                             if(userpw.equals(pwcheck)) {
                                 if (success) { // 회원등록 성공한 경우
-                                    Intent intent = new Intent(RegisterActivity.this, InsertBodyInfoActivity.class);
-                                    startActivity(intent);
+                                    transaction.replace(R.id.frameLayout, insertBodyInfoFragment).commitAllowingStateLoss();
                                 }
                             }
                             else{ // 회원등록 실패한 경우

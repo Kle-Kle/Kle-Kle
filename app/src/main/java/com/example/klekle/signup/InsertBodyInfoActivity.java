@@ -1,4 +1,4 @@
-package com.example.klekle;
+package com.example.klekle.signup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.klekle.LoginActivity;
+import com.example.klekle.R;
 
 public class InsertBodyInfoActivity extends AppCompatActivity {
     private Toolbar toolbar;
