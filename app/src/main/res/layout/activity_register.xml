@@ -24,138 +24,16 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TableLayout
-        android:id="@+id/tableLayout_Signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout_id_pw"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40sp"
-            android:text="Sign up"
-            android:textSize="40sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40sp"
-            android:text="계정 정보를 입력해주세요"
-            android:textSize="20sp" />
-    </TableLayout>
-
-    <TableLayout
-        android:id="@+id/tableLayout_id_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment_content_signup"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" >
-        <!--        android:background="@color/black"-->
-        <!--        android:padding="1dp"-->
-
-        <TableRow>
-            <EditText
-                android:id="@+id/join_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="14"
-                android:hint="아이디"
-                android:inputType="textPersonName" />
-        </TableRow>
-
-        <TableRow>
-            <!-- error message - id -->
-            <TextView
-                android:id="@+id/error_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/red_error"
-                android:text="" />
-        </TableRow>
-
-        <TableRow>
-            <EditText
-                android:layout_margin="1dp"
-                android:id="@+id/join_pw"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
-                android:ems="14"
-                android:hint="비밀번호"
-                android:inputType="textPassword" />
-        </TableRow>
-
-        <TableRow>
-            <!-- error message - pw -->
-            <TextView
-                android:id="@+id/error_pw"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/red_error"
-                android:text="" />
-        </TableRow>
-
-        <TableRow>
-            <EditText
-                android:layout_margin="1dp"
-                android:id="@+id/join_pw_check"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
-                android:ems="14"
-                android:hint="비밀번호 확인"
-                android:inputType="textPassword" />
-        </TableRow>
-
-        <TableRow>
-            <!-- error message - pw check -->
-            <TextView
-                android:id="@+id/error_pwch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/red_error"
-                android:text="" />
-        </TableRow>
-
-        <TableRow>
-            <EditText
-                android:layout_margin="1dp"
-                android:id="@+id/join_nickname"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
-                android:ems="14"
-                android:hint="닉네임"
-                android:inputType="textPersonName" />
-        </TableRow>
-
-        <TableRow>
-            <!-- error message - nickname -->
-            <TextView
-                android:id="@+id/error_nick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/red_error"
-                android:text="" />
-        </TableRow>
-    </TableLayout>
-
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="다음"
-        android:ems="11"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout_id_pw" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/signup_nav_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

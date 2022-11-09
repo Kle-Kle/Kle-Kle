@@ -6,13 +6,16 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.example.klekle.R
+import com.example.klekle.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
+    private lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // 툴바 생성
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar

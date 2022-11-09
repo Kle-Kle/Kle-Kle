@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/signup_nav_graph">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_nav_graph"
+    app:startDestination="@id/registerFragment">
+    
     <fragment
-        android:id="@+id/register_fragment"
+        android:id="@+id/registerFragment"
         android:name="com.example.klekle.signup.RegisterFragment"
-        android:label="회원 정보 입력" >
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_register_fragment_to_insertbodyinfo_fragment"
-            app:destination="@id/insertbodyinfo_fragment" />
+            android:id="@+id/action_registerFragment_to_insertBodyInfoFragment2"
+            app:destination="@id/insertBodyInfoFragment2" />
     </fragment>
-
     <fragment
-        android:id="@+id/insertbodyinfo_fragment"
+        android:id="@+id/insertBodyInfoFragment2"
         android:name="com.example.klekle.signup.InsertBodyInfoFragment"
-        android:label="신체 정보 입력" >
+        android:label="fragment_insert_body_info"
+        tools:layout="@layout/fragment_insert_body_info" >
+        <action
+            android:id="@+id/action_insertBodyInfoFragment2_to_insertReachInfoFragment"
+            app:destination="@id/insertReachInfoFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/insertReachInfoFragment"
+        android:name="com.example.klekle.signup.InsertReachInfoFragment"
+        android:label="fragment_insert_reach_info"
+        tools:layout="@layout/fragment_insert_reach_info" />
 </navigation>
