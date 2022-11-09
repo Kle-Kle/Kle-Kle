@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/signup_nav_graph">
+
+    <fragment
+        android:id="@+id/register_fragment"
+        android:name="com.example.klekle.signup.RegisterFragment"
+        android:label="회원 정보 입력" >
+        <action
+            android:id="@+id/action_register_fragment_to_insertbodyinfo_fragment"
+            app:destination="@id/insertbodyinfo_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/insertbodyinfo_fragment"
+        android:name="com.example.klekle.signup.InsertBodyInfoFragment"
+        android:label="신체 정보 입력" >
+    </fragment>
+
+</navigation>
