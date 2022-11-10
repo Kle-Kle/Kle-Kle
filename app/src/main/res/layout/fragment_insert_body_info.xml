@@ -9,7 +9,7 @@
     tools:context=".signup.InsertBodyInfoFragment">
 
     <TableLayout
-        android:id="@+id/tableLayout_id_pw"
+        android:id="@+id/tableLayout_bodyinfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

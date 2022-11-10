@@ -54,7 +54,7 @@ tools:context=".signup.InsertReachInfoFragment">
         android:layout_margin="30sp" />
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="계정 생성"

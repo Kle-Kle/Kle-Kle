@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_nav_graph"
     app:startDestination="@id/registerFragment">
-    
+
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.klekle.signup.RegisterFragment"
@@ -22,10 +22,29 @@
         <action
             android:id="@+id/action_insertBodyInfoFragment2_to_insertReachInfoFragment"
             app:destination="@id/insertReachInfoFragment" />
+        <argument
+            android:name="userid"
+            app:argType="string"/>
+        <argument
+            android:name="userpw"
+            app:argType="string"/>
+        <argument
+            android:name="userpwcheck"
+            app:argType="string"/>
+        <argument
+            android:name="nickname"
+            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/insertReachInfoFragment"
         android:name="com.example.klekle.signup.InsertReachInfoFragment"
         android:label="fragment_insert_reach_info"
-        tools:layout="@layout/fragment_insert_reach_info" />
+        tools:layout="@layout/fragment_insert_reach_info" >
+        <argument
+            android:name="height"
+            app:argType="string"/>
+        <argument
+            android:name="weight"
+            app:argType="string"/>
+    </fragment>
 </navigation>
