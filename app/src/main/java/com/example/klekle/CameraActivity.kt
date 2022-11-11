@@ -137,12 +137,13 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
 
         // Step 4: Parse the detection result and show it
         val resultToDisplay = results.map {
-            // Get the top-1 category and craft the display text
-            val category = it.categories.first()
-            val text = "${category.label}, ${category.score.times(100).toInt()}%"
+//            // Get the top-1 category and craft the display text
+//            val category = it.categories.first()
+//            val text = "${category.label}, ${category.score.times(100).toInt()}%"
 
             // Create a data object to display the detection result
-            DetectionResult(it.boundingBox, text)
+//            DetectionResult(it.boundingBox, text)
+            DetectionResult(it.boundingBox, "hold")
         }
         // Draw the detection result on the bitmap and show it.
         val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
@@ -321,29 +322,29 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
             pen.strokeWidth = 8F
             pen.style = Paint.Style.STROKE
             val box = it.boundingBox
-            canvas.drawRect(box, pen)
+//            canvas.drawRect(box, pen)
+            canvas.drawOval(box, pen)
 
-
-            val tagSize = Rect(0, 0, 0, 0)
-
-            // calculate the right font size
-            pen.style = Paint.Style.FILL_AND_STROKE
-            pen.color = Color.YELLOW
-            pen.strokeWidth = 2F
-
-            pen.textSize = MAX_FONT_SIZE
-            pen.getTextBounds(it.text, 0, it.text.length, tagSize)
-            val fontSize: Float = pen.textSize * box.width() / tagSize.width()
-
-            // adjust the font size so texts are inside the bounding box
-            if (fontSize < pen.textSize) pen.textSize = fontSize
-
-            var margin = (box.width() - tagSize.width()) / 2.0F
-            if (margin < 0F) margin = 0F
-            canvas.drawText(
-                it.text, box.left + margin,
-                box.top + tagSize.height().times(1F), pen
-            )
+//            val tagSize = Rect(0, 0, 0, 0)
+//
+//            // calculate the right font size
+//            pen.style = Paint.Style.FILL_AND_STROKE
+//            pen.color = Color.YELLOW
+//            pen.strokeWidth = 2F
+//
+//            pen.textSize = MAX_FONT_SIZE
+//            pen.getTextBounds(it.text, 0, it.text.length, tagSize)
+//            val fontSize: Float = pen.textSize * box.width() / tagSize.width()
+//
+//            // adjust the font size so texts are inside the bounding box
+//            if (fontSize < pen.textSize) pen.textSize = fontSize
+//
+//            var margin = (box.width() - tagSize.width()) / 2.0F
+//            if (margin < 0F) margin = 0F
+//            canvas.drawText(
+//                it.text, box.left + margin,
+//                box.top + tagSize.height().times(1F), pen
+//            )
         }
         return outputBitmap
     }
