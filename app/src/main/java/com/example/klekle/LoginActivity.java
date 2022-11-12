@@ -3,7 +3,6 @@ package com.example.klekle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.klekle.signup.RegisterActivity;
+import com.example.klekle.signup.InputInfoActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -45,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TextView 클릭 시 실행되는 부분
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, InputInfoActivity.class);
                 startActivity(intent);
             }
         });

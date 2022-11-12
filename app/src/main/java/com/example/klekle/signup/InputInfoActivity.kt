@@ -6,15 +6,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.example.klekle.R
-import com.example.klekle.databinding.ActivityRegisterBinding
+import com.example.klekle.databinding.ActivityInputInfoBinding
 
-class RegisterActivity : AppCompatActivity() {
+class InputInfoActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityInputInfoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityInputInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 툴바 생성

@@ -43,7 +43,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".signup.RegisterActivity"
+            android:name=".signup.InputInfoActivity"
             android:exported="false" />
         <activity
             android:name=".StartActivity"

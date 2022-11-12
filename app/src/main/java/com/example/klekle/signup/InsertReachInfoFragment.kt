@@ -17,6 +17,8 @@ class InsertReachInfoFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private var reach: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,20 +31,8 @@ class InsertReachInfoFragment : Fragment() {
         // binding.joinId.requestFocus()
         binding.btnRegister.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("reach", binding.inputReach.text.toString())
+            reach = binding.inputReach.text.toString()
         }
-
-        // argument를 추가하면 [Class명 + Args] 형태의 NavArgs 클래스가 자동생성 되는데, 여기서 꺼내어 쓸 수 있다..
-
-        /*
-        val userid = InsertBodyInfoFragmentArgs.fromBundle(requireArguments()).userid
-        val userpw = InsertBodyInfoFragmentArgs.fromBundle(requireArguments()).userpw
-        val userpwch = InsertBodyInfoFragmentArgs.fromBundle(requireArguments()).userpwcheck
-        val nickname = InsertBodyInfoFragmentArgs.fromBundle(requireArguments()).nickname
-
-        val height = InsertReachInfoFragmentArgs.fromBundle(requireArguments()).height
-        val weight = InsertReachInfoFragmentArgs.fromBundle(requireArguments()).weight
-         */
     }
 
     override fun onDestroyView() {

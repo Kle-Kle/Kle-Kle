@@ -1,31 +1,33 @@
 package com.example.klekle.signup
 
 import android.os.Bundle
-import com.example.klekle.signup.RegisterFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.klekle.R
-import com.example.klekle.databinding.FragmentRegisterBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.klekle.databinding.FragmentInsertUserInfoBinding
 
 /**
  * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
+ * Use the [InsertUserInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RegisterFragment : Fragment() {
-    private var _binding: FragmentRegisterBinding? = null
+class InsertUserInfoFragment : Fragment() {
+    private var _binding: FragmentInsertUserInfoBinding? = null
 
     private val binding get() = _binding!!
+
+    private var userid: String? = null
+    private var userpw: String? = null
+    private var userpwch: String? = null
+    private var nickname: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View { _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+    ): View { _binding = FragmentInsertUserInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,10 +36,10 @@ class RegisterFragment : Fragment() {
         // binding.joinId.requestFocus()
         binding.btnNext.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("userid", binding.joinId.text.toString())
-            bundle.putString("userpw", binding.joinPw.text.toString())
-            bundle.putString("userpwcheck", binding.joinPwCheck.text.toString())
-            bundle.putString("nickname", binding.joinNickname.text.toString())
+            userid = binding.joinId.text.toString()
+            userpw = binding.joinPw.text.toString()
+            userpwch = binding.joinPwCheck.text.toString()
+            nickname = binding.joinNickname.text.toString()
 
             findNavController().navigate(
                 R.id.action_registerFragment_to_insertBodyInfoFragment2,

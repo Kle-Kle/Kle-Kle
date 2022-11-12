@@ -5,11 +5,11 @@ import com.example.klekle.signup.InsertBodyInfoFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.klekle.R
 import com.example.klekle.databinding.FragmentInsertBodyInfoBinding
-import com.example.klekle.databinding.FragmentRegisterBinding
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -22,6 +22,9 @@ class InsertBodyInfoFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private var height: String? = null
+    private var weight: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,8 +36,8 @@ class InsertBodyInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNext.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("height", binding.inputHeight.text.toString())
-            bundle.putString("weight", binding.inputWeight.text.toString())
+            height = binding.inputHeight.text.toString()
+            weight = binding.inputWeight.text.toString()
 
             findNavController().navigate(
                 R.id.action_insertBodyInfoFragment2_to_insertReachInfoFragment,

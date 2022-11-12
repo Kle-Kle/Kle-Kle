@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.klekle.signup.RegisterFragment"
+        android:name="com.example.klekle.signup.InsertUserInfoFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        tools:layout="@layout/fragment_insert_user_info" >
         <action
             android:id="@+id/action_registerFragment_to_insertBodyInfoFragment2"
             app:destination="@id/insertBodyInfoFragment2" />
@@ -22,29 +22,11 @@
         <action
             android:id="@+id/action_insertBodyInfoFragment2_to_insertReachInfoFragment"
             app:destination="@id/insertReachInfoFragment" />
-        <argument
-            android:name="userid"
-            app:argType="string"/>
-        <argument
-            android:name="userpw"
-            app:argType="string"/>
-        <argument
-            android:name="userpwcheck"
-            app:argType="string"/>
-        <argument
-            android:name="nickname"
-            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/insertReachInfoFragment"
         android:name="com.example.klekle.signup.InsertReachInfoFragment"
         android:label="fragment_insert_reach_info"
         tools:layout="@layout/fragment_insert_reach_info" >
-        <argument
-            android:name="height"
-            app:argType="string"/>
-        <argument
-            android:name="weight"
-            app:argType="string"/>
     </fragment>
 </navigation>
