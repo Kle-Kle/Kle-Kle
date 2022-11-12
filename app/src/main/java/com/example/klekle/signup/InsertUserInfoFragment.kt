@@ -6,8 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
 import com.example.klekle.R
 import com.example.klekle.databinding.FragmentInsertUserInfoBinding
+import com.google.android.material.snackbar.Snackbar
+import org.json.JSONException
+import org.json.JSONObject
+
 
 /**
  * A simple [Fragment] subclass.
@@ -41,10 +47,44 @@ class InsertUserInfoFragment : Fragment() {
             userpwch = binding.joinPwCheck.text.toString()
             nickname = binding.joinNickname.text.toString()
 
-            findNavController().navigate(
-                R.id.action_registerFragment_to_insertBodyInfoFragment2,
-                bundle
-            )
+            if (userid.equals("")) {
+                Snackbar.make(view, "아이디는 빈 칸일 수 없습니다.", Snackbar.LENGTH_SHORT).show();
+            }
+            else {
+                if (userpw.equals("")) {
+                    Snackbar.make(view, "비밀번호는 빈 칸일 수 없습니다.", Snackbar.LENGTH_SHORT).show();
+                }
+                else if (userpw.equals(userpwch)) {
+                    if (nickname.equals("")) {
+                        Snackbar.make(view, "닉네임을 설정해 주세요.", Snackbar.LENGTH_SHORT).show();
+                    }
+                    else {
+                        val responseListener: Response.Listener<String> =
+                            Response.Listener { response ->
+                                try {
+                                    val jsonResponse = JSONObject(response)
+                                    val success = jsonResponse.getBoolean("success")
+                                    if (success) {
+                                        findNavController().navigate(
+                                            R.id.action_registerFragment_to_insertBodyInfoFragment2,
+                                            bundle
+                                        )
+                                    } else {
+                                        Snackbar.make(view, "사용할 수 없는 아이디 입니다.", Snackbar.LENGTH_SHORT).show();
+                                    }
+                                } catch (e: JSONException) {
+                                    e.printStackTrace()
+                                }
+                            }
+                        val validateRequest = ValidateRequest(userid, responseListener)
+                        val queue = Volley.newRequestQueue(context)
+                        queue.add(validateRequest)
+                    }
+                }
+                else {
+                    Snackbar.make(view, "비밀번호가 비밀번호 확인란과 일치하지 않습니다.", Snackbar.LENGTH_LONG).show();
+                }
+            }
         }
     }
 
