@@ -23,7 +23,7 @@ public class ValidateRequest extends StringRequest {
     public ValidateRequest(String userid, Response.Listener<String>listener){
         super(Request.Method.POST, URL, listener,null);
 
-        map=new HashMap<>();
+        map = new HashMap<>();
         map.put("userid", userid);
     }
 

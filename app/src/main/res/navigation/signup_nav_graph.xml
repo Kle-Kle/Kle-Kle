@@ -3,17 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_nav_graph"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/insertBodyInfoFragment2">
 
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.klekle.signup.InsertUserInfoFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_insert_user_info" >
-        <action
-            android:id="@+id/action_registerFragment_to_insertBodyInfoFragment2"
-            app:destination="@id/insertBodyInfoFragment2" />
-    </fragment>
     <fragment
         android:id="@+id/insertBodyInfoFragment2"
         android:name="com.example.klekle.signup.InsertBodyInfoFragment"

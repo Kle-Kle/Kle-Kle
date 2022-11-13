@@ -21,8 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".signup.InsertUserInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".CameraActivity"
             android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="org.tensorflow.codelabs.objectdetection.fileprovider"
@@ -37,13 +41,10 @@
             android:name=".AmendBodyInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".signup.InsertBodyInfoActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".signup.RegisterActivity"
+            android:name=".signup.InsertBodyInfoActivity"
             android:exported="false" />
         <activity
             android:name=".StartActivity"

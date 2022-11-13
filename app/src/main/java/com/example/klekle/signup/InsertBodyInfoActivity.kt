@@ -5,20 +5,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import com.android.volley.Response
-import com.android.volley.toolbox.Volley
 import com.example.klekle.R
-import com.example.klekle.databinding.ActivityRegisterBinding
-import org.json.JSONException
-import org.json.JSONObject
+import com.example.klekle.databinding.ActivityInsertBodyInfoBinding
 
-class RegisterActivity : AppCompatActivity() {
+class InsertBodyInfoActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityInsertBodyInfoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityInsertBodyInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 툴바 생성
