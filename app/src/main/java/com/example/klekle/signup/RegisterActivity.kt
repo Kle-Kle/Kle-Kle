@@ -1,21 +1,28 @@
 package com.example.klekle.signup
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
 import com.example.klekle.R
-import com.example.klekle.databinding.ActivityInsertBodyInfoBinding
+import com.example.klekle.databinding.ActivityRegisterBinding
+import com.google.android.material.snackbar.Snackbar
+import org.json.JSONException
+import org.json.JSONObject
 
-class InsertBodyInfoActivity : AppCompatActivity() {
+
+class RegisterActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private lateinit var binding: ActivityInsertBodyInfoBinding
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityInsertBodyInfoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_register)
 
         // 툴바 생성
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar

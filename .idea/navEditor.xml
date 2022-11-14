@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1288" />
-                            <option name="y" value="97" />
+                            <option name="x" value="-1169" />
+                            <option name="y" value="-115" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -41,18 +41,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="registerFragment">
+                  <entry key="insertUserInfoFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1611" />
-                            <option name="y" value="295" />
+                            <option name="x" value="-813" />
+                            <option name="y" value="-281" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_registerFragment_to_insertBodyInfoFragment2">
+                            <entry key="action_InsertUserInfoFragment_to_insertBodyInfoFragment2">
                               <value>
                                 <LayoutPositions />
                               </value>

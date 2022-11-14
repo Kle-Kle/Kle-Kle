@@ -16,8 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.klekle.signup.InsertBodyInfoActivity;
 import com.example.klekle.signup.InsertUserInfoActivity;
+import com.example.klekle.signup.RegisterActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TextView 클릭 시 실행되는 부분
-                Intent intent = new Intent(LoginActivity.this, InsertUserInfoActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });

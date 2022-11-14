@@ -44,7 +44,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".signup.InsertBodyInfoActivity"
+            android:name=".signup.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".StartActivity"

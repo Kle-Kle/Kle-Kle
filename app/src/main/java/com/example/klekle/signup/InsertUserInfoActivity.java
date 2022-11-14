@@ -13,8 +13,6 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.klekle.CameraActivity;
-import com.example.klekle.LoginActivity;
 import com.example.klekle.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -92,7 +90,7 @@ public class InsertUserInfoActivity extends AppCompatActivity {
                                         if (success) {
                                             validate = true;
 
-                                            Intent intent = new Intent(InsertUserInfoActivity.this, InsertBodyInfoActivity.class);
+                                            Intent intent = new Intent(InsertUserInfoActivity.this, RegisterActivity.class);
                                             startActivity(intent);
                                         }
                                         else {
