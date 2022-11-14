@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
@@ -41,7 +43,6 @@ class InsertUserInfoFragment : Fragment() {
         // binding.joinId.requestFocus()
 
         binding.btnNext.setOnClickListener {
-            val bundle = Bundle()
             userid = binding.joinId.text.toString()
             userpw = binding.joinPw.text.toString()
             userpwch = binding.joinPwCheck.text.toString()
@@ -65,6 +66,10 @@ class InsertUserInfoFragment : Fragment() {
                                     val jsonResponse = JSONObject(response)
                                     val success = jsonResponse.getBoolean("success")
                                     if (success) {
+                                        // 값 전송
+                                        val bundle = bundleOf("userid" to userid, "userpw" to userpw, "nickname" to nickname)
+                                        setFragmentResult("request", bundle)
+
                                         // 넘어가기
                                         findNavController().navigate(
                                             R.id.action_InsertUserInfoFragment_to_insertBodyInfoFragment2,
