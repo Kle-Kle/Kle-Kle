@@ -68,7 +68,7 @@ class InsertReachInfoFragment : Fragment() {
 
 //            println("$userid, $height, $reach")
 
-            val responseListener1: Response.Listener<String> =
+            val responseListener: Response.Listener<String> =
                 Response.Listener { response ->
                     try {
                         val jsonResponse = JSONObject(response)
@@ -84,22 +84,8 @@ class InsertReachInfoFragment : Fragment() {
                         e.printStackTrace()
                     }
                 }
-
-            val inputBodyInfoRequest = InputBodyInfoRequest(userid, height, weight, reach, responseListener1)
+            val registerRequest = RegisterRequest(userid, userpw, nickname, height, weight, reach, responseListener)
             var queue = Volley.newRequestQueue(context)
-            queue.add(inputBodyInfoRequest)
-
-            val responseListener2: Response.Listener<String> =
-                Response.Listener { response ->
-                    try {
-                        val jsonResponse = JSONObject(response)
-                        val success = jsonResponse.getBoolean("success")
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                }
-            val registerRequest = RegisterRequest(userid, userpw, nickname, responseListener2)
-            queue = Volley.newRequestQueue(context)
             queue.add(registerRequest)
         }
     }
