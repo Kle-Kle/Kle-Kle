@@ -28,6 +28,7 @@ class InsertUserInfoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var userid: String? = null
+    private var email: String? = null
     private var userpw: String? = null
     private var userpwch: String? = null
     private var nickname: String? = null
@@ -45,6 +46,7 @@ class InsertUserInfoFragment : Fragment() {
 
         binding.btnNext.setOnClickListener {
             userid = binding.joinId.text.toString()
+            email = binding.joinEmail.text.toString()
             userpw = binding.joinPw.text.toString()
             userpwch = binding.joinPwCheck.text.toString()
             nickname = binding.joinNickname.text.toString()
@@ -65,7 +67,7 @@ class InsertUserInfoFragment : Fragment() {
                                         val success = jsonResponse.getBoolean("success")
                                         if (success) {
                                             // 값 전송
-                                            val bundle = bundleOf("userid" to userid, "userpw" to userpw, "nickname" to nickname)
+                                            val bundle = bundleOf("userid" to userid, "email" to email, "userpw" to userpw, "nickname" to nickname)
                                             setFragmentResult("request", bundle)
 
                                             // 넘어가기

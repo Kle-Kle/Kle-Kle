@@ -28,6 +28,7 @@ class InsertReachInfoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var userid: String? = null
+    private var email: String? = null
     private var userpw: String? = null
     private var nickname: String? = null
 
@@ -48,6 +49,9 @@ class InsertReachInfoFragment : Fragment() {
         setFragmentResultListener("request1") { request1, bundle ->
             bundle.getString("userid")?.let { value ->
                 userid = value
+            }
+            bundle.getString("email")?.let { value ->
+                email = value
             }
             bundle.getString("userpw")?.let { value ->
                 userpw = value
@@ -84,7 +88,7 @@ class InsertReachInfoFragment : Fragment() {
                         e.printStackTrace()
                     }
                 }
-            val registerRequest = RegisterRequest(userid, userpw, nickname, height, weight, reach, responseListener)
+            val registerRequest = RegisterRequest(userid, email, userpw, nickname, height, weight, reach, responseListener)
             var queue = Volley.newRequestQueue(context)
             queue.add(registerRequest)
         }

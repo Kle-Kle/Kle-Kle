@@ -26,6 +26,7 @@ class InsertBodyInfoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var userid: String? = null
+    private var email: String? = null
     private var userpw: String? = null
     private var nickname: String? = null
 
@@ -46,6 +47,9 @@ class InsertBodyInfoFragment : Fragment() {
             bundle.getString("userid")?.let { value ->
                 userid = value
             }
+            bundle.getString("email")?.let { value ->
+                email = value
+            }
             bundle.getString("userpw")?.let { value ->
                 userpw = value
             }
@@ -65,7 +69,7 @@ class InsertBodyInfoFragment : Fragment() {
 //                println("$userid, $height")
 
                 // 값 전송
-                val bundle = bundleOf("userid" to userid, "userpw" to userpw, "nickname" to nickname, "height" to height, "weight" to weight)
+                val bundle = bundleOf("userid" to userid, "email" to email, "userpw" to userpw, "nickname" to nickname, "height" to height, "weight" to weight)
                 setFragmentResult("request1", bundle)
 
                 // 넘어가기
