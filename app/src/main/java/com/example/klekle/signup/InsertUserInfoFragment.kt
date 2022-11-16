@@ -1,6 +1,7 @@
 package com.example.klekle.signup
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,8 @@ class InsertUserInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // binding.joinId.requestFocus()
 
+        val pattern = Patterns.EMAIL_ADDRESS
+
         binding.btnNext.setOnClickListener {
             userid = binding.joinId.text.toString()
             email = binding.joinEmail.text.toString()
@@ -60,31 +63,36 @@ class InsertUserInfoFragment : Fragment() {
                             Snackbar.make(view, "닉네임을 설정해 주세요.", Snackbar.LENGTH_SHORT).show();
                         }
                         else {
-                            val responseListener: Response.Listener<String> =
-                                Response.Listener { response ->
-                                    try {
-                                        val jsonResponse = JSONObject(response)
-                                        val success = jsonResponse.getBoolean("success")
-                                        if (success) {
-                                            // 값 전송
-                                            val bundle = bundleOf("userid" to userid, "email" to email, "userpw" to userpw, "nickname" to nickname)
-                                            setFragmentResult("request", bundle)
+                            if (email.equals("") || pattern.matcher(email).matches()) {
+                                val responseListener: Response.Listener<String> =
+                                    Response.Listener { response ->
+                                        try {
+                                            val jsonResponse = JSONObject(response)
+                                            val success = jsonResponse.getBoolean("success")
+                                            if (success) {
+                                                // 값 전송
+                                                val bundle = bundleOf("userid" to userid, "email" to email, "userpw" to userpw, "nickname" to nickname)
+                                                setFragmentResult("request", bundle)
 
-                                            // 넘어가기
-                                            findNavController().navigate(
-                                                R.id.action_InsertUserInfoFragment_to_insertBodyInfoFragment2,
-                                                bundle
-                                            )
-                                        } else {
-                                            Snackbar.make(view, "사용할 수 없는 아이디 입니다.", Snackbar.LENGTH_SHORT).show();
+                                                // 넘어가기
+                                                findNavController().navigate(
+                                                    R.id.action_InsertUserInfoFragment_to_insertBodyInfoFragment2,
+                                                    bundle
+                                                )
+                                            } else {
+                                                Snackbar.make(view, "사용할 수 없는 아이디 입니다.", Snackbar.LENGTH_SHORT).show();
+                                            }
+                                        } catch (e: JSONException) {
+                                            e.printStackTrace()
                                         }
-                                    } catch (e: JSONException) {
-                                        e.printStackTrace()
                                     }
-                                }
-                            val validateRequest = ValidateRequest(userid, responseListener)
-                            val queue = Volley.newRequestQueue(context)
-                            queue.add(validateRequest)
+                                val validateRequest = ValidateRequest(userid, responseListener)
+                                val queue = Volley.newRequestQueue(context)
+                                queue.add(validateRequest)
+                            }
+                            else {
+                                Snackbar.make(view, "올바른 이메일 형식이 아닙니다.", Snackbar.LENGTH_SHORT).show();
+                            }
                         }
                     }
                     else {
