@@ -70,17 +70,33 @@ class InsertUserInfoFragment : Fragment() {
                                             val jsonResponse = JSONObject(response)
                                             val success = jsonResponse.getBoolean("success")
                                             if (success) {
-                                                // 값 전송
-                                                val bundle = bundleOf("userid" to userid, "email" to email, "userpw" to userpw, "nickname" to nickname)
-                                                setFragmentResult("request", bundle)
+                                                val responseListener2: Response.Listener<String> =
+                                                    Response.Listener { response ->
+                                                        try {
+                                                            val jsonResponse2 = JSONObject(response)
+                                                            val success2 = jsonResponse2.getBoolean("success")
+                                                            if (success2) {
+                                                                // 값 전송
+                                                                val bundle = bundleOf("userid" to userid, "email" to email, "userpw" to userpw, "nickname" to nickname)
+                                                                setFragmentResult("request", bundle)
 
-                                                // 넘어가기
-                                                findNavController().navigate(
-                                                    R.id.action_InsertUserInfoFragment_to_insertBodyInfoFragment2,
-                                                    bundle
-                                                )
+                                                                // 넘어가기
+                                                                findNavController().navigate(
+                                                                    R.id.action_InsertUserInfoFragment_to_insertBodyInfoFragment2,
+                                                                    bundle
+                                                                )
+                                                            } else {
+                                                                Snackbar.make(view, "이미 사용 중인 닉네임 입니다.", Snackbar.LENGTH_SHORT).show();
+                                                            }
+                                                        } catch (e: JSONException) {
+                                                            e.printStackTrace()
+                                                        }
+                                                    }
+                                                val nicknameValRequest = NicknameValRequest(nickname, responseListener2)
+                                                val queue2 = Volley.newRequestQueue(context)
+                                                queue2.add(nicknameValRequest)
                                             } else {
-                                                Snackbar.make(view, "사용할 수 없는 아이디 입니다.", Snackbar.LENGTH_SHORT).show();
+                                                Snackbar.make(view, "이미 사용 중인 아이디 입니다.", Snackbar.LENGTH_SHORT).show();
                                             }
                                         } catch (e: JSONException) {
                                             e.printStackTrace()
@@ -100,7 +116,7 @@ class InsertUserInfoFragment : Fragment() {
                     }
                 }
                 else {
-                    binding.errorPw.text = "영문 대/소문자, 숫자, 특수문자(!, @, #, \$, %, ^, &, \n+, =)를 포함하여 8자 이상 작성해 주세요."
+                    binding.errorPw.text = "영문 대/소문자, 숫자, 특수문자(!, ?, *, @, #, \$, %,\n^, &, +, =)를 포함하여 8자 이상 작성해 주세요."
                 }
             }
             else {
@@ -116,7 +132,7 @@ class InsertUserInfoFragment : Fragment() {
 
     fun isRegularPw(password: String): Boolean {
         // 영문, 숫자, 특수문자
-        val pwPattern = "^.*(?=^.{8,20}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$"
+        val pwPattern = "^.*(?=^.{8,20}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!?*@#\$%^&+=]).*\$"
         return (Pattern.matches(pwPattern, password))
     }
     fun isRegularId(id: String): Boolean {
