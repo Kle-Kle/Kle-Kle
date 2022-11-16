@@ -32,6 +32,12 @@
             android:textSize="20sp" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="* 는 필수 입력란입니다."
+            android:textSize="12sp" />
+
+        <TextView
             android:layout_margin="30sp" />
 
         <TableRow
@@ -47,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="cm" />
+                android:text="cm *" />
         </TableRow>
 
         <TableRow
@@ -64,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="kg" />
+                android:text="kg  " />
         </TableRow>
 
         <TextView

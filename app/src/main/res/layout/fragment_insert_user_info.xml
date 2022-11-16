@@ -32,7 +32,13 @@
             android:textSize="20sp" />
 
         <TextView
-            android:layout_margin="30sp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="* 는 필수 입력란입니다."
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_margin="25sp" />
 
         <TableRow
             android:gravity="center">
@@ -43,6 +49,11 @@
                 android:ems="14"
                 android:hint="@string/id_hint"
                 android:inputType="textPersonName" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="*" />
         </TableRow>
 
         <TableRow
@@ -61,12 +72,45 @@
             android:gravity="center">
             <EditText
                 android:layout_margin="1dp"
-                android:id="@+id/join_pw"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
+                android:id="@+id/join_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="14"
+                android:hint="이메일(example@example.com)"
+                android:inputType="textEmailAddress" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=" " />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center">
+            <!-- error message - nickname -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/purple_700"
+                android:text="@string/join_guide_email" />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center">
+            <EditText
+                android:layout_margin="1dp"
+                android:id="@+id/join_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="13"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="*" />
         </TableRow>
 
         <TableRow
@@ -86,11 +130,16 @@
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_pw_check"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="14"
                 android:hint="비밀번호 확인"
                 android:inputType="textPassword" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="*" />
         </TableRow>
 
         <TableRow
@@ -110,11 +159,16 @@
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_nickname"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="14"
                 android:hint="닉네임"
                 android:inputType="textPersonName" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="*" />
         </TableRow>
 
         <TableRow
@@ -130,7 +184,7 @@
         </TableRow>
 
         <TextView
-            android:layout_margin="30sp" />
+            android:layout_margin="25sp" />
 
         <Button
             android:id="@+id/btn_next"
