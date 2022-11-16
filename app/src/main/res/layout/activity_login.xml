@@ -145,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="6"
-                android:text="비밀번호를 잊으셨나요?"
+                android:text="계정을 잊으셨나요?"
                 android:gravity="right"
                 android:layout_span="2" />
         </TableRow>
@@ -156,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:ems="6"
-                android:text="비밀번호 찾기"
+                android:text="아이디/비밀번호 찾기"
                 android:textColor="@color/purple_200"
                 android:gravity="right"
                 android:layout_span="2" />

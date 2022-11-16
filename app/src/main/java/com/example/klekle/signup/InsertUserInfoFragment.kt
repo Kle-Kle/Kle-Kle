@@ -120,7 +120,7 @@ class InsertUserInfoFragment : Fragment() {
                 }
             }
             else {
-                binding.errorId.text = "2자 이상이어야 하며, 특수문자는 포함할 수 없습니다."
+                binding.errorId.text = "2자 이상의 영어 소문자 또는 숫자의 조합으로 작성해 주세요."
             }
         }
     }
@@ -136,8 +136,8 @@ class InsertUserInfoFragment : Fragment() {
         return (Pattern.matches(pwPattern, password))
     }
     fun isRegularId(id: String): Boolean {
-        val idPattern1 = "^(?=.*[A-Za-z])[A-Za-z]{2,20}\$" // 영문
-        val idPattern2 = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{2,20}\$" // 영문, 숫자
+        val idPattern1 = "^(?=.*[a-z])[a-z]{2,20}\$" // 영문
+        val idPattern2 = "^(?=.*[a-z])(?=.*[0-9])[a-z[0-9]]{2,20}\$" // 영문, 숫자
         return (Pattern.matches(idPattern1, id) ||
                 Pattern.matches(idPattern2, id))
     }
