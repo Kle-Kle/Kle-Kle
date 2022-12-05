@@ -89,6 +89,7 @@
             android:gravity="center">
             <!-- error message - nickname -->
             <TextView
+                android:id="@+id/error_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
