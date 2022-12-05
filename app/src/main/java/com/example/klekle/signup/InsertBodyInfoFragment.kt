@@ -78,6 +78,8 @@ class InsertBodyInfoFragment : Fragment() {
                     bundle
                 )
             }
+
+//            System.out.println(userid)
         }
     }
 
