@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String userpw = jasonObject.getString("userpw");
                                 String nickname = jasonObject.getString("nickname");
                                 Toast.makeText(getApplicationContext(), "어서오세요, " + nickname + "님!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, CameraActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("log", "user");
                                 intent.putExtra("userid", userid);
                                 startActivity(intent);
