@@ -8,4 +8,11 @@
     <string name="id_hint">아이디 영문 소문자, 숫자 조합 2 ~ 20자</string>
     <string name="password_hint">비밀번호 영문 대/소문자, 숫자, 특수문자(!, ?, *, @, #, $, %, ^, &amp;, +, =) 포함 8 ~ 30자</string>
     <string name="join_guide_email">잊어버린 계정을 되찾을 때 필요합니다.</string>
+
+    <string name="main_str1">안녕하세요!</string>
+    <string name="main_str2">클클에 오신것을 환영합니다.</string>
+    <string name="main_str3">경로 추천</string>
+    <string name="main_str4">한 발자국 더</string>
+    <string name="main_str5">어지러운 홀드\n최적의 경로를 추천</string>
+    <string name="main_str6">더 이상\n못 움직이겠다면</string>
 </resources>
