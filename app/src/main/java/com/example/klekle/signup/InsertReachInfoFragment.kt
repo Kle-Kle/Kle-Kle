@@ -72,6 +72,10 @@ class InsertReachInfoFragment : Fragment() {
 
 //            println("$userid, $height, $reach")
 
+            if (reach.equals("")) {
+                reach = (height!!.toFloat() / 3).toString()
+            }
+
             val responseListener: Response.Listener<String> =
                 Response.Listener { response ->
                     try {
