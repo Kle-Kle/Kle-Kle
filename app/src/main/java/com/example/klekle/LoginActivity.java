@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 final String userid = loginId.getText().toString();
                 String userpw = loginPw.getText().toString();
 
