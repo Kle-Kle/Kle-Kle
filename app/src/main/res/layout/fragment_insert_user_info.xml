@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/red_error"
+                android:textColor="@color/danger_500"
                 android:text="" />
         </TableRow>
 
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/primary_500"
                 android:text="@string/join_guide_email" />
         </TableRow>
 
@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/red_error"
+                android:textColor="@color/danger_500"
                 android:text="" />
         </TableRow>
 
@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/red_error"
+                android:textColor="@color/danger_500"
                 android:text="" />
         </TableRow>
 
@@ -180,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/red_error"
+                android:textColor="@color/danger_500"
                 android:text="" />
         </TableRow>
 
