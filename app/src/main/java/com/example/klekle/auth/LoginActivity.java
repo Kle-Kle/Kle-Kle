@@ -1,4 +1,4 @@
-package com.example.klekle;
+package com.example.klekle.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +16,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.klekle.signup.RegisterActivity;
+import com.example.klekle.MainActivity;
+import com.example.klekle.R;
+import com.example.klekle.auth.signup.RegisterActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;

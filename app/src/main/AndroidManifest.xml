@@ -38,13 +38,13 @@
         </provider>
 
         <activity
-            android:name=".AmendBodyInfoActivity"
+            android:name=".auth.AmendBodyInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".signup.RegisterActivity"
+            android:name=".auth.signup.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".StartActivity"

@@ -1,4 +1,4 @@
-package com.example.klekle.signup
+package com.example.klekle.auth.signup
 
 import android.os.Bundle
 import android.view.MenuItem

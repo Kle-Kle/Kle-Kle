@@ -1,7 +1,7 @@
-package com.example.klekle.signup
+package com.example.klekle.auth.signup
 
 import android.os.Bundle
-import com.example.klekle.signup.InsertBodyInfoFragment
+import com.example.klekle.auth.signup.InsertBodyInfoFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

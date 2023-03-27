@@ -1,4 +1,4 @@
-package com.example.klekle.signup
+package com.example.klekle.auth.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import androidx.navigation.fragment.findNavController
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.example.klekle.LoginActivity
-import com.example.klekle.R
+import com.example.klekle.auth.LoginActivity
 import com.example.klekle.databinding.FragmentInsertReachInfoBinding
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONException

@@ -6,7 +6,7 @@ android:layout_height="match_parent"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 android:orientation="vertical"
 android:gravity="center"
-tools:context=".signup.InsertReachInfoFragment">
+tools:context=".auth.signup.InsertReachInfoFragment">
 
 <TableLayout
     android:id="@+id/tableLayout_id_pw"

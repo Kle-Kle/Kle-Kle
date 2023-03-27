@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.klekle.signup.RegisterActivity;
+import com.example.klekle.auth.signup.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView goToRoute;

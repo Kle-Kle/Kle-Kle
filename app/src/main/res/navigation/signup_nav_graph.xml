@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/insertUserInfoFragment"
-        android:name="com.example.klekle.signup.InsertUserInfoFragment"
+        android:name="com.example.klekle.auth.signup.InsertUserInfoFragment"
         android:label="fragment_insert_user_info"
         tools:layout="@layout/fragment_insert_user_info" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/insertBodyInfoFragment2"
-        android:name="com.example.klekle.signup.InsertBodyInfoFragment"
+        android:name="com.example.klekle.auth.signup.InsertBodyInfoFragment"
         android:label="fragment_insert_body_info"
         tools:layout="@layout/fragment_insert_body_info" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/insertReachInfoFragment"
-        android:name="com.example.klekle.signup.InsertReachInfoFragment"
+        android:name="com.example.klekle.auth.signup.InsertReachInfoFragment"
         android:label="fragment_insert_reach_info"
         tools:layout="@layout/fragment_insert_reach_info" >
         <argument

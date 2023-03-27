@@ -1,4 +1,4 @@
-package com.example.klekle.signup;
+package com.example.klekle.auth.signup;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
