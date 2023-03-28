@@ -2,7 +2,9 @@ package com.example.klekle.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,10 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    private TextView goToRegister, goToFindpw;
     private EditText loginId, loginPw;
-    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +35,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // 툴바 생성
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생성
 
         // 계정이 없으신가요? link가 연결된 TextView 생성
-        goToRegister = (TextView) findViewById(R.id.go_to_register);
+        TextView goToRegister = (TextView) findViewById(R.id.go_to_register);
         goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        goToFindpw = (TextView) findViewById(R.id.go_to_findpw);
+        TextView goToFindpw = (TextView) findViewById(R.id.go_to_findpw);
         goToFindpw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,13 +60,20 @@ public class LoginActivity extends AppCompatActivity {
 
         loginId = findViewById(R.id.login_id);
         loginPw = findViewById(R.id.login_pw);
-        btnLogin = findViewById(R.id.btn_login);
+        Button btnLogin = findViewById(R.id.btn_login);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final String userid = loginId.getText().toString();
                 String userpw = loginPw.getText().toString();
+
+                // 한 번이라도 로그인 한 적 있다면 -> 자동 로그인되도록
+                SharedPreferences sharedPreferences = getSharedPreferences("login_info", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor autoLogin = sharedPreferences.edit();
+                autoLogin.putString("loginedId", userid);
+//                autoLogin.putString("loginedPw", userpw); // 비밀번호까지 저장할 필요는 없을 듯
+                autoLogin.apply();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -80,12 +86,14 @@ public class LoginActivity extends AppCompatActivity {
                                 String userpw = jasonObject.getString("userpw");
                                 String nickname = jasonObject.getString("nickname");
                                 Toast.makeText(getApplicationContext(), "어서오세요, " + nickname + "님!", Toast.LENGTH_SHORT).show();
+
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("log", "user");
                                 intent.putExtra("userid", userid);
+                                finishAffinity(); // 스택에 있는 모든 Activity 종료
+                                // 로그인이 안 된 상태면(회원이 아니면) 앱 사용 자체가 불가하게 통제
                                 startActivity(intent);
                             }
-
 
                             else{
                                 Snackbar.make(v, "로그인 정보를 다시 확인해 주세요.", Snackbar.LENGTH_SHORT).show();
