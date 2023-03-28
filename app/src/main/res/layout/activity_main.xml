@@ -152,7 +152,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_editor"
+        android:src="@drawable/icon_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/calendar"
         app:layout_constraintRight_toLeftOf="@id/chat" />
