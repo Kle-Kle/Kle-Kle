@@ -39,11 +39,11 @@
         android:layout_height="100dp"
         android:layout_margin="25dp"
         android:scaleType="fitXY"
-        android:src="@drawable/user"
+        android:src="@drawable/icon_user"
         app:layout_constraintLeft_toRightOf="@id/text1"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="@drawable/user" />
+        android:onClick="@drawable/icon_user" />
 
     <ImageView
         android:id="@+id/banner"
@@ -129,7 +129,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:scaleType="fitXY"
-        android:src="@drawable/home"
+        android:src="@drawable/icon_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -141,7 +141,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:scaleType="fitXY"
-        android:src="@drawable/calendar"
+        android:src="@drawable/icon_calendar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/home"
         app:layout_constraintRight_toLeftOf="@id/note" />
@@ -152,7 +152,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:scaleType="fitXY"
-        android:src="@drawable/note"
+        android:src="@drawable/icon_editor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/calendar"
         app:layout_constraintRight_toLeftOf="@id/chat" />
@@ -163,7 +163,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:scaleType="fitXY"
-        android:src="@drawable/chat"
+        android:src="@drawable/icon_chat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/note"
         app:layout_constraintRight_toRightOf="parent" />
