@@ -14,7 +14,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView.menu.findItem(R.id.home).isChecked = true // set default selection is 'home'
 
         // 첫 화면 지정
         val transaction = fragmentManager.beginTransaction()
