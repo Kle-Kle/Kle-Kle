@@ -23,8 +23,13 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.mainImg1.setOnClickListener {
+        binding.btnGoToCamera.setOnClickListener {
             val intent = Intent(activity, CameraActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnGoToCommunity.setOnClickListener {
+            val intent = Intent(activity, CommunityActivity::class.java)
             startActivity(intent)
         }
     }
