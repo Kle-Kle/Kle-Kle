@@ -6,8 +6,8 @@
         android:title="캘린더" />
     <item
         android:id="@+id/community"
-        android:icon="@drawable/icon_chat"
-        android:title="커뮤니티" />
+        android:icon="@drawable/icon_search"
+        android:title="탐색" />
     <item
         android:id="@+id/home"
         android:icon="@drawable/icon_home"
