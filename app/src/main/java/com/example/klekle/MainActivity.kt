@@ -3,8 +3,10 @@ package com.example.klekle
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.klekle.databinding.ActivityRegisterBinding
+import com.example.klekle.main.CalendarFragment
 import com.example.klekle.main.HomeFragment
 import com.example.klekle.main.MypageFragment
+import com.example.klekle.main.NoticeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     private val fragmentManager = supportFragmentManager
     private val homeFragment = HomeFragment()
+    private val calendarFragment = CalendarFragment()
+    private val noticeFragment = NoticeFragment()
     private val mypageFragment = MypageFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +35,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> {
                     transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss()
                 }
-                R.id.calendar -> {}
-                R.id.notice -> {}
+                R.id.calendar -> {
+                    transaction.replace(R.id.frame_layout, calendarFragment).commitAllowingStateLoss()
+                }
+                R.id.notice -> {
+                    transaction.replace(R.id.frame_layout, noticeFragment).commitAllowingStateLoss()
+                }
                 R.id.user -> {
                     transaction.replace(R.id.frame_layout, mypageFragment).commitAllowingStateLoss()
                 }
