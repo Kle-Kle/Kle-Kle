@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <font android:font="@font/nanum_square_neo_hv"
+        android:fontStyle="normal" />
+    <font android:font="@font/nanum_square_neo_rg"
+        android:fontStyle="normal" />
+    <font android:font="@font/nanum_square_neo_lt"
+        android:fontStyle="normal" />
+</font-family>
