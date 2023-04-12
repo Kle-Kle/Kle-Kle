@@ -26,11 +26,10 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val transaction = fragmentManager.beginTransaction()
             when (item.itemId) {
-                R.id.calendar -> {}
-                R.id.community -> {}
                 R.id.home -> {
                     transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss()
                 }
+                R.id.calendar -> {}
                 R.id.notice -> {}
                 R.id.user -> {
                     transaction.replace(R.id.frame_layout, mypageFragment).commitAllowingStateLoss()

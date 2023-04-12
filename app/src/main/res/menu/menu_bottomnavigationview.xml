@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/calendar"
-        android:icon="@drawable/icon_calendar"
-        android:title="캘린더" />
-    <item
-        android:id="@+id/community"
-        android:icon="@drawable/icon_search"
-        android:title="탐색" />
-    <item
         android:id="@+id/home"
         android:icon="@drawable/icon_home"
         android:title="홈" />
+    <item
+        android:id="@+id/calendar"
+        android:icon="@drawable/icon_calendar"
+        android:title="캘린더" />
     <item
         android:id="@+id/notice"
         android:icon="@drawable/icon_bell"
@@ -19,5 +15,5 @@
     <item
         android:id="@+id/user"
         android:icon="@drawable/icon_user"
-        android:title="마이페이지" />
+        android:title="나" />
 </menu>
