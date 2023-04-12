@@ -21,19 +21,18 @@ class StartActivity : AppCompatActivity() {
         loginedId = sharedPreferences.getString("loginedId", null)
 //        loginedPw = sharedPreferences.getString("loginedPw", null)
 
-        if (loginedId != null) { // 전에 로그인 한 기록이 있을 시
-            Handler().postDelayed(Runnable {
+
+        Handler().postDelayed(Runnable {
+            if (loginedId != null) { // 전에 로그인 한 기록이 있을 시
                 val intent = Intent(this@StartActivity, MainActivity::class.java)
                 finishAffinity()
                 startActivity(intent)
-            }, 2000)
-        }
-        else { // 전에 로그인 한 적이 없거나, 로그아웃 해서 기록이 사라졌을 시
-            Handler().postDelayed(Runnable {
+            }
+            else {
                 val intent = Intent(this@StartActivity, LoginActivity::class.java)
                 finishAffinity()
                 startActivity(intent)
-            }, 2000)
-        }
+            }
+        }, 1500)
     }
 }
