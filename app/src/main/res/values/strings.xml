@@ -12,8 +12,8 @@
     <string name="join_guide_email">잊어버린 계정을 되찾을 때 필요합니다.</string>
 
     <!--  fragment_home  -->
-    <string name="main_banner_title">안녕하세요!</string>
-    <string name="main_banner_text">클클에 오신 것을 환영합니다.</string>
+    <string name="main_banner_title">어서오세요!</string>
+    <string name="main_banner_text">나만의 클라이밍 코치,\n클클에 오신 것을 환영합니다.</string>
     <string name="main_content01_title">경로 추천</string>
     <string name="main_content01_text">어지러운 홀드\n최적의 경로를 추천</string>
     <string name="main_content02_title">커뮤니티</string>
