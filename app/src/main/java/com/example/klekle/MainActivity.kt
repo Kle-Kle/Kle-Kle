@@ -3,6 +3,8 @@ package com.example.klekle
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.klekle.databinding.ActivityRegisterBinding
+import com.example.klekle.main.HomeFragment
+import com.example.klekle.main.MypageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

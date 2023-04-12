@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".HomeFragment">
+    tools:context=".main.HomeFragment">
 
     <ImageView
         android:id="@+id/banner"
