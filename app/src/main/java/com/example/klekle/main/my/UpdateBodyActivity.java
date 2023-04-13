@@ -1,9 +1,8 @@
-package com.example.klekle.auth;
+package com.example.klekle.main.my;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.EditText;
 
 import com.example.klekle.R;
 
-public class AmendBodyInfoActivity extends AppCompatActivity {
+public class UpdateBodyActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText inputHeight, inputWeight, inputReach;
     private Button btnAmend;

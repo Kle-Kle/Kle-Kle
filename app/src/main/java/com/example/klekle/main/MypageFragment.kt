@@ -12,6 +12,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.klekle.auth.LoginActivity
 import com.example.klekle.databinding.FragmentMypageBinding
+import com.example.klekle.main.my.AppInfoActivity
+import com.example.klekle.main.my.SettingActivity
+import com.example.klekle.main.my.UpdateBodyActivity
+import com.example.klekle.main.my.UpdateUserActivity
 
 class MypageFragment : Fragment() {
     private var _binding: FragmentMypageBinding? = null
@@ -33,7 +37,27 @@ class MypageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val sharedPreferences = activity?.getSharedPreferences("login_info", AppCompatActivity.MODE_PRIVATE)
+        sharedPreferences = activity?.getSharedPreferences("login_info", AppCompatActivity.MODE_PRIVATE)!!
+
+        binding.btnGoToUpdateUser.setOnClickListener {
+            val intent = Intent(activity, UpdateUserActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnGoToUpdateBody.setOnClickListener {
+            val intent = Intent(activity, UpdateBodyActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnGoToSetting.setOnClickListener {
+            val intent = Intent(activity, SettingActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnGoToAppInfo.setOnClickListener {
+            val intent = Intent(activity, AppInfoActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnLogout.setOnClickListener {
             try{
