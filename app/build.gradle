@@ -34,6 +34,7 @@ android {
             viewBinding true
         }
     }
+    namespace 'com.example.klekle'
 }
 
 dependencies {
@@ -57,6 +58,7 @@ dependencies {
 
     // Feature module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:2.5.3"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // tensorflow
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.1' //object detection
