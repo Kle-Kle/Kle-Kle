@@ -18,4 +18,10 @@
     <string name="main_content01_text">어지러운 홀드\n최적의 경로를 추천</string>
     <string name="main_content02_title">커뮤니티</string>
     <string name="main_content02_text">더 이상\n못 움직이겠다면</string>
+
+    <!--  메뉴  -->
+    <string name="menu_1_title">홈</string>
+    <string name="menu_2_title">캘린더</string>
+    <string name="menu_3_title">알림</string>
+    <string name="menu_4_title">마이페이지</string>
 </resources>
