@@ -36,7 +36,7 @@
             android:text="@string/main_banner_title"
             android:textColor="@color/white"
             android:textSize="50sp"
-            android:fontFamily="@font/nanum_square_neo_lt" />
+            android:fontFamily="@font/thin" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             android:text="@string/main_banner_text"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:fontFamily="@font/nanum_square_neo_rg" />
+            android:fontFamily="@font/regular" />
     </LinearLayout>
 
     <LinearLayout
@@ -88,7 +88,7 @@
                     android:text="@string/main_content01_title"
                     android:textColor="@color/white"
                     android:textSize="25sp"
-                    android:fontFamily="@font/nanum_square_neo_rg" />
+                    android:fontFamily="@font/regular" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,7 +97,7 @@
                     android:text="@string/main_content01_text"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    android:fontFamily="@font/nanum_square_neo_lt" />
+                    android:fontFamily="@font/thin" />
             </LinearLayout>
         </LinearLayout>
 
@@ -125,7 +125,7 @@
                     android:text="@string/main_content02_title"
                     android:textColor="@color/white"
                     android:textSize="25sp"
-                    android:fontFamily="@font/nanum_square_neo_rg" />
+                    android:fontFamily="@font/regular" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -135,7 +135,7 @@
                     android:text="@string/main_content02_text"
                     android:textColor="@color/white"
                     android:textSize="15sp"
-                    android:fontFamily="@font/nanum_square_neo_lt" />
+                    android:fontFamily="@font/thin" />
             </LinearLayout>
 
             <ImageView
