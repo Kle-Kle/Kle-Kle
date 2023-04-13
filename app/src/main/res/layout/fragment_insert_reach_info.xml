@@ -23,21 +23,18 @@ tools:context=".auth.signup.InsertReachInfoFragment">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="추가 입력 사항"
-        android:fontFamily="@font/regular"
         android:textSize="40sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="팔 길이를 입력하시면\n더 정확한 추천이 가능합니다."
-        android:fontFamily="@font/regular"
         android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="* 는 필수 입력란입니다."
-        android:fontFamily="@font/regular"
         android:textSize="12sp" />
 
     <TextView
@@ -51,13 +48,11 @@ tools:context=".auth.signup.InsertReachInfoFragment">
             android:layout_height="wrap_content"
             android:ems="11"
             android:hint="리치"
-            android:fontFamily="@font/regular"
             android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:fontFamily="@font/regular"
             android:text="cm" />
     </TableRow>
 
@@ -71,7 +66,6 @@ tools:context=".auth.signup.InsertReachInfoFragment">
         android:text="계정 생성"
         android:ems="11"
         android:textSize="26sp"
-        android:fontFamily="@font/regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
