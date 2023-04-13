@@ -23,18 +23,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="신체 정보 입력"
+            android:fontFamily="@font/regular"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="신체 정보를 입력해주세요."
+            android:fontFamily="@font/regular"
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="* 는 필수 입력란입니다."
+            android:fontFamily="@font/regular"
             android:textSize="12sp" />
 
         <TextView
@@ -48,11 +51,13 @@
                 android:layout_height="wrap_content"
                 android:ems="11"
                 android:hint="키"
+                android:fontFamily="@font/regular"
                 android:inputType="numberDecimal" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:fontFamily="@font/regular"
                 android:text="cm *" />
         </TableRow>
 
@@ -65,11 +70,13 @@
                 android:layout_height="wrap_content"
                 android:ems="11"
                 android:hint="몸무게"
+                android:fontFamily="@font/regular"
                 android:inputType="numberDecimal" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:fontFamily="@font/regular"
                 android:text="kg  " />
         </TableRow>
 
@@ -83,6 +90,7 @@
             android:text="다음"
             android:ems="11"
             android:textSize="26sp"
+            android:fontFamily="@font/regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
