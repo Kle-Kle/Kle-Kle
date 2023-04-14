@@ -23,7 +23,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="게시글 작성"
+                android:text="커뮤니티"
                 android:textSize="20sp" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
