@@ -131,6 +131,11 @@
                 android:gravity="start|center"
                 android:text="갤러리 선택" />
         </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black_300"/>
 
         <LinearLayout
             android:id="@+id/btn_letsFeedback"
