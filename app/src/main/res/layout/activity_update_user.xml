@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:ems="14"
                 android:hint="이메일(example@example.com)"
+                android:text="klekle@klekle.com"
                 android:inputType="textEmailAddress" />
             <TextView
                 android:layout_width="wrap_content"
@@ -136,6 +137,7 @@
                 android:layout_height="wrap_content"
                 android:ems="14"
                 android:hint="닉네임"
+                android:text="클클닉네임"
                 android:inputType="textPersonName" />
             <TextView
                 android:layout_width="wrap_content"
