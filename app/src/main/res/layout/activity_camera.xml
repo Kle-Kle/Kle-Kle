@@ -105,7 +105,7 @@
             android:background="@color/black_300"/>
 
         <LinearLayout
-            android:id="@+id/btn_goToSetting"
+            android:id="@+id/btn_selectFromGallery"
             android:clickable="true"
             android:background="?attr/selectableItemBackground"
             android:layout_width="match_parent"
@@ -130,6 +130,34 @@
                 android:textSize="20sp"
                 android:gravity="start|center"
                 android:text="갤러리 선택" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_letsFeedback"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="40dp"
+            android:weightSum="8"
+            android:orientation="horizontal"
+            android:gravity="end|center">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="7"
+                android:paddingEnd="20dp"
+                android:textSize="20sp"
+                android:gravity="end|center"
+                android:text="경로 탐색 시작" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="end|center"
+                android:src="@drawable/icon_feedback" />
         </LinearLayout>
     </LinearLayout>
 
