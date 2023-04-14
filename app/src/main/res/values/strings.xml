@@ -23,4 +23,8 @@
     <string name="menu_2_title">캘린더</string>
     <string name="menu_3_title">알림</string>
     <string name="menu_4_title">마이페이지</string>
+
+    <!--  activity_community  -->
+    <string name="community_title">당신의 성장을 기록하세요!</string>
+    <string name="community_text">기록은 당신의 발전을 더욱 선명하게 드러내어줍니다.</string>
 </resources>
