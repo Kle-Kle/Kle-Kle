@@ -201,7 +201,7 @@
                     android:paddingVertical="10dp"
                     android:weightSum="8">
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/comment_profile_imege"
+                        android:id="@+id/comment_profile_image"
                         android:clickable="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:layout_width="0dp"
