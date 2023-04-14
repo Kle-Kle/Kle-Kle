@@ -29,8 +29,7 @@ class CalendarFragment : Fragment() {
             .setFirstDayOfWeek(Calendar.SUNDAY)
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
-
-        val oneDayDecorator = OneDayDecorator()
+        
         binding.calendarView.addDecorators(
             SundayDecorator(),
             SaturdayDecorator()
