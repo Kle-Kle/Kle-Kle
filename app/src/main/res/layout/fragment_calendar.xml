@@ -29,5 +29,16 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mcv_selectionColor="@color/primary_200"
+            app:mcv_showOtherDates="other_months" />
+    </LinearLayout>
 </FrameLayout>
