@@ -33,6 +33,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.klekle.databinding.ActivityCameraBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.tensorflow.lite.support.image.TensorImage
@@ -51,6 +52,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         const val REQUEST_IMAGE_CAPTURE: Int = 1
         private const val MAX_FONT_SIZE = 96F
     }
+    private lateinit var binding: ActivityCameraBinding
 
     private lateinit var captureImageFab: View
     private lateinit var inputImageView: ImageView
@@ -60,12 +62,21 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+        binding = ActivityCameraBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         captureImageFab = findViewById(R.id.captureImageFab)
         inputImageView = findViewById(R.id.imageView)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
 
         captureImageFab.setOnClickListener(this)
+
+        binding.btnGoToFeedback.setOnClickListener {
+            val intent = Intent(this, PostActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

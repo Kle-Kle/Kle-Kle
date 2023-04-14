@@ -138,7 +138,7 @@
             android:background="@color/black_300"/>
 
         <LinearLayout
-            android:id="@+id/btn_letsFeedback"
+            android:id="@+id/btn_goToFeedback"
             android:clickable="true"
             android:background="?attr/selectableItemBackground"
             android:layout_width="match_parent"
