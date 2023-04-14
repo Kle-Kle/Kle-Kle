@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".ArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".main.my.AppInfoActivity"
             android:exported="false" />
         <activity

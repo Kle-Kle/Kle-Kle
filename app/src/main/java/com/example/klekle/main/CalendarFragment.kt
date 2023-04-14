@@ -1,10 +1,12 @@
 package com.example.klekle.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.klekle.ArticleActivity
 import com.example.klekle.databinding.FragmentCalendarBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
@@ -34,6 +36,11 @@ class CalendarFragment : Fragment() {
             SundayDecorator(),
             SaturdayDecorator()
         )
+
+        binding.btnGoToArticle.setOnClickListener {
+            val intent = Intent(activity, ArticleActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

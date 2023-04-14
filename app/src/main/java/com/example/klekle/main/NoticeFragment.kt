@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.widget.AppCompatButton
+import com.example.klekle.ArticleActivity
 import com.example.klekle.CameraActivity
 import com.example.klekle.CommunityActivity
 import com.example.klekle.databinding.FragmentNoticeBinding
@@ -25,7 +26,10 @@ class NoticeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        binding.btnGoToArticle.setOnClickListener {
+            val intent = Intent(activity, ArticleActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
