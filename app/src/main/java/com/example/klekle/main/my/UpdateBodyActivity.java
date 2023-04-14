@@ -19,7 +19,7 @@ public class UpdateBodyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_amend_body_info);
+        setContentView(R.layout.activity_update_body);
 
         btnAmend = (Button) findViewById(R.id.btn_amend);
 
