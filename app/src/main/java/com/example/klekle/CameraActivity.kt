@@ -52,11 +52,8 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         private const val MAX_FONT_SIZE = 96F
     }
 
-    private lateinit var captureImageFab: Button
+    private lateinit var captureImageFab: View
     private lateinit var inputImageView: ImageView
-    private lateinit var imgSampleOne: ImageView
-    private lateinit var imgSampleTwo: ImageView
-    private lateinit var imgSampleThree: ImageView
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
 
@@ -66,15 +63,9 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
 
         captureImageFab = findViewById(R.id.captureImageFab)
         inputImageView = findViewById(R.id.imageView)
-        imgSampleOne = findViewById(R.id.imgSampleOne)
-        imgSampleTwo = findViewById(R.id.imgSampleTwo)
-        imgSampleThree = findViewById(R.id.imgSampleThree)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
 
         captureImageFab.setOnClickListener(this)
-        imgSampleOne.setOnClickListener(this)
-        imgSampleTwo.setOnClickListener(this)
-        imgSampleThree.setOnClickListener(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -98,15 +89,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
                 } catch (e: ActivityNotFoundException) {
                     Log.e(TAG, e.message.toString())
                 }
-            }
-            R.id.imgSampleOne -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_one))
-            }
-            R.id.imgSampleTwo -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_two))
-            }
-            R.id.imgSampleThree -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_three))
             }
         }
     }

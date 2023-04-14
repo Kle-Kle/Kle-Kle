@@ -2,9 +2,8 @@
     <string name="app_name">클클</string>
     <string name="app_title"><strike><b><i>KLE</i></b></strike>\n<strike><b><i>KLE</i></b></strike></string>
 
-    <string name="tv_take_photo">chalkak</string>
-    <string name="tv_description">Select a preset image or take a new photo</string>
-    <string name="tv_placeholder">Object detection klekle demo</string>
+    <string name="tv_description">* 현장에서 촬영하거나 갤러리에서 선택하여 암벽장의 사진을 입력합니다.</string>
+    <string name="tv_placeholder">KLEKLE\nHOLD\nDETECTOR</string>
 
     <!--  auth.signup  -->
     <string name="id_hint">아이디 영문 소문자, 숫자 조합 2 ~ 20자</string>
