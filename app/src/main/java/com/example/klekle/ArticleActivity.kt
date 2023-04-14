@@ -1,5 +1,6 @@
 package com.example.klekle
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.klekle.databinding.ActivityArticleBinding
@@ -15,5 +16,9 @@ class ArticleActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.commentProfileImage.setOnClickListener {
+            val intent = Intent(this, UserPageActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

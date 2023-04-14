@@ -19,5 +19,10 @@ class CommunityActivity : AppCompatActivity() {
             val intent = Intent(this, ArticleActivity::class.java)
             startActivity(intent)
         }
+
+        binding.articleProfileImage.setOnClickListener {
+            val intent = Intent(this, UserPageActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
