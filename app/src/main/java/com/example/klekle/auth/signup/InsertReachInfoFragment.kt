@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.android.volley.Response
@@ -80,9 +81,8 @@ class InsertReachInfoFragment : Fragment() {
                         val jsonResponse = JSONObject(response)
                         val success = jsonResponse.getBoolean("success")
                         if (success) {
-                            // 넘어가기
-                            val intent = Intent(activity, LoginActivity::class.java)
-                            startActivity(intent)
+                            // login activity 보이기
+                            activity?.finish()
                         } else {
                             Snackbar.make(view, "입력 조건을 다시 한 번 확인해 주세요.", Snackbar.LENGTH_SHORT).show();
                         }
