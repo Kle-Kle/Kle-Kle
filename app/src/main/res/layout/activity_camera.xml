@@ -102,7 +102,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black_300"/>
+            android:background="@color/black_200"/>
 
         <LinearLayout
             android:id="@+id/btn_selectFromGallery"
@@ -135,7 +135,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black_300"/>
+            android:background="@color/black_200"/>
 
         <LinearLayout
             android:id="@+id/btn_goToFeedback"
