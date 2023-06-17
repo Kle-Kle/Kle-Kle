@@ -131,9 +131,13 @@ class InsertUserInfoFragment : Fragment() {
                             e.printStackTrace()
                         }
                     }
-                val validateRequest = ValidateRequest(userid, responseListener)
+                val useridValRequest =
+                    UseridValRequest(
+                        userid,
+                        responseListener
+                    )
                 val queue = Volley.newRequestQueue(context)
-                queue.add(validateRequest)
+                queue.add(useridValRequest)
             }
         }
     }

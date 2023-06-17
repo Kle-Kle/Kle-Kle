@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class NicknameValRequest extends StringRequest {
     //서버 url 설정(php파일 연동)
-    final static  private String URL="https://yewon-txuxl.run.goorm.io/klekle/nicknameValidate.php";
+    final static  private String URL="https://yewon-txuxl.run.goorm.io/klekle/auth/nicknameValidate.php";
     private Map<String,String> map;
 
     public NicknameValRequest(String nickname, Response.Listener<String>listener){
