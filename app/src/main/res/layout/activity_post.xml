@@ -93,7 +93,7 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="180dp"
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="20dp"
                 android:textSize="20sp"
