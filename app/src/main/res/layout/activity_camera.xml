@@ -30,140 +30,150 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_marginTop="60dp"
-        android:layout_above="@+id/tvDescription">
-
-        <TextView
-            android:id="@+id/tvPlaceholder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/tv_placeholder"
-            android:textAlignment="center"
-            android:textSize="40sp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            android:scaleType="centerInside" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/tvDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/linearLayout"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="10dp"
-        android:text="@string/tv_description" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center|bottom"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/captureImageFab"
-            android:clickable="true"
-            android:background="?attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="40dp"
-            android:weightSum="8"
-            android:orientation="horizontal"
-            android:gravity="start|center">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:gravity="start|center"
-                android:src="@drawable/icon_camera" />
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvPlaceholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingVertical="60dp"
+                    android:text="@string/tv_placeholder"
+                    android:textAlignment="center"
+                    android:textSize="40sp" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:scaleType="centerInside" />
+            </FrameLayout>
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="7"
-                android:paddingStart="20dp"
-                android:textSize="20sp"
-                android:gravity="start|center"
-                android:text="사진 촬영" />
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/linearLayout"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="10dp"
+                android:text="@string/tv_description" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center|bottom"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/captureImageFab"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="start|center">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:src="@drawable/icon_camera" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingStart="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="사진 촬영" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black_200"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_selectFromGallery"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="start|center">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:src="@drawable/icon_gallery" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingStart="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="갤러리 선택" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black_200"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_goToFeedback"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="end|center">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingEnd="20dp"
+                        android:textSize="20sp"
+                        android:gravity="end|center"
+                        android:text="경로 탐색 시작" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:gravity="end|center"
+                        android:src="@drawable/icon_feedback" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black_200"/>
-
-        <LinearLayout
-            android:id="@+id/btn_selectFromGallery"
-            android:clickable="true"
-            android:background="?attr/selectableItemBackground"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="40dp"
-            android:weightSum="8"
-            android:orientation="horizontal"
-            android:gravity="start|center">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_weight="1"
-                android:gravity="start|center"
-                android:src="@drawable/icon_gallery" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="7"
-                android:paddingStart="20dp"
-                android:textSize="20sp"
-                android:gravity="start|center"
-                android:text="갤러리 선택" />
-        </LinearLayout>
-        
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black_200"/>
-
-        <LinearLayout
-            android:id="@+id/btn_goToFeedback"
-            android:clickable="true"
-            android:background="?attr/selectableItemBackground"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="40dp"
-            android:weightSum="8"
-            android:orientation="horizontal"
-            android:gravity="end|center">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="7"
-                android:paddingEnd="20dp"
-                android:textSize="20sp"
-                android:gravity="end|center"
-                android:text="경로 탐색 시작" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_weight="1"
-                android:gravity="end|center"
-                android:src="@drawable/icon_feedback" />
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
