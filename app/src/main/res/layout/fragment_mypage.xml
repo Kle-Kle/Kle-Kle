@@ -31,97 +31,35 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_imege"
-            android:clickable="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/icon_user"
-            app:civ_border_width="1dp"
-            app:civ_border_color="@color/black"
-            android:layout_marginTop="100dp" />
-
-        <TextView
-            android:id="@+id/tv_nickname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="클클닉네임"
-            android:textSize="26sp"
-            android:gravity="center"
-            android:layout_margin="30dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="3dp"
-            android:background="@color/black_200"/>
-
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/btn_goToUpdateUser"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_imege"
                 android:clickable="true"
-                android:background="?attr/selectableItemBackground"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/icon_user"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/black"
+                android:layout_marginTop="100dp" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="40dp"
-                android:weightSum="8"
-                android:orientation="horizontal"
-                android:gravity="start|center">
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:src="@drawable/icon_web" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="7"
-                    android:paddingStart="20dp"
-                    android:textSize="20sp"
-                    android:gravity="start|center"
-                    android:text="계정 정보 수정" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_goToUpdateBody"
-                android:clickable="true"
-                android:background="?attr/selectableItemBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="40dp"
-                android:weightSum="8"
-                android:orientation="horizontal"
-                android:gravity="start|center">
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:src="@drawable/icon_body" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="7"
-                    android:paddingStart="20dp"
-                    android:textSize="20sp"
-                    android:gravity="start|center"
-                    android:text="신체 정보 수정" />
-            </LinearLayout>
+                android:text="클클닉네임"
+                android:textSize="26sp"
+                android:gravity="center"
+                android:layout_margin="30dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -130,96 +68,163 @@
                 android:background="@color/black_200"/>
 
             <LinearLayout
-                android:id="@+id/btn_goToSetting"
-                android:clickable="true"
-                android:background="?attr/selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="40dp"
-                android:weightSum="8"
-                android:orientation="horizontal"
-                android:gravity="start|center">
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:src="@drawable/icon_setting" />
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/btn_goToUpdateUser"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="start|center">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:src="@drawable/icon_web" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="7"
-                    android:paddingStart="20dp"
-                    android:textSize="20sp"
-                    android:gravity="start|center"
-                    android:text="설정" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingStart="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="계정 정보 수정" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/btn_goToAppInfo"
-                android:clickable="true"
-                android:background="?attr/selectableItemBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="40dp"
-                android:weightSum="8"
-                android:orientation="horizontal"
-                android:gravity="start|center">
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:src="@drawable/icon_infomation" />
+                <LinearLayout
+                    android:id="@+id/btn_goToUpdateBody"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="start|center">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:src="@drawable/icon_body" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="7"
-                    android:paddingStart="20dp"
-                    android:textSize="20sp"
-                    android:gravity="start|center"
-                    android:text="앱 정보" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingStart="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="신체 정보 수정" />
+                </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="3dp"
-                android:background="@color/black_200"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="3dp"
+                    android:background="@color/black_200"/>
 
-            <LinearLayout
-                android:id="@+id/btn_logout"
-                android:clickable="true"
-                android:background="?attr/selectableItemBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="40dp"
-                android:weightSum="8"
-                android:orientation="horizontal"
-                android:gravity="start|center">
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:src="@drawable/icon_logout" />
+                <LinearLayout
+                    android:id="@+id/btn_goToSetting"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="start|center">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:src="@drawable/icon_setting" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="7"
-                    android:paddingStart="20dp"
-                    android:textSize="20sp"
-                    android:gravity="start|center"
-                    android:text="로그아웃" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingStart="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="설정" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_goToAppInfo"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="start|center">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:src="@drawable/icon_infomation" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingStart="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="앱 정보" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="3dp"
+                    android:background="@color/black_200"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_logout"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:weightSum="8"
+                    android:orientation="horizontal"
+                    android:gravity="start|center">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:src="@drawable/icon_logout" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="7"
+                        android:paddingStart="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="로그아웃" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 
 
