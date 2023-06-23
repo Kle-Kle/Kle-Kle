@@ -29,58 +29,71 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/calendarView"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:mcv_selectionColor="@color/primary_200"
-            app:mcv_showOtherDates="other_months" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center">
 
-    <LinearLayout
-        android:id="@+id/btn_goToArticle"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:weightSum="3"
-        android:layout_marginTop="540dp"
-        android:paddingHorizontal="10dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_meal_one" />
+<!--            캘린더-->
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mcv_selectionColor="@color/primary_200"
+                    app:mcv_showOtherDates="other_months" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:gravity="start"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+<!--            오늘의 활동 기록이 나타나는 부분-->
+            <LinearLayout
+                android:id="@+id/btn_goToArticle"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2023-04-14 15:12:16"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:weightSum="3"
+                android:paddingHorizontal="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="2"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_meal_one" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="오늘 핑거테이프 감는 방법부터 다시 배웠네요 ㅋㅋ"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:gravity="start"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2023-04-14 15:12:16"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="오늘 핑거테이프 감는 방법부터 다시 배웠네요 ㅋㅋ"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>
