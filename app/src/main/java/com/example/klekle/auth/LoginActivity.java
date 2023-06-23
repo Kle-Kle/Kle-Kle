@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest(userid, userpw, responseListener);
                 RequestQueue queue= Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
+                //Login php 연결 -> LoginRequest.java
             }
         });
     }
