@@ -56,7 +56,7 @@ public class UpdateBodyActivity extends AppCompatActivity {
                         inputReach.setText(jsonObject.getString("reach"));
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "신체 정보 불러오기에 실패했습니다.\n잠시 뒤에 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "신체 정보 불러오기에 실패했습니다.\n잠시 후 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
