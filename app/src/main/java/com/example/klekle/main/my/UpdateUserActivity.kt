@@ -1,25 +1,37 @@
 package com.example.klekle.main.my
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.klekle.R
+import com.example.klekle.databinding.ActivityUpdateUserBinding
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.regex.Pattern
 
 class UpdateUserActivity : AppCompatActivity() {
     private val toolbar: Toolbar? = null
+
     private lateinit var inputEmail: EditText
     private lateinit var inputPassword: EditText
     private lateinit var inputPwCheck: EditText
+
+    private lateinit var errorPw: TextView
+    private lateinit var errorPwCh: TextView
+    private lateinit var errorEmail: TextView
+
     private var btnAmend: Button? = null
+
+    val pattern = Patterns.EMAIL_ADDRESS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,33 +80,58 @@ class UpdateUserActivity : AppCompatActivity() {
             val email = inputEmail.getText().toString()
             val userpw = inputPassword.getText().toString()
             val userpwch = inputPwCheck.getText().toString()
-            val responseListener: Response.Listener<String> =
-                Response.Listener { response ->
-                    try {
-                        val jasonObject = JSONObject(response)
-                        val success = jasonObject.getBoolean("success")
-                        if (success) { // 정보 수정에 성공한 경우
-                            Toast.makeText(
-                                applicationContext,
-                                "정보가 수정되었습니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            finish()
-                        } else {
-                            Toast.makeText(
-                                applicationContext,
-                                "정보 수정에 실패했습니다.\n잠시 뒤에 다시 시도해 주세요.",
-                                Toast.LENGTH_SHORT
-                            ).show()
+
+            errorPw = findViewById(R.id.error_pw)
+            errorPwCh = findViewById(R.id.error_pwch)
+            errorEmail = findViewById(R.id.error_email)
+
+            if (isRegularPw(userpw)) {
+                errorPw.text = "" // 안내 메세지 숨김
+            } else {
+                errorPw.text = "영문 대/소문자, 숫자, 특수문자(!, ?, *, @, #, \$, %,\n^, &, +, =)를 포함하여 8자 이상 작성해 주세요."
+            }
+
+            if (userpw.equals(userpwch)) {
+                errorPwCh.text = ""
+            } else {
+                errorPwCh.text = "비밀번호가 일치하지 않습니다."
+            }
+
+            if (email.equals("") || pattern.matcher(email).matches()) {
+                errorEmail.text = "잊어버린 계정을 되찾을 때 필요합니다."
+            } else {
+                errorEmail.text = "올바른 이메일 형식이 아닙니다."
+            }
+
+            if (errorPw.text.equals("") && errorPwCh.text.equals("") && errorEmail.text.equals("잊어버린 계정을 되찾을 때 필요합니다.")) {
+                val responseListener: Response.Listener<String> =
+                    Response.Listener { response ->
+                        try {
+                            val jasonObject = JSONObject(response)
+                            val success = jasonObject.getBoolean("success")
+                            if (success) { // 정보 수정에 성공한 경우
+                                Toast.makeText(
+                                    applicationContext,
+                                    "정보가 수정되었습니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                finish()
+                            } else {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "정보 수정에 실패했습니다.\n잠시 후 다시 시도해 주세요.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
                         }
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
                     }
-                }
-            val updateUserRequest =
-                UpdateUserRequest(userid, email, userpw, responseListener)
-            val queue = Volley.newRequestQueue(this@UpdateUserActivity)
-            queue.add(updateUserRequest)
+                val updateUserRequest =
+                    UpdateUserRequest(email, userpw, userid, responseListener)
+                val queue = Volley.newRequestQueue(this@UpdateUserActivity)
+                queue.add(updateUserRequest)
+            }
         }
     }
 
@@ -107,5 +144,11 @@ class UpdateUserActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun isRegularPw(password: String): Boolean {
+        // 영문, 숫자, 특수문자
+        val pwPattern = "^.*(?=^.{8,20}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!?*@#\$%^&+=]).*\$"
+        return (Pattern.matches(pwPattern, password))
     }
 }
