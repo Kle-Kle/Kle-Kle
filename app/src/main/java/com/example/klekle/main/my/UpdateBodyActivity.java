@@ -67,14 +67,36 @@ public class UpdateBodyActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(UpdateBodyActivity.this);
         queue.add(getBodyRequest);
 
+        // '수정' 버튼 클릭 시 실행되는 부분
         btnAmend = (Button) findViewById(R.id.btn_amend);
         btnAmend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // '계정 생성' 버튼 클릭 시 실행되는 부분
-                // 계정 생성 후, 다시 로그인 페이지로 연결
-//                Intent intent = new Intent(AmendBodyInfoActivity.this, LoginActivity.class);
-//                startActivity(intent);
+                final String height = inputHeight.getText().toString();
+                final String weight = inputWeight.getText().toString();
+                final String reach = inputReach.getText().toString();
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jasonObject = new JSONObject(response);
+                            boolean success = jasonObject.getBoolean("success");
+                            if (success) { // 정보 수정에 성공한 경우
+                                Toast.makeText(getApplicationContext(), "신체 정보가 수정되었습니다.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "신체 정보 수정에 실패했습니다.\n잠시 뒤에 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                UpdateBodyRequest updateBodyRequest = new UpdateBodyRequest(height, weight, reach, userid, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(UpdateBodyActivity.this);
+                queue.add(updateBodyRequest);
             }
         });
     }
