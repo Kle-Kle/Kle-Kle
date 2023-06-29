@@ -67,6 +67,9 @@ class InsertBodyInfoFragment : Fragment() {
             }
             else {
 //                println("$userid, $height")
+                if (weight.equals("")) {
+                    weight = "0"
+                }
 
                 // 값 전송
                 val bundle = bundleOf("userid" to userid, "email" to email, "userpw" to userpw, "nickname" to nickname, "height" to height, "weight" to weight)
