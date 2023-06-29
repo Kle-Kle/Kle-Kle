@@ -69,7 +69,7 @@
                     android:text="이메일" />
                 <EditText
                     android:layout_margin="1dp"
-                    android:id="@+id/join_email"
+                    android:id="@+id/input_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="11"
@@ -108,7 +108,7 @@
                     android:text="비밀번호" />
                 <EditText
                     android:layout_margin="1dp"
-                    android:id="@+id/join_pw"
+                    android:id="@+id/input_pw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="11"
@@ -148,7 +148,7 @@
                     android:textSize="12sp"
                     android:text="비밀번호\n확인" />
                 <EditText
-                    android:id="@+id/join_pw_check"
+                    android:id="@+id/input_pw_check"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="11"
@@ -176,34 +176,6 @@
             </TableRow>
 
             <TableRow
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:weightSum="14">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textAlignment="textEnd"
-                    android:layout_marginEnd="10dp"
-                    android:text="닉네임" />
-                <EditText
-                    android:layout_margin="1dp"
-                    android:id="@+id/join_nickname"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="11"
-                    android:ems="14"
-                    android:hint="닉네임"
-                    android:inputType="textPersonName" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd"
-                    android:text="*" />
-            </TableRow>
-
-            <TableRow
                 android:gravity="center">
                 <!-- error message - nickname -->
                 <TextView
@@ -219,7 +191,7 @@
                 android:layout_margin="25sp" />
 
             <Button
-                android:id="@+id/btn_next"
+                android:id="@+id/btn_amend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="수정"
