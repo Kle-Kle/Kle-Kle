@@ -41,35 +41,58 @@
             android:layout_margin="30sp" />
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:weightSum="14">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="10dp"
+                android:textSize="12sp"
+                android:text="키" />
             <EditText
                 android:id="@+id/input_height"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="11"
                 android:ems="11"
                 android:hint="키"
                 android:inputType="numberDecimal" />
             <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
                 android:text="cm *" />
         </TableRow>
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:weightSum="14">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="10dp"
+                android:textSize="12sp"
+                android:text="몸무게" />
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/input_weight"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="11"
                 android:ems="11"
                 android:hint="몸무게"
                 android:inputType="numberDecimal" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
                 android:text="kg  " />
         </TableRow>
 
