@@ -68,29 +68,29 @@ public class LoginActivity extends AppCompatActivity {
                 final String userid = loginId.getText().toString();
                 String userpw = loginPw.getText().toString();
 
-                // 한 번이라도 로그인 한 적 있다면 -> 자동 로그인되도록
-                SharedPreferences sharedPreferences = getSharedPreferences("login_info", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor autoLogin = sharedPreferences.edit();
-                autoLogin.putString("loginedId", userid);
-//                autoLogin.putString("loginedPw", userpw); // 비밀번호까지 저장할 필요는 없을 듯
-                autoLogin.apply();
-
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jasonObject = new JSONObject(response);
                             boolean success = jasonObject.getBoolean("success");
-                            if (success) { // 회원등록 성공한 경우
+                            if (success) { // 로그인 성공한 경우
                                 String userid = jasonObject.getString("userid");
                                 String nickname = jasonObject.getString("nickname");
                                 Toast.makeText(getApplicationContext(), "어서오세요, " + nickname + "님!", Toast.LENGTH_SHORT).show();
+
+                                // 한 번이라도 로그인 한 적 있다면 -> 자동 로그인되도록
+                                SharedPreferences sharedPreferences = getSharedPreferences("login_info", Activity.MODE_PRIVATE);
+                                SharedPreferences.Editor autoLogin = sharedPreferences.edit();
+                                autoLogin.putString("loginedId", userid);
+                                autoLogin.putString("nickname", nickname); // shared preference 에 nickname 저장
+                                autoLogin.apply();
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("log", "user");
                                 intent.putExtra("userid", userid);
                                 finishAffinity(); // 스택에 있는 모든 Activity 종료
-                                // 로그인이 안 된 상태면(회원이 아니면) 앱 사용 자체가 불가하게 통제
+                                // 로그인이 안 된 상태면(회원이 아니면) 앱 사용 자체가 불가하도록 통제
                                 startActivity(intent);
                             }
 
