@@ -74,7 +74,6 @@ class MypageFragment : Fragment() {
                                 val jasonObject = JSONObject(response)
                                 val success = jasonObject.getBoolean("success")
                                 if (success) { // 수정에 성공한 경우
-                                    // 한 번이라도 로그인 한 적 있다면 -> 자동 로그인되도록
                                     val sharedPreferences: SharedPreferences =
                                         requireActivity().getSharedPreferences("login_info", Activity.MODE_PRIVATE)
                                     val autoLogin = sharedPreferences.edit()
@@ -85,17 +84,9 @@ class MypageFragment : Fragment() {
                                     activity?.finishAffinity()
                                     startActivity(intent)
 
-                                    Toast.makeText(
-                                        activity,
-                                        "닉네임이 수정되었습니다.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Toast.makeText(activity, "닉네임이 변경되었습니다.", Toast.LENGTH_SHORT).show()
                                 } else {
-                                    Toast.makeText(
-                                        activity,
-                                        "닉네임 수정에 실패했습니다.\n잠시 후 다시 시도해 주세요.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Toast.makeText(activity, "닉네임 변경에 실패했습니다.\n사용할 수 없는 닉네임입니다.", Toast.LENGTH_SHORT).show()
                                 }
                             } catch (e: JSONException) {
                                 e.printStackTrace()
