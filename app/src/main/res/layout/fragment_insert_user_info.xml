@@ -41,18 +41,29 @@
             android:layout_margin="25sp" />
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:weightSum="14">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="10dp"
+                android:text="아이디" />
             <EditText
                 android:id="@+id/join_id"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="11"
                 android:ems="14"
                 android:hint="@string/id_hint"
                 android:inputType="textPersonName" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
                 android:text="*" />
         </TableRow>
 
@@ -69,19 +80,30 @@
         </TableRow>
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:weightSum="14">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="10dp"
+                android:textSize="12sp"
+                android:text="이메일" />
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_email"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="11"
                 android:ems="14"
                 android:hint="이메일(example@example.com)"
                 android:inputType="textEmailAddress" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:text=" " />
         </TableRow>
 
@@ -98,19 +120,31 @@
         </TableRow>
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:weightSum="14">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="10dp"
+                android:textSize="11sp"
+                android:text="비밀번호" />
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_pw"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="11"
                 android:ems="13"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
                 android:text="*" />
         </TableRow>
 
@@ -127,19 +161,31 @@
         </TableRow>
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:weightSum="14">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="10dp"
+                android:textSize="11sp"
+                android:text="비밀번호\n확인" />
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_pw_check"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="11"
                 android:ems="14"
                 android:hint="비밀번호 확인"
                 android:inputType="textPassword" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
                 android:text="*" />
         </TableRow>
 
@@ -156,19 +202,31 @@
         </TableRow>
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:weightSum="14">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="10dp"
+                android:textSize="12sp"
+                android:text="닉네임" />
             <EditText
                 android:layout_margin="1dp"
                 android:id="@+id/join_nickname"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="11"
                 android:ems="14"
                 android:hint="닉네임"
                 android:inputType="textPersonName" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
                 android:text="*" />
         </TableRow>
 
