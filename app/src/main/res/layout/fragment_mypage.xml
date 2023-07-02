@@ -45,8 +45,8 @@
                 android:id="@+id/profile_imege"
                 android:clickable="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@drawable/icon_user"
                 app:civ_border_width="1dp"
                 app:civ_border_color="@color/black"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:text="클클닉네임"
-                    android:textSize="26sp"
+                    android:textSize="20sp"
                     android:gravity="start" />
                 <TextView
                     android:id="@+id/btn_update_nickname"
@@ -94,14 +94,14 @@
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="30dp"
                     android:weightSum="8"
                     android:orientation="horizontal"
                     android:gravity="start|center">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
                         android:src="@drawable/icon_web" />
@@ -111,7 +111,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="7"
                         android:paddingStart="20dp"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:gravity="start|center"
                         android:text="계정 정보 수정" />
                 </LinearLayout>
@@ -122,14 +122,14 @@
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="30dp"
                     android:weightSum="8"
                     android:orientation="horizontal"
                     android:gravity="start|center">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
                         android:src="@drawable/icon_body" />
@@ -139,7 +139,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="7"
                         android:paddingStart="20dp"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:gravity="start|center"
                         android:text="신체 정보 수정" />
                 </LinearLayout>
@@ -156,14 +156,14 @@
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="30dp"
                     android:weightSum="8"
                     android:orientation="horizontal"
                     android:gravity="start|center">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
                         android:src="@drawable/icon_setting" />
@@ -173,7 +173,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="7"
                         android:paddingStart="20dp"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:gravity="start|center"
                         android:text="설정" />
                 </LinearLayout>
@@ -184,14 +184,14 @@
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="30dp"
                     android:weightSum="8"
                     android:orientation="horizontal"
                     android:gravity="start|center">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
                         android:src="@drawable/icon_infomation" />
@@ -201,7 +201,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="7"
                         android:paddingStart="20dp"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:gravity="start|center"
                         android:text="앱 정보" />
                 </LinearLayout>
@@ -218,14 +218,14 @@
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="30dp"
                     android:weightSum="8"
                     android:orientation="horizontal"
                     android:gravity="start|center">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
                         android:src="@drawable/icon_logout" />
@@ -235,7 +235,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="7"
                         android:paddingStart="20dp"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:gravity="start|center"
                         android:text="로그아웃" />
                 </LinearLayout>
