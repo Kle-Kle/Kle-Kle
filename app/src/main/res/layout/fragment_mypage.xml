@@ -42,7 +42,7 @@
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_imege"
+                android:id="@+id/profile_image"
                 android:clickable="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="100dp"
