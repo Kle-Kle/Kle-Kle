@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -20,7 +20,6 @@ import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.klekle.MainActivity
 import com.example.klekle.R
-import com.example.klekle.auth.LoginActivity
 import com.example.klekle.databinding.ActivityUpdateProfileBinding
 import com.example.klekle.util.BitmapConverter
 import com.example.klekle.util.UpdateProfileRequest
@@ -50,7 +49,6 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         if (image != null) {
             // 기존 프로필 이미지 정보 가져옴
-            // todo: 버그 존재
             val bm = BitmapConverter.stringToBitmap(image)
             binding.profileImage.setImageBitmap(bm)
         }
@@ -66,11 +64,12 @@ class UpdateProfileActivity : AppCompatActivity() {
         // 완료 버튼 이벤트
         binding.btnUpdateProfile.setOnClickListener {
             val img : Bitmap = binding.profileImage.drawable.toBitmap()
+            var newImage = ""
 
             val baos = ByteArrayOutputStream()
-            img.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            img.compress(Bitmap.CompressFormat.PNG, 50, baos)
             val bytes = baos.toByteArray()
-            val newImage = BitmapConverter.byteArrayToBinaryString(bytes)
+            newImage = Base64.encodeToString(bytes, Base64.DEFAULT)
 
             val responseListener: Response.Listener<String> =
                 Response.Listener { response ->
