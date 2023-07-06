@@ -61,11 +61,11 @@
                     android:id="@+id/btn_update_profile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:text="완료"
                     android:textSize="24sp"
                     android:gravity="center_vertical|end"
-                    android:textColor="@color/primary_500" />
+                    android:textColor="@color/primary_200" />
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView

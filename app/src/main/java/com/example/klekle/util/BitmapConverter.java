@@ -1,6 +1,20 @@
 package com.example.klekle.util;
 
-public class BinaryByteToBinaryString {
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+import java.io.ByteArrayInputStream;
+
+public class BitmapConverter {
+    public static Bitmap stringToBitmap(String data){
+        Bitmap bitmap = null;
+        byte[] byteArray = Base64.decode(data, Base64.DEFAULT);
+        ByteArrayInputStream stream = new ByteArrayInputStream(byteArray);
+        bitmap = BitmapFactory.decodeStream(stream);
+        return bitmap;
+    }
+
     // byte[] to String
     // 바이너리 바이트 배열을 스트링으로
     public static String byteArrayToBinaryString(byte[] b) {
