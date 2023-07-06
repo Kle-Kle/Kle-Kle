@@ -51,7 +51,8 @@ class MypageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         sharedPreferences = activity?.getSharedPreferences("login_info", AppCompatActivity.MODE_PRIVATE)!!
-        val nickname = sharedPreferences.getString("nickname", null) // TODO: nickname 대신 userid 로 요청 보낼 수 있게 바꾸는 게 좋겠어요
+        val userid = sharedPreferences.getString("loginedId", null)
+        val nickname = sharedPreferences.getString("nickname", null)
         val image = sharedPreferences.getString("profile", null)
 
         // 기존 닉네임 정보 가져욤
@@ -101,11 +102,7 @@ class MypageFragment : Fragment() {
                             }
                         }
                     val updateNicknameRequest =
-                        UpdateNicknameRequest(
-                            newNickname,
-                            nickname,
-                            responseListener
-                        )
+                        UpdateNicknameRequest(newNickname, userid, responseListener)
                     val queue = Volley.newRequestQueue(activity)
                     queue.add(updateNicknameRequest)
                 })
