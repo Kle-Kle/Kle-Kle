@@ -13,6 +13,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.klekle.R
 import com.example.klekle.databinding.FragmentInsertUserInfoBinding
+import com.example.klekle.util.NicknameValRequest
+import com.example.klekle.util.UseridValRequest
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONException
 import org.json.JSONObject
@@ -121,7 +123,11 @@ class InsertUserInfoFragment : Fragment() {
                                             e.printStackTrace()
                                         }
                                     }
-                                val nicknameValRequest = NicknameValRequest(nickname, responseListener2)
+                                val nicknameValRequest =
+                                    NicknameValRequest(
+                                        nickname,
+                                        responseListener2
+                                    )
                                 val queue2 = Volley.newRequestQueue(context)
                                 queue2.add(nicknameValRequest)
                             } else {

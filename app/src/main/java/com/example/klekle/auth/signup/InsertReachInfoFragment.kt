@@ -1,17 +1,15 @@
 package com.example.klekle.auth.signup
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.example.klekle.auth.LoginActivity
 import com.example.klekle.databinding.FragmentInsertReachInfoBinding
+import com.example.klekle.util.RegisterRequest
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONException
 import org.json.JSONObject
@@ -90,7 +88,16 @@ class InsertReachInfoFragment : Fragment() {
                         e.printStackTrace()
                     }
                 }
-            val registerRequest = RegisterRequest(userid, email, userpw, nickname, height, weight, reach, responseListener)
+            val registerRequest = RegisterRequest(
+                userid,
+                email,
+                userpw,
+                nickname,
+                height,
+                weight,
+                reach,
+                responseListener
+            )
             var queue = Volley.newRequestQueue(context)
             queue.add(registerRequest)
         }

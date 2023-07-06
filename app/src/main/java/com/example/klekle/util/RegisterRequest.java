@@ -1,4 +1,4 @@
-package com.example.klekle.auth.signup;
+package com.example.klekle.util;
 
 import android.app.Activity;
 

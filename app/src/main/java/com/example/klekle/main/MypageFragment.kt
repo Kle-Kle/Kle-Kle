@@ -22,7 +22,7 @@ import com.example.klekle.databinding.FragmentMypageBinding
 import com.example.klekle.main.my.AppInfoActivity
 import com.example.klekle.main.my.SettingActivity
 import com.example.klekle.main.my.UpdateBodyActivity
-import com.example.klekle.main.my.UpdateNicknameRequest
+import com.example.klekle.util.UpdateNicknameRequest
 import com.example.klekle.main.my.UpdateProfileActivity
 import com.example.klekle.main.my.UpdateUserActivity
 import org.json.JSONException
@@ -95,7 +95,11 @@ class MypageFragment : Fragment() {
                             }
                         }
                     val updateNicknameRequest =
-                        UpdateNicknameRequest(newNickname, nickname, responseListener)
+                        UpdateNicknameRequest(
+                            newNickname,
+                            nickname,
+                            responseListener
+                        )
                     val queue = Volley.newRequestQueue(activity)
                     queue.add(updateNicknameRequest)
                 })

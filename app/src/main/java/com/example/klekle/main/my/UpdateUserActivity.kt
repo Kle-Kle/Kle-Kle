@@ -13,7 +13,8 @@ import androidx.appcompat.widget.Toolbar
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.klekle.R
-import com.example.klekle.databinding.ActivityUpdateUserBinding
+import com.example.klekle.util.GetEmailRequest
+import com.example.klekle.util.UpdateUserRequest
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.regex.Pattern
@@ -70,7 +71,8 @@ class UpdateUserActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-        val getEmailRequest = GetEmailRequest(userid, responseListener)
+        val getEmailRequest =
+            GetEmailRequest(userid, responseListener)
         val queue = Volley.newRequestQueue(this@UpdateUserActivity)
         queue.add(getEmailRequest)
 
@@ -128,7 +130,12 @@ class UpdateUserActivity : AppCompatActivity() {
                         }
                     }
                 val updateUserRequest =
-                    UpdateUserRequest(email, userpw, userid, responseListener)
+                    UpdateUserRequest(
+                        email,
+                        userpw,
+                        userid,
+                        responseListener
+                    )
                 val queue = Volley.newRequestQueue(this@UpdateUserActivity)
                 queue.add(updateUserRequest)
             }
