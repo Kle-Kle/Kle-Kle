@@ -2,15 +2,19 @@ package com.example.klekle.main.my
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.Glide
 import com.example.klekle.R
 import com.example.klekle.databinding.ActivityUpdateProfileBinding
+import com.example.klekle.util.BinaryByteToBinaryString
+import java.io.ByteArrayOutputStream
 
 class UpdateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateProfileBinding
@@ -39,7 +43,15 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         // 완료 버튼 이벤트
         binding.btnUpdateProfile.setOnClickListener {
-            // todo: update post 요청 보내야겠죠
+            val img : Bitmap = binding.profileImage.drawable.toBitmap()
+            var image = ""
+
+            val baos = ByteArrayOutputStream()
+            img.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            val bytes = baos.toByteArray()
+            image = "&image=" + BinaryByteToBinaryString.byteArrayToBinaryString(bytes)
+
+            System.out.println(image)
         }
     }
 
