@@ -23,6 +23,7 @@ import com.example.klekle.main.my.AppInfoActivity
 import com.example.klekle.main.my.SettingActivity
 import com.example.klekle.main.my.UpdateBodyActivity
 import com.example.klekle.main.my.UpdateNicknameRequest
+import com.example.klekle.main.my.UpdateProfileActivity
 import com.example.klekle.main.my.UpdateUserActivity
 import org.json.JSONException
 import org.json.JSONObject
@@ -41,7 +42,7 @@ class MypageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         return binding.root
@@ -49,7 +50,8 @@ class MypageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         sharedPreferences = activity?.getSharedPreferences("login_info", AppCompatActivity.MODE_PRIVATE)!!
-        val nickname = sharedPreferences.getString("nickname", null)
+        val nickname = sharedPreferences.getString("nickname", null) // TODO: nickname 대신 userid 로 요청 보낼 수 있게 바꾸는 게 좋겠어요
+        // TODO: shared preferences에 profile image 정보도 저장해두는 게 어떨까?
         binding.tvNickname.setText(nickname)
 
         binding.btnUpdateNickname.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄로 clickable 임을 표시..
@@ -67,7 +69,7 @@ class MypageFragment : Fragment() {
                 builder.setView(et_newNickname)
 
                 builder.setPositiveButton(str_buttonOK, DialogInterface.OnClickListener { dialog, which ->
-                    var newNickname : String = et_newNickname.text.toString()
+                    val newNickname : String = et_newNickname.text.toString()
                     val responseListener: Response.Listener<String> =
                         Response.Listener { response ->
                             try {
@@ -118,26 +120,37 @@ class MypageFragment : Fragment() {
             }
         }
 
+        // 프로필 사진 변경
+        binding.profileImage.setOnClickListener {
+            val intent = Intent(activity, UpdateProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 계정 정보 수정
         binding.btnGoToUpdateUser.setOnClickListener {
             val intent = Intent(activity, UpdateUserActivity::class.java)
             startActivity(intent)
         }
 
+        // 신체 정보 수정
         binding.btnGoToUpdateBody.setOnClickListener {
             val intent = Intent(activity, UpdateBodyActivity::class.java)
             startActivity(intent)
         }
 
+        // 설정
         binding.btnGoToSetting.setOnClickListener {
             val intent = Intent(activity, SettingActivity::class.java)
             startActivity(intent)
         }
 
+        // 앱 정보
         binding.btnGoToAppInfo.setOnClickListener {
             val intent = Intent(activity, AppInfoActivity::class.java)
             startActivity(intent)
         }
 
+        // 로그아웃
         binding.btnLogout.setOnClickListener {
             try{
                 var str_tittle = "로그아웃"

@@ -35,6 +35,9 @@
             android:name=".main.my.SettingActivity"
             android:exported="false" />
         <activity
+            android:name=".main.my.UpdateProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".main.my.UpdateBodyActivity"
             android:exported="false" />
         <activity
