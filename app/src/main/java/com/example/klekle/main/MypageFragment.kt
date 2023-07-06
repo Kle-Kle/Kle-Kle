@@ -54,12 +54,11 @@ class MypageFragment : Fragment() {
         val nickname = sharedPreferences.getString("nickname", null) // TODO: nickname 대신 userid 로 요청 보낼 수 있게 바꾸는 게 좋겠어요
         val image = sharedPreferences.getString("profile", null)
 
+        // 기존 닉네임 정보 가져욤
         binding.tvNickname.text = nickname
-        if (image != null) {
-            // 기존 프로필 이미지 정보 가져옴
-            val bm = BitmapConverter.stringToBitmap(image)
-            binding.profileImage.setImageBitmap(bm)
-        }
+        // 기존 프로필 사진 정보 가져옴
+        val bm = BitmapConverter.stringToBitmap(image)
+        binding.profileImage.setImageBitmap(bm)
 
         binding.btnUpdateNickname.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄로 clickable 임을 표시..
         binding.btnUpdateNickname.setOnClickListener {

@@ -47,11 +47,9 @@ class UpdateProfileActivity : AppCompatActivity() {
         val userid = sharedPreferences.getString("loginedId", null)
         val image = sharedPreferences.getString("profile", null)
 
-        if (image != null) {
-            // 기존 프로필 이미지 정보 가져옴
-            val bm = BitmapConverter.stringToBitmap(image)
-            binding.profileImage.setImageBitmap(bm)
-        }
+        // 기존 프로필 이미지 정보 가져옴
+        val bm = BitmapConverter.stringToBitmap(image)
+        binding.profileImage.setImageBitmap(bm)
 
         binding.btnUpdateProfile.isEnabled = false // click listner가 작성되었다는 시점에서 자동으로 clickable이 true로 설정됨.. 따라서 setClickable(false) 대신 이렇게 설정
         binding.profileImage.setOnClickListener {

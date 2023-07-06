@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (success) { // 로그인 성공한 경우
                                 String userid = jasonObject.getString("userid");
                                 String nickname = jasonObject.getString("nickname");
+                                String profile = jasonObject.getString("profile");
                                 Toast.makeText(getApplicationContext(), "어서오세요, " + nickname + "님!", Toast.LENGTH_SHORT).show();
 
                                 // 한 번이라도 로그인 한 적 있다면 -> 자동 로그인되도록
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor autoLogin = sharedPreferences.edit();
                                 autoLogin.putString("loginedId", userid);
                                 autoLogin.putString("nickname", nickname); // shared preference 에 nickname 저장
+                                autoLogin.putString("profile", profile); // shared preference 에 profile 저장
                                 autoLogin.apply();
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
