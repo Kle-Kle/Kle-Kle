@@ -130,7 +130,7 @@ class MypageFragment : Fragment() {
         }
 
         // 프로필 사진 변경
-        binding.profileImage.setOnClickListener {
+        binding.btnGoToUpdateProfile.setOnClickListener {
             val intent = Intent(activity, UpdateProfileActivity::class.java)
             startActivity(intent)
         }
