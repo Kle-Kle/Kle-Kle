@@ -59,6 +59,14 @@ class UpdateProfileActivity : AppCompatActivity() {
             activityResult.launch(intent)
         }
 
+        // 초기화 버튼 이벤트
+        binding.btnDeleteProfile.setOnClickListener {
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.icon_user))
+
+            binding.btnUpdateProfile.isEnabled = true
+            binding.btnUpdateProfile.setTextColor(ContextCompat.getColor(this, R.color.primary_600))
+        }
+
         // 완료 버튼 이벤트
         binding.btnUpdateProfile.setOnClickListener {
             val img : Bitmap = binding.profileImage.drawable.toBitmap()
