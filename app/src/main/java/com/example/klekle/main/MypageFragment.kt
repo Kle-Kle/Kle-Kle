@@ -55,6 +55,8 @@ class MypageFragment : Fragment() {
         val nickname = sharedPreferences.getString("nickname", null)
         val image = sharedPreferences.getString("profile", null)
 
+        // 기존 아이디 정보 가져옴
+        binding.tvUserid.text = userid
         // 기존 닉네임 정보 가져욤
         binding.tvNickname.text = nickname
         // 기존 프로필 사진 정보 가져옴
