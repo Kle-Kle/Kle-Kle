@@ -31,8 +31,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.klekle.databinding.ActivityCameraBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,10 +75,28 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
 
         captureImageFab.setOnClickListener(this)
 
+        binding.btnSelectFromGallery.setOnClickListener {
+//            '캘러리 선택' 버튼 클릭 시..
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            activityResult.launch(intent)
+        }
+
         binding.btnGoToFeedback.setOnClickListener {
             val intent = Intent(this, PostActivity::class.java)
             finish()
             startActivity(intent)
+        }
+    }
+
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK && it.data != null) {
+            val uri = it.data!!.data
+
+            Glide.with(this)
+                .load(uri)
+                .into(inputImageView)
         }
     }
 
