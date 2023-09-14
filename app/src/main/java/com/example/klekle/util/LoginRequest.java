@@ -10,7 +10,7 @@ import java.util.Map;
 public class LoginRequest extends StringRequest {
 
     //서버 url 설정(php파일 연동)
-    final static private String URL="https://yewon-txuxl.run.goorm.io/klekle/auth/login.php";
+    final static private String URL="https://ywww-zzauz.run.goorm.site/klekle/auth/login.php";
     private Map<String,String>map;
 
     public LoginRequest(String userid, String userpw, Response.Listener<String>listener){

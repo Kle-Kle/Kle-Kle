@@ -11,7 +11,7 @@ import com.android.volley.Request;
 
 public class UseridValRequest extends StringRequest {
     //서버 url 설정(php파일 연동)
-    final static  private String URL="https://yewon-txuxl.run.goorm.io/klekle/auth/useridValidate.php";
+    final static  private String URL="https://ywww-zzauz.run.goorm.site/klekle/auth/useridValidate.php";
     private Map<String,String> map;
 
     public UseridValRequest(String userid, Response.Listener<String>listener){

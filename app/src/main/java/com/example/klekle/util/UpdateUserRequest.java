@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class UpdateUserRequest extends StringRequest {
     // 서버 url(API 호출)
-    final static private String URL="https://yewon-txuxl.run.goorm.io/klekle/main/my/updateUser.php";
+    final static private String URL="https://ywww-zzauz.run.goorm.site/klekle/main/my/updateUser.php";
     private Map<String,String>map;
 
     public UpdateUserRequest(String email, String userpw, String userid, Response.Listener<String>listener){
