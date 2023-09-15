@@ -147,7 +147,7 @@
 
                 <LinearLayout
                     android:id="@+id/btn_goToFeedback"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -157,20 +157,24 @@
                     android:orientation="horizontal"
                     android:gravity="end|center">
                     <TextView
+                        android:id="@+id/tv_letsGo"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="7"
                         android:paddingEnd="20dp"
                         android:textSize="20sp"
                         android:gravity="end|center"
-                        android:text="경로 탐색 시작" />
+                        android:text="경로 탐색 시작"
+                        android:textColor="#26000000" />
 
                     <ImageView
+                        android:id="@+id/iv_letsGo"
                         android:layout_width="0dp"
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="end|center"
-                        android:src="@drawable/icon_feedback" />
+                        android:src="@drawable/icon_feedback"
+                        android:alpha="0.5" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

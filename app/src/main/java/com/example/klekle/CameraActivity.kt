@@ -22,26 +22,29 @@ import android.content.Intent
 import android.graphics.*
 import android.media.ExifInterface
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.core.graphics.drawable.toBitmap
+import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.klekle.databinding.ActivityCameraBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.task.vision.detector.Detection
-import org.tensorflow.lite.task.vision.detector.ObjectDetector
+import com.example.klekle.util.DetectHoldRequest
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -53,6 +56,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val TAG = "TFLite - ODT"
         const val REQUEST_IMAGE_CAPTURE: Int = 1
+        const val REQUEST_IMAGE_SELECT: Int = 1
         private const val MAX_FONT_SIZE = 96F
     }
     private lateinit var binding: ActivityCameraBinding
@@ -61,6 +65,8 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var inputImageView: ImageView
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
+
+    lateinit var wallImage: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,38 +80,60 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
 
         captureImageFab.setOnClickListener(this)
-
-        binding.btnSelectFromGallery.setOnClickListener {
-//            '캘러리 선택' 버튼 클릭 시..
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            activityResult.launch(intent)
-        }
-
-        binding.btnGoToFeedback.setOnClickListener {
-            val intent = Intent(this, PostActivity::class.java)
-            finish()
-            startActivity(intent)
-        }
+        binding.btnSelectFromGallery.setOnClickListener(this)
+        binding.btnGoToFeedback.setOnClickListener(this)
     }
 
-    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK && it.data != null) {
-            val uri = it.data!!.data
+    private fun moveToFeedBack() {
+        // '사진 촬영' 또는 '갤러리 선택'으로 불러온 이미지가 있으면
+        val image : Bitmap = binding.imageView.drawable.toBitmap()
 
-            Glide.with(this)
-                .load(uri)
-                .into(inputImageView)
-        }
+        val baos = ByteArrayOutputStream()
+        image.compress(Bitmap.CompressFormat.PNG, 50, baos)
+        val bytes = baos.toByteArray()
+        wallImage = Base64.encodeToString(bytes, Base64.DEFAULT)
+
+//                intent.putExtra("inputImage", byteArrayD)
+        // 원래는 화면 전환을 하면서 bitmap을 그대로 다음 activity로 보내려고 했는데,
+        // todo: [BUG] bitmap 이미지가 너무 크면 작동하지 않는 현상이..
+        // todo: bitmap을 그대로 건낼 게 아니라, 장치에서 저장하고, URI를 가져와서, 그 path를 넘기도록 하는 방법이 있나?
+
+        val responseListener: com.android.volley.Response.Listener<String> =
+            com.android.volley.Response.Listener { response ->
+                try {
+                    val jsonObject = JSONObject(response)
+                    val success = jsonObject.getBoolean("success")
+                    val result = jsonObject.getJSONArray("results")
+                    if (success) { // 변경에 성공한 경우
+                        Log.d("D:Test", "$result")
+                        Log.d("D:Test", "${result[0]}")
+                    } else {
+                        Toast.makeText(this, "서버와 통신에 실패했습니다.\n잠시 뒤에 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        val detectHoldRequest =
+            DetectHoldRequest(wallImage, responseListener)
+        val queue = Volley.newRequestQueue(this)
+        queue.add(detectHoldRequest)
+
+//        callDetectHold() // detect hold api 호출
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE &&
-            resultCode == Activity.RESULT_OK
-        ) {
-            setViewAndDetect(getCapturedImage())
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        when (requestCode) {
+            REQUEST_IMAGE_CAPTURE -> {
+                setView(getCapturedImage())
+                thereIsImage()
+            }
         }
     }
 
@@ -113,6 +141,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
      * onClick(v: View?)
      *      Detect touches on the UI components
      */
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.captureImageFab -> {
@@ -122,78 +151,34 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
                     Log.e(TAG, e.message.toString())
                 }
             }
-        }
-    }
-
-    /**
-     * runObjectDetection(bitmap: Bitmap)
-     *      TFLite Object Detection function
-     */
-
-    private fun runObjectDetection(bitmap: Bitmap) {
-        //TODO: Add object detection code here
-        // Step 1: create TFLite's TensorImage object
-        val image = TensorImage.fromBitmap(bitmap)
-
-        // Step 2: Initialize the detector object
-        val options = ObjectDetector.ObjectDetectorOptions.builder()
-            .setMaxResults(5)
-            .setScoreThreshold(0.5f)
-            .build()
-        val detector = ObjectDetector.createFromFileAndOptions(
-            this, // the application context
-            "model.tflite", // must be same as the filename in assets folder
-            options
-        )
-
-        // Step 3: feed given image to the model and print the detection result
-        val results = detector.detect(image)
-
-        // Step 4: Parse the detection result and show it
-        val resultToDisplay = results.map {
-            // Get the top-1 category and craft the display text
-            val category = it.categories.first()
-            val text = "${category.label}, ${category.score.times(100).toInt()}%"
-
-            // Create a data object to display the detection result
-            DetectionResult(it.boundingBox, text)
-        }
-        // Draw the detection result on the bitmap and show it.
-        val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
-        runOnUiThread {
-            inputImageView.setImageBitmap(imgWithResult)
-        }
-    }
-
-    private fun debugPrint(results : List<Detection>) {
-        for ((i, obj) in results.withIndex()) {
-            val box = obj.boundingBox
-
-            Log.d(TAG, "Detected object: ${i} ")
-            Log.d(TAG, "  boundingBox: (${box.left}, ${box.top}) - (${box.right},${box.bottom})")
-
-            for ((j, category) in obj.categories.withIndex()) {
-                Log.d(TAG, "    Label $j: ${category.label}")
-                val confidence: Int = category.score.times(100).toInt()
-                Log.d(TAG, "    Confidence: ${confidence}%")
+            R.id.btn_selectFromGallery -> {
+                try {
+                    selectFromGallery()
+                } catch (e: ActivityNotFoundException) {
+                    Log.e(TAG, e.message.toString())
+                }
+            }
+            R.id.btn_goToFeedback -> {
+                moveToFeedBack()
             }
         }
-
     }
 
+    private fun thereIsImage() {
+        binding.btnGoToFeedback.isEnabled = true
+        binding.tvLetsGo.setTextColor(resources.getColor(R.color.primary_600))
+        binding.ivLetsGo.setColorFilter(R.color.primary_600)
+    }
+
+
     /**
-     * setViewAndDetect(bitmap: Bitmap)
+     * setView(bitmap: Bitmap)
      *      Set image to view and call object detection
      */
-    private fun setViewAndDetect(bitmap: Bitmap) {
+    private fun setView(bitmap: Bitmap) {
         // Display capture image
         inputImageView.setImageBitmap(bitmap)
         tvPlaceholder.visibility = View.INVISIBLE
-
-        // Run ODT and display result
-        // Note that we run this in the background thread to avoid blocking the app UI because
-        // TFLite object detection is a synchronised process.
-        lifecycleScope.launch(Dispatchers.Default) { runObjectDetection(bitmap) }
     }
 
     /**
@@ -243,16 +228,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
                 bitmap
             }
         }
-    }
-
-    /**
-     * getSampleImage():
-     *      Get image form drawable and convert to bitmap.
-     */
-    private fun getSampleImage(drawable: Int): Bitmap {
-        return BitmapFactory.decodeResource(resources, drawable, BitmapFactory.Options().apply {
-            inMutable = true
-        })
     }
 
     /**
@@ -316,55 +291,47 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * drawDetectionResult(bitmap: Bitmap, detectionResults: List<DetectionResult>
-     *      Draw a box around each objects and show the object's name.
-     */
-    private fun drawDetectionResult(
-        bitmap: Bitmap,
-        detectionResults: List<DetectionResult>
-    ): Bitmap {
-        val outputBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        val canvas = Canvas(outputBitmap)
-        val pen = Paint()
-        pen.textAlign = Paint.Align.LEFT
-
-        detectionResults.forEach {
-            // draw bounding box
-            pen.color = Color.RED
-            pen.strokeWidth = 8F
-            pen.style = Paint.Style.STROKE
-            val box = it.boundingBox
-            canvas.drawRect(box, pen)
-
-
-            val tagSize = Rect(0, 0, 0, 0)
-
-            // calculate the right font size
-            pen.style = Paint.Style.FILL_AND_STROKE
-            pen.color = Color.YELLOW
-            pen.strokeWidth = 2F
-
-            pen.textSize = MAX_FONT_SIZE
-            pen.getTextBounds(it.text, 0, it.text.length, tagSize)
-            val fontSize: Float = pen.textSize * box.width() / tagSize.width()
-
-            // adjust the font size so texts are inside the bounding box
-            if (fontSize < pen.textSize) pen.textSize = fontSize
-
-            var margin = (box.width() - tagSize.width()) / 2.0F
-            if (margin < 0F) margin = 0F
-            canvas.drawText(
-                it.text, box.left + margin,
-                box.top + tagSize.height().times(1F), pen
-            )
-        }
-        return outputBitmap
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun selectFromGallery() {
+        val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+        intent.type = "image/*"
+        activityResult.launch(intent)
     }
-}
 
-/**
- * DetectionResult
- *      A class to store the visualization info of a detected object.
- */
-data class DetectionResult(val boundingBox: RectF, val text: String)
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK && it.data != null) {
+            val uri = it.data!!.data
+
+            Glide.with(this)
+                .load(uri)
+                .into(inputImageView)
+
+            thereIsImage()
+        }
+    }
+
+//    private fun callDetectHold() {
+//        mRetrofit = Retrofit
+//            .Builder()
+//            .baseUrl(getString(R.string.flaskBaseUrl))
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//
+//        val result = mRetrofit.create(HoldDetectAPI::class.java)
+//        val param = HoldDTO()
+//        param.image = wallImage
+//
+//        result.getHoldList(param).enqueue(object : Callback<HoldDTO> {
+//            override fun onResponse(call: Call<HoldDTO>, response: Response<HoldDTO>) {
+//                val holds = response.body()
+//                Log.d("D:test", "$response")
+//                Log.d("D:test", "$holds")
+//            }
+//
+//            override fun onFailure(call: Call<HoldDTO>, t: Throwable) {
+//                Log.e("E:error", "${t.printStackTrace()}")
+//            }
+//        })
+//    }
+}
