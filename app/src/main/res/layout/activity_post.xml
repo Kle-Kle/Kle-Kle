@@ -28,85 +28,91 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/article_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_marginTop="60dp"
-        android:orientation="vertical">
-
-        <!--            atricle component -->
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/article"
+            android:id="@+id/article_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:orientation="vertical"
-            android:gravity="start|center">
+            android:orientation="vertical">
+
+            <!--            atricle component -->
             <LinearLayout
+                android:id="@+id/article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start|center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp"
-                android:weightSum="7">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_imege"
-                    android:clickable="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/icon_user"
-                    app:civ_border_width="1dp"
-                    app:civ_border_color="@color/black" />
-
-                <TextView
-                    android:id="@+id/userid"
-                    android:layout_width="0dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="vertical"
+                android:gravity="start|center">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:gravity="start|center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="30dp"
+                    android:weightSum="7">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_imege"
+                        android:clickable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/icon_user"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/black" />
+
+                    <TextView
+                        android:id="@+id/userid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:paddingHorizontal="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="클클사우르스" />
+
+                    <Button
+                        android:id="@+id/btn_post"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="게시"
+                        android:textSize="16sp"
+                        android:background="@drawable/style_button"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_inputImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:paddingVertical="10dp"
+                    android:src="@drawable/img_meal_one" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:paddingVertical="10dp"
                     android:paddingHorizontal="20dp"
                     android:textSize="20sp"
-                    android:gravity="start|center"
-                    android:text="클클사우르스" />
+                    android:gravity="start"
+                    android:text="오늘 핑거테이프 감는 방법부터 다시 배웠네요 ㅋㅋ" />
 
-                <Button
-                    android:id="@+id/btn_post"
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:text="게시"
-                    android:textSize="16sp"
-                    android:background="@drawable/style_button"
-                    android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="20dp"
+                    android:gravity="end"
+                    android:text="27 /280" />
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="centerCrop"
-                android:paddingVertical="10dp"
-                android:src="@drawable/img_meal_one" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="20dp"
-                android:textSize="20sp"
-                android:gravity="start"
-                android:text="오늘 핑거테이프 감는 방법부터 다시 배웠네요 ㅋㅋ" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="20dp"
-                android:gravity="end"
-                android:text="27 /280" />
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
