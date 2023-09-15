@@ -19,6 +19,7 @@ package com.example.klekle
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.*
 import android.media.ExifInterface
 import android.net.Uri
@@ -67,6 +68,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var currentPhotoPath: String
 
     lateinit var wallImage: String
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +84,8 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         captureImageFab.setOnClickListener(this)
         binding.btnSelectFromGallery.setOnClickListener(this)
         binding.btnGoToFeedback.setOnClickListener(this)
+
+        sharedPreferences = getSharedPreferences("tempData", Activity.MODE_PRIVATE)
     }
 
     private fun moveToFeedBack() {
@@ -93,33 +97,12 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         val bytes = baos.toByteArray()
         wallImage = Base64.encodeToString(bytes, Base64.DEFAULT)
 
-//                intent.putExtra("inputImage", byteArrayD)
-        // 원래는 화면 전환을 하면서 bitmap을 그대로 다음 activity로 보내려고 했는데,
-        // todo: [BUG] bitmap 이미지가 너무 크면 작동하지 않는 현상이..
-        // todo: bitmap을 그대로 건낼 게 아니라, 장치에서 저장하고, URI를 가져와서, 그 path를 넘기도록 하는 방법이 있나?
-
-        val responseListener: com.android.volley.Response.Listener<String> =
-            com.android.volley.Response.Listener { response ->
-                try {
-                    val jsonObject = JSONObject(response)
-                    val success = jsonObject.getBoolean("success")
-                    val result = jsonObject.getJSONArray("results")
-                    if (success) { // 변경에 성공한 경우
-                        Log.d("D:Test", "$result")
-                        Log.d("D:Test", "${result[0]}")
-                    } else {
-                        Toast.makeText(this, "서버와 통신에 실패했습니다.\n잠시 뒤에 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }
-        val detectHoldRequest =
-            DetectHoldRequest(wallImage, responseListener)
-        val queue = Volley.newRequestQueue(this)
-        queue.add(detectHoldRequest)
-
-//        callDetectHold() // detect hold api 호출
+        // Post Activity로 화면 전환
+        val intent = Intent(this, PostActivity::class.java)
+        val temp = sharedPreferences.edit() // bitmap을 encoding 한 string의 크기가 너무 커서, putExtra로는 넘어가지 않음.. shared preference로 재도전
+        temp.putString("tempWallImage", wallImage)
+        temp.apply()
+        startActivity(intent)
     }
 
     @Deprecated("Deprecated in Java")
@@ -310,28 +293,4 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
             thereIsImage()
         }
     }
-
-//    private fun callDetectHold() {
-//        mRetrofit = Retrofit
-//            .Builder()
-//            .baseUrl(getString(R.string.flaskBaseUrl))
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//
-//        val result = mRetrofit.create(HoldDetectAPI::class.java)
-//        val param = HoldDTO()
-//        param.image = wallImage
-//
-//        result.getHoldList(param).enqueue(object : Callback<HoldDTO> {
-//            override fun onResponse(call: Call<HoldDTO>, response: Response<HoldDTO>) {
-//                val holds = response.body()
-//                Log.d("D:test", "$response")
-//                Log.d("D:test", "$holds")
-//            }
-//
-//            override fun onFailure(call: Call<HoldDTO>, t: Throwable) {
-//                Log.e("E:error", "${t.printStackTrace()}")
-//            }
-//        })
-//    }
 }
