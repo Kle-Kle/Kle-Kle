@@ -9,8 +9,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,16 +33,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PostActivity extends AppCompatActivity {
+public class HoldSelectActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     private ImageView ivInputImage;
     private Button btnPost;
+    private final int HOLD_SUGGEST_COUNT = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
+        setContentView(R.layout.activity_hold_select);
 
         ivInputImage = findViewById(R.id.iv_inputImage);
         btnPost = findViewById(R.id.btn_post);
@@ -48,40 +51,39 @@ public class PostActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("tempData", Activity.MODE_PRIVATE);
         String wallImage = sharedPreferences.getString("tempWallImage", null);
         Bitmap bitmapD = BitmapConverter.stringToBitmap(wallImage).copy(Bitmap.Config.ARGB_8888, true);
-        Canvas canvas = new Canvas(bitmapD);
 
         ivInputImage.setImageBitmap(bitmapD);
 
-        int holdCount = getIntent().getIntExtra("holdCount", 0);
-        ArrayList<Hold> holds = new ArrayList<>();
-        detectHoldRequest(wallImage, canvas, holdCount, holds);
+        Canvas canvas = new Canvas(bitmapD);
+        List<Hold> randomHolds = new ArrayList<>();
+        detectHoldRequest(wallImage, canvas, randomHolds);
 
-        Hold startHold = (Hold) getIntent().getSerializableExtra("startHold");
-        Hold topHold = (Hold) getIntent().getSerializableExtra("topHold");
-
-        Paint paint = makePaintForStartHoldAndTopHold();
-        canvas.drawPoint(startHold.getXmax(), startHold.getYmax(), paint);
-        canvas.drawPoint(topHold.getXmax(), topHold.getYmax(), paint);
+        NumberPicker startHoldPicker = findViewById(R.id.start_hold_picker);
+        NumberPicker topHoldPicker = findViewById(R.id.top_hold_picker);
+        setMinValueAndMaxValue(startHoldPicker, topHoldPicker);
 
         btnPost.setOnClickListener(view -> {
-            Intent intent = new Intent(PostActivity.this, ArticleActivity.class);
+            int startHoldNumber = startHoldPicker.getValue();
+            int topHoldNumber = topHoldPicker.getValue();
+
+            if (startHoldNumber == topHoldNumber) {
+                Toast.makeText(this, "시작 홀드와 탑 홀드는 달라야 합니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Intent intent = new Intent(HoldSelectActivity.this, HoldCountActivity.class);
+            Hold startHold = randomHolds.get(startHoldNumber - 1);
+            Hold topHold = randomHolds.get(topHoldNumber - 1);
+
             intent.putExtra("startHold", startHold);
             intent.putExtra("topHold", topHold);
-            intent.putExtra("holds", holds);
+
             finish();
             startActivity(intent);
         });
     }
 
-    @NonNull
-    private Paint makePaintForStartHoldAndTopHold() {
-        Paint paint = new Paint();
-        paint.setColor(Color.YELLOW);
-        paint.setStrokeWidth(30f);
-        return paint;
-    }
-
-    private void detectHoldRequest(String wallImage, Canvas canvas, int holdCount, List<Hold> holds) {
+    private void detectHoldRequest(String wallImage, Canvas canvas, List<Hold> randomHolds) {
         Response.Listener<String> responseListener = response -> {
             try {
                 JSONObject jsonObject = new JSONObject(response);
@@ -91,17 +93,20 @@ public class PostActivity extends AppCompatActivity {
                     Log.d("D:Test", String.valueOf(result));
 
                     int length = result.length();
-                    Random random = new Random();
-                    Paint paint = makePaintForPoint();
 
-                    for (int i = 0; i < holdCount; i++) {
+                    Random random = new Random();
+                    Paint paintForPoint = makePaintForPoint();
+                    Paint paintWithText = makePaintForText();
+
+                    for (int i = 0; i < HOLD_SUGGEST_COUNT; i++) {
                         int randomValue = random.nextInt(length);
                         JSONObject hold = result.getJSONObject(randomValue);
                         int xmax = hold.getInt("xmax");
                         int ymax = hold.getInt("ymax");
 
-                        canvas.drawPoint(xmax, ymax, paint);
-                        holds.add(new Hold(xmax, ymax));
+                        canvas.drawPoint(xmax, ymax, paintForPoint);
+                        canvas.drawText(String.valueOf(i+1), xmax, ymax, paintWithText);
+                        randomHolds.add(new Hold(xmax, ymax));
                     }
                 }
                 else {
@@ -112,7 +117,7 @@ public class PostActivity extends AppCompatActivity {
             }
         };
         DetectHoldRequest detectHoldRequest = new DetectHoldRequest(wallImage, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(PostActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(HoldSelectActivity.this);
         queue.add(detectHoldRequest);
     }
 
@@ -122,5 +127,22 @@ public class PostActivity extends AppCompatActivity {
         paintWithPoint.setColor(Color.RED);
         paintWithPoint.setStrokeWidth(30f);
         return paintWithPoint;
+    }
+
+    @NonNull
+    private Paint makePaintForText() {
+        Paint paintWithText = new Paint();
+        paintWithText.setTextSize(50);
+        return paintWithText;
+    }
+
+    private void setMinValueAndMaxValue(NumberPicker startHoldPicker, NumberPicker topHoldPicker) {
+        startHoldPicker.setMaxValue(HOLD_SUGGEST_COUNT);
+        startHoldPicker.setMinValue(1);
+        startHoldPicker.setValue(1);
+
+        topHoldPicker.setMaxValue(HOLD_SUGGEST_COUNT);
+        topHoldPicker.setMinValue(1);
+        topHoldPicker.setValue(1);
     }
 }

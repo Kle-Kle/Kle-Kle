@@ -53,6 +53,13 @@
         <activity
             android:name=".CameraActivity"
             android:exported="false" />
+        <activity
+            android:name=".HoldCountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HoldSelectActivity"
+            android:exported="false" />
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

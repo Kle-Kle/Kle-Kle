@@ -97,8 +97,8 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         val bytes = baos.toByteArray()
         wallImage = Base64.encodeToString(bytes, Base64.DEFAULT)
 
-        // Post Activity로 화면 전환
-        val intent = Intent(this, PostActivity::class.java)
+        // Hold Select Activity 로 화면 전환
+        val intent = Intent(this, HoldSelectActivity::class.java)
         val temp = sharedPreferences.edit() // bitmap을 encoding 한 string의 크기가 너무 커서, putExtra로는 넘어가지 않음.. shared preference로 재도전
         temp.putString("tempWallImage", wallImage)
         temp.apply()

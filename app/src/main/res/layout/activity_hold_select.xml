@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="게시글 작성"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/article_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--            atricle component -->
+            <LinearLayout
+                android:id="@+id/article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="vertical"
+                android:gravity="start|center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="30dp"
+                    android:weightSum="7">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_imege"
+                        android:clickable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/icon_user"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/black" />
+
+                    <TextView
+                        android:id="@+id/userid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:paddingHorizontal="20dp"
+                        android:textSize="20sp"
+                        android:gravity="start|center"
+                        android:text="클클사우르스" />
+
+                    <Button
+                        android:id="@+id/btn_post"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="게시"
+                        android:textSize="16sp"
+                        android:background="@drawable/style_button"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_inputImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:paddingVertical="10dp"
+                    android:src="@drawable/img_meal_one" />
+
+                <TextView
+                    android:id="@+id/startHoldtextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:text="시작 홀드 번호를 입력해주세요." />
+
+                <NumberPicker
+                    android:id="@+id/start_hold_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/topHoldtextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:text="탑 홀드 번호를 입력해주세요." />
+                <NumberPicker
+                    android:id="@+id/top_hold_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
