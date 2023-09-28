@@ -1,4 +1,4 @@
-package com.example.klekle.main.newhome
+package com.example.klekle.main.community
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

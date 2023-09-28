@@ -1,4 +1,4 @@
-package com.example.klekle.main.myarticle
+package com.example.klekle.main.community.myarticle
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

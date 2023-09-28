@@ -21,7 +21,7 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".main.myarticle.MyArticleActivity"
+            android:name=".main.community.myarticle.MyArticleActivity"
             android:exported="false" />
         <activity
             android:name=".UserPageActivity"

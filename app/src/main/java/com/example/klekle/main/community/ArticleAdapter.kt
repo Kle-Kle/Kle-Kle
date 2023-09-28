@@ -1,10 +1,9 @@
-package com.example.klekle.main.newhome
+package com.example.klekle.main.community
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.bumptech.glide.Glide
 import com.example.klekle.databinding.ListItemArticleBinding
 import com.example.klekle.model.ArticleModel
 import com.example.klekle.util.BitmapConverter
