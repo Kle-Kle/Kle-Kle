@@ -12,6 +12,7 @@ import com.example.klekle.main.CalendarFragment
 import com.example.klekle.main.HomeFragment
 import com.example.klekle.main.MypageFragment
 import com.example.klekle.main.NoticeFragment
+import com.example.klekle.main.newhome.NewHomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -20,7 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
 
     private val fragmentManager = supportFragmentManager
-    private val homeFragment = HomeFragment()
+    //private val homeFragment = HomeFragment()
+    private val newHomeFragment = NewHomeFragment()
     private val calendarFragment = CalendarFragment()
     private val noticeFragment = NoticeFragment()
     private val mypageFragment = MypageFragment()
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         // 첫 화면 지정
         val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss()
+        transaction.replace(R.id.frame_layout, newHomeFragment).commitAllowingStateLoss()
 
         // 알림 badge (임시 고정값)
         showBadge(this, bottomNavigationView, R.id.notice, "4")
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             val transaction = fragmentManager.beginTransaction()
             when (item.itemId) {
                 R.id.home -> {
-                    transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss()
+                    transaction.replace(R.id.frame_layout, newHomeFragment).commitAllowingStateLoss()
                 }
                 R.id.calendar -> {
                     transaction.replace(R.id.frame_layout, calendarFragment).commitAllowingStateLoss()

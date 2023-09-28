@@ -56,4 +56,11 @@
     <color name="danger_700">#A71655</color>
     <color name="danger_800">#860E4E</color>
     <color name="danger_900">#6F0849</color>
+
+    <color name="gray_100">#dddddd</color>
+    <color name="gray_200">#aaaaaa</color>
+    <color name="gray_300">#888888</color>
+    <color name="gray_400">#555555</color>
+    <color name="gray_500">#333333</color>
+
 </resources>
