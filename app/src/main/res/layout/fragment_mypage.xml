@@ -54,9 +54,9 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/icon_user"
-                        app:civ_border_width="0.5dp"
-                        app:civ_border_color="@color/black" />
+                        android:src="@drawable/simple_profile_image"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/gray_100" />
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/btn_goToUpdateProfile"
                         android:clickable="true"
@@ -67,8 +67,8 @@
                         android:layout_marginStart="70dp"
                         android:src="@drawable/icon_editor"
                         app:civ_border_width="1dp"
-                        app:civ_border_color="@color/primary_500"
-                        app:civ_circle_background_color="@color/white" />
+                        app:civ_border_color="@color/gray_100"
+                        app:civ_circle_background_color="@color/gray_500" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginVertical="3dp"
-                android:background="@color/black_200"/>
+                android:background="@color/gray_100"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,7 +161,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
-                        android:src="@drawable/icon_web" />
+                        android:src="@drawable/icon_web"
+                        android:alpha="0.5" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -189,7 +190,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
-                        android:src="@drawable/icon_body" />
+                        android:src="@drawable/icon_body"
+                        android:alpha="0.5" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -205,7 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginVertical="3dp"
-                    android:background="@color/black_200"/>
+                    android:background="@color/gray_100"/>
 
                 <LinearLayout
                     android:id="@+id/btn_goToSetting"
@@ -223,7 +225,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
-                        android:src="@drawable/icon_setting" />
+                        android:src="@drawable/icon_setting"
+                        android:alpha="0.5" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -251,7 +254,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
-                        android:src="@drawable/icon_infomation" />
+                        android:src="@drawable/icon_infomation"
+                        android:alpha="0.5" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -267,7 +271,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginVertical="3dp"
-                    android:background="@color/black_200"/>
+                    android:background="@color/gray_100"/>
 
                 <LinearLayout
                     android:id="@+id/btn_logout"
@@ -285,7 +289,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="start|center"
-                        android:src="@drawable/icon_logout" />
+                        android:src="@drawable/icon_logout"
+                        android:alpha="0.5" />
 
                     <TextView
                         android:layout_width="0dp"

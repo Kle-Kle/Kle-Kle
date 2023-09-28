@@ -90,9 +90,9 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:src="@drawable/icon_user"
+                android:src="@drawable/simple_profile_image"
                 app:civ_border_width="1dp"
-                app:civ_border_color="@color/black"
+                app:civ_border_color="@color/gray_100"
                 android:layout_marginTop="10dp" />
 
         </LinearLayout>

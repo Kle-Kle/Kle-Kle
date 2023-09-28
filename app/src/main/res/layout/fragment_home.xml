@@ -55,20 +55,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingHorizontal="10dp"
             android:text="@string/main_banner_title"
             android:textColor="@color/white"
-            android:textSize="50sp"
-            android:fontFamily="@font/thin" />
+            android:textSize="40sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="10dp"
             android:text="@string/main_banner_text"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:fontFamily="@font/regular" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -110,8 +109,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/main_content01_title"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
-                    android:fontFamily="@font/regular" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,8 +117,7 @@
                     android:layout_marginTop="5dp"
                     android:text="@string/main_content01_text"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/thin" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -139,7 +136,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:background="#141820"
+                android:background="@color/primary_900"
                 android:gravity="end|top"
                 android:orientation="vertical">
                 <TextView
@@ -147,8 +144,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/main_content02_title"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
-                    android:fontFamily="@font/regular" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -157,8 +153,7 @@
                     android:gravity="end|bottom"
                     android:text="@string/main_content02_text"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/thin" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <ImageView
