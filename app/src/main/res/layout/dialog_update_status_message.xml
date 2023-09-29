@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/et_newStatusMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:maxLength="280"
+        />
+    <TextView
+        android:id="@+id/tv_currentCharCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(0/280)"
+        android:textColor="@color/gray_300"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        />
+</LinearLayout>
