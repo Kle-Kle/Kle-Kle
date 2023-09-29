@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <Button
+                    android:id="@+id/btn_setting_notification"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="?attr/selectableItemBackground"
@@ -61,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <Button
+                    android:id="@+id/btn_setting_theme"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="?attr/selectableItemBackground"
@@ -79,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <Button
+                    android:id="@+id/btn_delete_user"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="?attr/selectableItemBackground"
