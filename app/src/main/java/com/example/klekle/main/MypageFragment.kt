@@ -9,7 +9,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -30,10 +32,11 @@ import com.example.klekle.main.my.UpdateProfileActivity
 import com.example.klekle.main.my.UpdateUserActivity
 import com.example.klekle.util.BitmapConverter
 import com.example.klekle.util.UpdateStatusMessageRequest
+import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException
 import org.json.JSONObject
 
-class MypageFragment : Fragment() {
+class MypageFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!! // 매번 null 체크를 할 필요 없이 편의성을 위해 바인딩 변수 재 선언
 
@@ -44,6 +47,15 @@ class MypageFragment : Fragment() {
     lateinit var builder : AlertDialog.Builder
     lateinit var et_newNickname : EditText
     lateinit var view_updateStatusMessage : View
+
+    lateinit var btnUpdateNickname : TextView
+    lateinit var btnUpdateStatusMessage : TextView
+    lateinit var btnGoToUpdateProfile : CircleImageView
+    lateinit var btnGoToUpdateUser : LinearLayout
+    lateinit var btnGoToUpdateBody : LinearLayout
+    lateinit var btnGoToSetting : LinearLayout
+    lateinit var btnGoToAppInfo : LinearLayout
+    lateinit var btnLogout : LinearLayout
 
     lateinit var userid : String
     lateinit var nickname : String
@@ -81,51 +93,63 @@ class MypageFragment : Fragment() {
         val bm = BitmapConverter.stringToBitmap(image)
         binding.profileImage.setImageBitmap(bm)
 
-        // 닉네임 표시, 변경
-        binding.btnUpdateNickname.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄로 clickable 임을 표시..
-        binding.btnUpdateNickname.setOnClickListener {
-            updateNickname()
-        }
+        btnUpdateNickname = view.findViewById(R.id.btn_update_nickname)
+        btnUpdateStatusMessage = view.findViewById(R.id.btn_update_statusMessage)
+        btnGoToUpdateProfile = view.findViewById(R.id.btn_goToUpdateProfile)
+        btnGoToUpdateUser = view.findViewById(R.id.btn_goToUpdateUser)
+        btnGoToUpdateBody = view.findViewById(R.id.btn_goToUpdateBody)
+        btnGoToSetting = view.findViewById(R.id.btn_goToSetting)
+        btnGoToAppInfo = view.findViewById(R.id.btn_goToAppInfo)
+        btnLogout = view.findViewById(R.id.btn_logout)
 
-        // 상태메시지 표시, 변경
-        binding.btnUpdateStatusMessage.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        binding.btnUpdateStatusMessage.setOnClickListener {
-            updateStatusMessage()
-        }
+        // 밑줄로 clickable 임을 표시..
+        binding.btnUpdateNickname.paintFlags = Paint.UNDERLINE_TEXT_FLAG // nickname
+        binding.btnUpdateStatusMessage.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 상태메시지
+    }
 
-        // 프로필 사진 변경
-        binding.btnGoToUpdateProfile.setOnClickListener {
-            val intent = Intent(activity, UpdateProfileActivity::class.java)
-            startActivity(intent)
-        }
+    override fun onStart() {
+        super.onStart()
+        btnUpdateNickname.setOnClickListener(this)
+        btnUpdateStatusMessage.setOnClickListener(this)
+        btnGoToUpdateProfile.setOnClickListener(this)
+        btnGoToUpdateUser.setOnClickListener(this)
+        btnGoToUpdateBody.setOnClickListener(this)
+        btnGoToSetting.setOnClickListener(this)
+        btnGoToAppInfo.setOnClickListener(this)
+        btnLogout.setOnClickListener(this)
+    }
 
-        // 계정 정보 수정
-        binding.btnGoToUpdateUser.setOnClickListener {
-            val intent = Intent(activity, UpdateUserActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 신체 정보 수정
-        binding.btnGoToUpdateBody.setOnClickListener {
-            val intent = Intent(activity, UpdateBodyActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 설정
-        binding.btnGoToSetting.setOnClickListener {
-            val intent = Intent(activity, SettingActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 앱 정보
-        binding.btnGoToAppInfo.setOnClickListener {
-            val intent = Intent(activity, AppInfoActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 로그아웃
-        binding.btnLogout.setOnClickListener {
-            logout()
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_update_nickname -> {
+                updateNickname()
+            }
+            R.id.btn_update_statusMessage -> {
+                updateStatusMessage()
+            }
+            R.id.btn_goToUpdateProfile -> {
+                val intent = Intent(activity, UpdateProfileActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_goToUpdateUser -> {
+                val intent = Intent(activity, UpdateUserActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_goToUpdateBody -> {
+                val intent = Intent(activity, UpdateBodyActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_goToSetting -> {
+                val intent = Intent(activity, SettingActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_goToAppInfo -> {
+                val intent = Intent(activity, AppInfoActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_logout -> {
+                logout()
+            }
         }
     }
 
