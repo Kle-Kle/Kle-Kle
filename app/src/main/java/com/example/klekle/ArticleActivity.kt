@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.klekle.databinding.ActivityArticleBinding
@@ -16,6 +17,8 @@ import com.example.klekle.main.community.ArticleAdapter
 import com.example.klekle.main.community.CommentAdapter
 import com.example.klekle.model.ArticleModel
 import com.example.klekle.model.CommentModel
+import com.example.klekle.util.BitmapConverter
+import com.example.klekle.util.GetArticleDetailRequest
 import com.example.klekle.util.GetArticleListRequest
 import com.example.klekle.util.GetCommentsRequest
 import de.hdodenhof.circleimageview.CircleImageView
@@ -31,6 +34,9 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var btnLike : LinearLayout
     lateinit var btnComment : Button
 
+    lateinit var userid : String
+    lateinit var articleNo : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
@@ -44,10 +50,11 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
         btnComment = findViewById(R.id.btn_comment)
 
         val sharedPreferences = getSharedPreferences("login_info", Activity.MODE_PRIVATE)
-        val userid = sharedPreferences.getString("loginedId", null) // todo: 해당 게시글 추가/삭제 or 댓글들 추가/삭제 시, 권한이 있는 사용자인지 판단키 위해
+        userid = sharedPreferences.getString("loginedId", null).toString() // 해당 게시글 수정/삭제 or 댓글들 수정/삭제 시, 권한이 있는 사용자인지 판단키 위해
+        articleNo = "2" // TODO: 해당 페이지로 넘어오기 전에, 선택한 글의 article no를 넘겨 받도록 해서 처리할 것
 
         with(binding) {
-            // 아티클 어댑터 설정
+            // 댓글 어댑터 설정
             with(rvCommentList) {
                 commentAdapter = CommentAdapter().apply {
                     moreUnit {
@@ -58,6 +65,7 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         getComments()
+        getAndSetArticleDetail()
     }
 
     override fun onStart() {
@@ -92,8 +100,6 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getComments() {
-        val articleNo = "2" // TODO: 해당 페이지로 넘어오기 전에, 선택한 글의 article no를 넘겨 받도록 해서 처리할 것
-
         val responseListener: Response.Listener<String?> =
             Response.Listener<String?> { response ->
                 try {
@@ -126,5 +132,38 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
         val getCommentsRequest = GetCommentsRequest(articleNo, responseListener)
         val queue = Volley.newRequestQueue(this)
         queue.add(getCommentsRequest)
+    }
+
+    private fun getAndSetArticleDetail() {
+        val responseListener: Response.Listener<String?> =
+            Response.Listener<String?> { response ->
+                try {
+                    val jsonResponse = JSONObject(response)
+                    val success = jsonResponse.getBoolean("success")
+                    val results = jsonResponse.getJSONArray("result")
+                    if(success) {
+                        results.getJSONObject(0).apply {
+                            var bm = BitmapConverter.stringToBitmap(getString("userProfile") ?: "") // 사용자 프로필 이미지
+                            binding.articleAuthorProfileImage.setImageBitmap(bm)
+
+                            binding.articleAuthorNickname.text = getString("userNickname")
+                            binding.articleAuthorUserid.text = getString("userId")
+                            binding.tvPublished.text = getString("published")
+                            binding.tvArticleContent.text = getString("articleContent")
+                            binding.tvStatusCommentAndLike.text = "댓글 ${getString("commentCount")}개 | 좋아요 0회"
+
+                            bm = BitmapConverter.stringToBitmap(getString("articleImage") ?: "") // article image
+                            binding.ivArticleImage.setImageBitmap(bm)
+                        }
+                    } else {
+                        return@Listener
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        val getArticleDetailRequest = GetArticleDetailRequest(articleNo, responseListener)
+        val queue = Volley.newRequestQueue(this)
+        queue.add(getArticleDetailRequest)
     }
 }
