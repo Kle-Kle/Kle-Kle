@@ -44,7 +44,7 @@
                 android:id="@+id/article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginVertical="12dp"
                 android:orientation="vertical"
                 android:gravity="start|center">
                 <LinearLayout
@@ -55,7 +55,7 @@
                     android:paddingHorizontal="30dp"
                     android:weightSum="8">
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profile_imege"
+                        android:id="@+id/article_author_profile_image"
                         android:clickable="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:layout_width="0dp"
@@ -72,30 +72,49 @@
                         android:gravity="start"
                         android:paddingHorizontal="20dp"
                         android:orientation="vertical">
-                        <TextView
+                        <LinearLayout
+                            android:id="@+id/article_author_id"
+                            android:clickable="true"
+                            android:background="?attr/selectableItemBackground"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:gravity="start|center"
-                            android:text="클클사우르스" />
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:gravity="start|center"
+                                android:text="클클사우르스" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="12dp"
+                                android:textSize="20sp"
+                                android:gravity="start|center"
+                                android:textColor="@color/gray_200"
+                                android:text="klekle" />
+                        </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tv_published"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:gravity="start|center"
+                            android:textColor="@color/gray_200"
                             android:text="1분 전" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/iv_article_image"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:paddingVertical="10dp"
+                    android:layout_marginVertical="10dp"
                     android:src="@drawable/img_meal_one" />
 
                 <TextView
+                    android:id="@+id/tv_article_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="10dp"
@@ -104,6 +123,7 @@
                     android:text="오늘 핑거테이프 감는 방법부터 다시 배웠네요 ㅋㅋ" />
 
                 <TextView
+                    android:id="@+id/tv_status_comment_and_like"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="10dp"
@@ -111,7 +131,7 @@
                     android:layout_marginTop="20dp"
                     android:gravity="start"
                     android:textSize="12sp"
-                    android:text="좋아요 0개 | 댓글 4개 | 저장 1회" />
+                    android:text=" 댓글 4개 | 좋아요 0회" />
 
                 <View
                     android:layout_width="match_parent"
@@ -122,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    >
 
                     <LinearLayout
                         android:id="@+id/btn_like"
@@ -139,7 +159,7 @@
                             android:layout_height="20dp"
                             android:layout_weight="1"
                             android:gravity="start|center"
-                            android:src="@drawable/icon_like" />
+                            android:src="@drawable/outline_favorite_border_24" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -151,32 +171,32 @@
                             android:text="좋아요" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/btn_download"
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackground"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:paddingHorizontal="30dp"
-                        android:gravity="center">
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="20dp"
-                            android:layout_weight="1"
-                            android:gravity="start|center"
-                            android:src="@drawable/icon_download" />
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/btn_download"-->
+<!--                        android:clickable="true"-->
+<!--                        android:background="?attr/selectableItemBackground"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:paddingHorizontal="30dp"-->
+<!--                        android:gravity="center">-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:gravity="start|center"-->
+<!--                            android:src="@drawable/icon_download" />-->
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="7"
-                            android:paddingStart="20dp"
-                            android:textSize="12sp"
-                            android:gravity="start|center"
-                            android:text="피드백 결과\n다운로드" />
-                    </LinearLayout>
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:layout_weight="7"-->
+<!--                            android:paddingStart="20dp"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:gravity="start|center"-->
+<!--                            android:text="피드백 결과\n다운로드" />-->
+<!--                    </LinearLayout>-->
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -186,7 +206,6 @@
 
 <!--            댓글 입력란 -->
             <LinearLayout
-                android:id="@+id/post_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -200,8 +219,10 @@
                     android:weightSum="7">
 
                     <EditText
+                        android:id="@+id/et_comment"
                         android:layout_width="0dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="100dp"
                         android:layout_weight="6"
                         android:paddingVertical="10dp"
                         android:layout_marginEnd="10dp"
@@ -211,233 +232,43 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_gravity="center|bottom"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_currentCharCount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingVertical="10dp"
-                            android:gravity="top|center"
-                            android:text="8 /280" />
+                            android:gravity="top|end"
+                            android:text="(8/280)" />
 
-                        <Button
-                            android:id="@+id/btn_post"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="32dp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:text="작성"
-                            android:textSize="16sp"
-                            android:background="@drawable/style_button"
-                            android:textColor="@color/white" />
+                            android:layout_height="match_parent"
+                            android:paddingBottom="10dp">
+                            <Button
+                                android:id="@+id/btn_comment"
+                                android:layout_width="match_parent"
+                                android:layout_height="32dp"
+                                android:gravity="center"
+                                android:layout_gravity="bottom|end"
+                                android:text="작성"
+                                android:textSize="16sp"
+                                android:background="@drawable/style_button"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-<!--            댓글 목록 -->
-            <LinearLayout
-                android:id="@+id/comment_list"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_commentList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-<!--                comment component -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|top"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="10dp"
-                    android:weightSum="8">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/comment_profile_image"
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_user"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="start"
-                        android:paddingHorizontal="20dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:gravity="start|center"
-                            android:text="클숭이" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:gravity="start|center"
-                            android:text="1분 전" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="start|center"
-                            android:text="와~! 축하해요~^^" />
-                    </LinearLayout>
-                </LinearLayout>
-<!--                여기까지 comment component -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|top"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="10dp"
-                    android:weightSum="8">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_user"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="start"
-                        android:paddingHorizontal="20dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:gravity="start|center"
-                            android:text="날다람쥐" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:gravity="start|center"
-                            android:text="1시간 전" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="start|center"
-                            android:text="앞으로도 파이팅입니다!!" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|top"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="10dp"
-                    android:weightSum="8">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_user"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="start"
-                        android:paddingHorizontal="20dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:gravity="start|center"
-                            android:text="따뜻한 당근" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:gravity="start|center"
-                            android:text="2023-04-13 | 20:11:16" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="start|center"
-                            android:text="홀드 배치가 특이하네요~ 재밌어 보여요!" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|top"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="10dp"
-                    android:weightSum="8">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_user"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="start"
-                        android:paddingHorizontal="20dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:gravity="start|center"
-                            android:text="허생원" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:gravity="start|center"
-                            android:text="2023-04-13 | 17:14:01" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="start|center"
-                            android:text="여름 장이란 애시당초에 글러서, 해는 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.마을 사람들은 거지반 돌아간 뒤요, 팔리지 못한 나뭇군패가 길거리에 궁싯거리고들 있으나 석윳병이나 받고 고깃마리나 사면 족할 이 축들을 바라고 언제까지든지 버티고 있을 법은 없다. 춥춥스럽게 날아드는 파리떼도 장난군 각다귀들도 귀치않다. 얽둑배기요 왼손잡이인 드팀전의 허생원은 기어코 동업의 조선달에게 낚아보았다.\n&quot;그만 거둘까?&quot;\n\&quot;댓글은 280자 제한" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/list_item_comment" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
