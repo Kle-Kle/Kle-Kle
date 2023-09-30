@@ -92,7 +92,7 @@
                     android:id="@+id/iv_inputImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     android:paddingVertical="10dp"
                     android:src="@drawable/img_meal_one" />
 
