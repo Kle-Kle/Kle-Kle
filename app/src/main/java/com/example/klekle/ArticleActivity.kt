@@ -2,24 +2,21 @@ package com.example.klekle
 
 import android.app.Activity
 import android.content.Intent
-import android.media.Image
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.klekle.databinding.ActivityArticleBinding
-import com.example.klekle.main.community.ArticleAdapter
 import com.example.klekle.main.community.CommentAdapter
-import com.example.klekle.model.ArticleModel
 import com.example.klekle.model.CommentModel
 import com.example.klekle.util.BitmapConverter
+import com.example.klekle.util.CreateCommentsRequest
 import com.example.klekle.util.GetArticleDetailRequest
-import com.example.klekle.util.GetArticleListRequest
 import com.example.klekle.util.GetCommentsRequest
 import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException
@@ -66,6 +63,22 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
         }
         getComments()
         getAndSetArticleDetail()
+
+        // 댓글 글자 수 세기
+        binding.etComment.addTextChangedListener {
+            var currentCommentLength = binding.etComment.length()
+            binding.tvCurrentCommentLength.text = "($currentCommentLength/280)"
+
+            if (currentCommentLength == 0) {
+                binding.btnComment.isEnabled = false
+                binding.btnComment.alpha = 0.5F
+            }
+            else {
+                binding.btnComment.isEnabled = true
+                binding.btnComment.alpha = 1F
+            }
+        }
+        binding.btnComment.isEnabled = false // 첫 입장 시 '댓글 작성' 버튼 비활성화
     }
 
     override fun onStart() {
@@ -73,6 +86,8 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
 
         articleAuthorProfile.setOnClickListener(this)
         articleAuthorId.setOnClickListener(this)
+        btnLike.setOnClickListener(this)
+        btnComment.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -89,9 +104,36 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
                 // todo
             }
             R.id.btn_comment -> {
-                // todo
+                createComment()
             }
         }
+    }
+
+    private fun createComment() {
+        val currentCommentContent = binding.etComment.text.toString()
+
+        val responseListener: Response.Listener<String?> =
+            Response.Listener<String?> { response ->
+                try {
+                    val jsonResponse = JSONObject(response)
+                    val success = jsonResponse.getBoolean("success")
+                    if(success) {
+                        // 페이지 새로고침
+                        finish() // 인텐트 종료
+                        overridePendingTransition(0, 0) // 인텐트 효과 없애기
+                        val intent = intent // 인텐트
+                        startActivity(intent) // 액티비티 열기
+                        overridePendingTransition(0, 0) // 인텐트 효과 없애기
+                    } else {
+                        Toast.makeText(this, "댓글 작성에 실패했습니다.\n잠시 후 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        val createCommentsRequest = CreateCommentsRequest(currentCommentContent, userid, articleNo, responseListener)
+        val queue = Volley.newRequestQueue(this)
+        queue.add(createCommentsRequest)
     }
 
     private fun moveToUserPage() {

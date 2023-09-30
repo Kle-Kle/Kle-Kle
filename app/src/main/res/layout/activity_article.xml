@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="start|center"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="30dp"
+                    android:paddingHorizontal="12dp"
                     android:weightSum="8">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/article_author_profile_image"
@@ -63,7 +63,7 @@
                         android:layout_weight="1"
                         android:src="@drawable/icon_user"
                         app:civ_border_width="1dp"
-                        app:civ_border_color="@color/black" />
+                        app:civ_border_color="@color/gray_100" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -111,7 +111,7 @@
                     android:id="@+id/iv_article_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     android:layout_marginVertical="10dp" />
 
                 <TextView
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_weight="1"
-                        android:paddingHorizontal="30dp"
+                        android:paddingHorizontal="20dp"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="0dp"
@@ -211,55 +211,62 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:paddingVertical="10dp"
                 android:gravity="start|center">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|center"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:paddingHorizontal="20dp"
-                    android:weightSum="7">
-
-                    <EditText
-                        android:id="@+id/et_comment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:minHeight="100dp"
-                        android:layout_weight="6"
-                        android:paddingVertical="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:textSize="16sp"
-                        android:gravity="start"
-                        android:text="클클 파이팅!!" />
-
+                    >
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/tv_currentCharCount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:gravity="top|end"
-                            android:text="(8/280)" />
-
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="horizontal">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:paddingBottom="10dp">
-                            <Button
-                                android:id="@+id/btn_comment"
+                            android:gravity="bottom">
+                            <TextView
+                                android:id="@+id/tv_currentCommentLength"
                                 android:layout_width="match_parent"
-                                android:layout_height="32dp"
-                                android:gravity="center"
-                                android:layout_gravity="bottom|end"
-                                android:text="작성"
-                                android:textSize="16sp"
-                                android:background="@drawable/style_button"
-                                android:textColor="@color/white" />
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:text="(0/280)" />
                         </LinearLayout>
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:maxLength="280"
+                        android:hint="댓글을 남겨보세요"
+                        android:text="" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="7">
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="6" />
+                        <Button
+                            android:id="@+id/btn_comment"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_weight="1"
+                            android:text="작성"
+                            android:textSize="16sp"
+                            android:background="@drawable/style_button"
+                            android:textColor="@color/white"
+                            android:alpha="0.5" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
