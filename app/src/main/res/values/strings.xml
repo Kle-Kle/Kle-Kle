@@ -18,6 +18,10 @@
     <string name="main_content02_title">커뮤니티</string>
     <string name="main_content02_text">더 이상\n못 움직이겠다면</string>
 
+    <!--  fragment_calendar  -->
+    <string name="calendar_there_is_no_content">해당 일자에 기록이 없습니다.</string>
+    <string name="calendar_there_is_no_content02"><u>오늘을 기록하러 가기</u></string>
+
     <!--  메뉴  -->
     <string name="menu_1_title">홈</string>
     <string name="menu_2_title">캘린더</string>
