@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
@@ -17,6 +18,8 @@ import com.example.klekle.util.BitmapConverter
 import com.example.klekle.util.GetMyTodayOneArticleRequest
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -55,11 +58,15 @@ class CalendarFragment : Fragment(), View.OnClickListener {
             .setFirstDayOfWeek(Calendar.SUNDAY)
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
-        
         binding.calendarView.addDecorators(
             SundayDecorator(),
             SaturdayDecorator()
         )
+        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
+            val selectedDate = getSelectedDateInMySQLFormat()
+            Toast.makeText(activity, "${selectedDate}", Toast.LENGTH_SHORT).show()
+            getTodayArticle(selectedDate)
+        }
 
         btnGoToArticle = view.findViewById(R.id.btn_goToArticle)
     }
@@ -72,7 +79,6 @@ class CalendarFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_goToArticle -> {
-//                Toast.makeText(activity, "${getTime()}", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity, ArticleActivity::class.java)
                 intent.putExtra("currentArticleNo", currentArticleNo) // 화면 넘어가면서, 해당 글의 article no 를 같이 넘겨줌
                 startActivity(intent)
@@ -126,5 +132,23 @@ class CalendarFragment : Fragment(), View.OnClickListener {
             )
         val queue = Volley.newRequestQueue(activity)
         queue.add(getMyTodayOneArticleRequest)
+    }
+
+    private fun getSelectedDateInMySQLFormat(): String {
+        val selectedDate = binding.calendarView.selectedDate
+        val tempYear = selectedDate.year.toString()
+        var tempMonth = (selectedDate.month + 1).toString() // 왜인지 모르겠지만, 10월에서 선택하면 9월로, 9월에서 선택하면 8월 이런식으로 나옴
+        var tempDay = selectedDate.day.toString()
+
+        if (tempMonth.length < 2) {
+            // 9월이면 09, 10월이면 10 그대로
+            tempMonth = "0" + tempMonth
+        }
+        if (tempDay.length < 2) {
+            tempDay = "0" + tempDay
+        }
+
+        val thisDayDate = "${tempYear}-${tempMonth}-${tempDay}"
+        return thisDayDate
     }
 }
