@@ -3,12 +3,12 @@ package com.example.klekle.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
@@ -16,13 +16,12 @@ import com.example.klekle.ArticleActivity
 import com.example.klekle.CameraActivity
 import com.example.klekle.R
 import com.example.klekle.databinding.FragmentCalendarBinding
-import com.example.klekle.model.CommentModel
 import com.example.klekle.util.BitmapConverter
-import com.example.klekle.util.GetCommentsRequest
 import com.example.klekle.util.GetMyArticlesThisMonthRequest
 import com.example.klekle.util.GetMyTodayOneArticleRequest
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
+import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -42,6 +41,7 @@ class CalendarFragment : Fragment(), View.OnClickListener {
     var mNow: Long = 0
     var mDate: Date? = null
     var mFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd") // SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val calendarDayList = ArrayList<CalendarDay>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,10 +69,40 @@ class CalendarFragment : Fragment(), View.OnClickListener {
             SundayDecorator(),
             SaturdayDecorator()
         )
+//        binding.calendarView.setTitleFormatter(MonthArrayTitleFormatter(resources.getTextArray(R.array.custom_months)))
+        binding.calendarView.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)))
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             // 포커스 되는 순간, 해당 일자의 글 중 가장 최신 글을 btn_goToArticle 영역에 띄우게 2
             val selectedDate = getDateInMySQLFormat(binding.calendarView.selectedDate)
             getTodayArticle(selectedDate)
+        }
+        binding.calendarView.setOnMonthChangedListener { widget, date ->
+            Handler().postDelayed(Runnable {
+                // 바로 실행하니까, 슬라이드 되기 전의 title을 반환함
+                val f = binding.calendarView.javaClass.getDeclaredField("title")
+                f.isAccessible = true
+                val titleTextView = f.get(widget) as TextView
+                var month = titleTextView.text.replace("[^a-zA-Z]".toRegex(), "") // 현재 title에는 월+년도 정보가 같이 있는데, 거기서 숫자인 년도 정보는 쳐내고 월 정보만 가져옴
+                val year = titleTextView.text.replace("[^0-9]".toRegex(), "")
+
+                when (month) {
+                    "January" -> month = "01"
+                    "February" -> month = "02"
+                    "March" -> month = "03"
+                    "April" -> month = "04"
+                    "May" -> month = "05"
+                    "June" -> month = "06"
+                    "July" -> month = "07"
+                    "August" -> month = "08"
+                    "September" -> month = "09"
+                    "October" -> month = "10"
+                    "November" -> month = "11"
+                    "December" -> month = "12"
+                }
+
+                val monthAreLookingAt = "${year}-${month}-01"
+                decorateRecorded(monthAreLookingAt)
+            }, 200)
         }
 
         btnGoToArticle = view.findViewById(R.id.btn_goToArticle)
@@ -173,10 +203,15 @@ class CalendarFragment : Fragment(), View.OnClickListener {
         return thisDayDate
     }
 
-    private fun decorateRecorded(currentDate: CalendarDay) {
+    private fun decorateRecorded(currentDate: Any) {
         // 현재 캘린더가 보여주고 있는 달..에서, 기록이 있는 날짜들에 색다른 표시를 해 둠
-        val date = getDateInMySQLFormat(currentDate)
-        val yearAndMonth = date.substring(0, 7)
+        val yearAndMonth = ""
+        if (currentDate.javaClass.name == "CalendarDay") {
+            val date = getDateInMySQLFormat(currentDate as CalendarDay)
+            date.substring(0, 7)
+        } else if (currentDate.javaClass.name == "String") {
+            currentDate as String
+        }
 
         val responseListener: Response.Listener<String?> =
             Response.Listener<String?> { response ->
@@ -184,13 +219,11 @@ class CalendarFragment : Fragment(), View.OnClickListener {
                     val jsonResponse = JSONObject(response)
                     val success = jsonResponse.getBoolean("success")
                     val results = jsonResponse.getJSONArray("result")
-                    val calendarDayList = ArrayList<CalendarDay>()
                     if(success) {
                         for(i in 0 until results.length()) {
                             val aRecordDay : String
                             results.getJSONObject(i).apply {
                                 aRecordDay = getString("published")
-                                Log.d("test:D", "$aRecordDay")
                             }
                             val tempYear = aRecordDay.substring(0, 4).toInt()
                             val tempMonth = aRecordDay.substring(5, 7).toInt()

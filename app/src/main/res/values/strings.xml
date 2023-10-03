@@ -31,4 +31,30 @@
     <!--  activity_community  -->
     <string name="community_title">당신의 성장을 기록하세요!</string>
     <string name="community_text">기록은 당신의 발전을 더욱 선명하게 드러내어줍니다.</string>
+
+    <!--  캘린더 커스텀  -->
+    <string-array name="custom_weekdays">
+        <item>일</item>
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+    </string-array>
+
+<!--    <string-array name="custom_months">-->
+<!--        <item>JAN</item>-->
+<!--        <item>FEB</item>-->
+<!--        <item>MAR</item>-->
+<!--        <item>APR</item>-->
+<!--        <item>MAY</item>-->
+<!--        <item>JUN</item>-->
+<!--        <item>JUL</item>-->
+<!--        <item>AUG</item>-->
+<!--        <item>SEP</item>-->
+<!--        <item>OCT</item>-->
+<!--        <item>NOV</item>-->
+<!--        <item>DEC</item>-->
+<!--    </string-array>-->
 </resources>
