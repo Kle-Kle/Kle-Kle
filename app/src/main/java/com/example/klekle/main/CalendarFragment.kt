@@ -3,10 +3,12 @@ package com.example.klekle.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
@@ -14,7 +16,10 @@ import com.example.klekle.ArticleActivity
 import com.example.klekle.CameraActivity
 import com.example.klekle.R
 import com.example.klekle.databinding.FragmentCalendarBinding
+import com.example.klekle.model.CommentModel
 import com.example.klekle.util.BitmapConverter
+import com.example.klekle.util.GetCommentsRequest
+import com.example.klekle.util.GetMyArticlesThisMonthRequest
 import com.example.klekle.util.GetMyTodayOneArticleRequest
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
@@ -23,6 +28,7 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+
 
 class CalendarFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentCalendarBinding? = null
@@ -51,6 +57,7 @@ class CalendarFragment : Fragment(), View.OnClickListener {
 
         binding.calendarView.setSelectedDate(CalendarDay.today()) // 캘린더 입장 하자마자, 오늘 날짜에 포커스
         getTodayArticle(getTime().toString()) // 포커스 되는 순간, 해당 일자의 글 중 가장 최신 글을 btn_goToArticle 영역에 띄우게
+        decorateRecorded(CalendarDay.today())
         binding.layoutTodayRecord.removeAllViews()
         binding.layoutTodayRecord.addView(binding.btnGoToArticle)
 
@@ -64,7 +71,7 @@ class CalendarFragment : Fragment(), View.OnClickListener {
         )
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             // 포커스 되는 순간, 해당 일자의 글 중 가장 최신 글을 btn_goToArticle 영역에 띄우게 2
-            val selectedDate = getSelectedDateInMySQLFormat()
+            val selectedDate = getDateInMySQLFormat(binding.calendarView.selectedDate)
             getTodayArticle(selectedDate)
         }
 
@@ -149,8 +156,7 @@ class CalendarFragment : Fragment(), View.OnClickListener {
         queue.add(getMyTodayOneArticleRequest)
     }
 
-    private fun getSelectedDateInMySQLFormat(): String {
-        val selectedDate = binding.calendarView.selectedDate
+    private fun getDateInMySQLFormat(selectedDate: CalendarDay): String {
         val tempYear = selectedDate.year.toString()
         var tempMonth = (selectedDate.month + 1).toString() // 왜인지 모르겠지만, 10월에서 선택하면 9월로, 9월에서 선택하면 8월 이런식으로 나옴
         var tempDay = selectedDate.day.toString()
@@ -165,5 +171,45 @@ class CalendarFragment : Fragment(), View.OnClickListener {
 
         val thisDayDate = "${tempYear}-${tempMonth}-${tempDay}"
         return thisDayDate
+    }
+
+    private fun decorateRecorded(currentDate: CalendarDay) {
+        // 현재 캘린더가 보여주고 있는 달..에서, 기록이 있는 날짜들에 색다른 표시를 해 둠
+        val date = getDateInMySQLFormat(currentDate)
+        val yearAndMonth = date.substring(0, 7)
+
+        val responseListener: Response.Listener<String?> =
+            Response.Listener<String?> { response ->
+                try {
+                    val jsonResponse = JSONObject(response)
+                    val success = jsonResponse.getBoolean("success")
+                    val results = jsonResponse.getJSONArray("result")
+                    val calendarDayList = ArrayList<CalendarDay>()
+                    if(success) {
+                        for(i in 0 until results.length()) {
+                            val aRecordDay : String
+                            results.getJSONObject(i).apply {
+                                aRecordDay = getString("published")
+                                Log.d("test:D", "$aRecordDay")
+                            }
+                            val tempYear = aRecordDay.substring(0, 4).toInt()
+                            val tempMonth = aRecordDay.substring(5, 7).toInt()
+                            val tempDay = aRecordDay.substring(8, 10).toInt()
+
+                            calendarDayList.add(CalendarDay.from(tempYear, tempMonth - 1, tempDay))
+                        }
+
+                        val eventDecorator = EventDecorator(calendarDayList, activity)
+                        binding.calendarView.addDecorators(eventDecorator)
+                    } else {
+                        return@Listener
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        val getMyArticlesThisMonthRequest = GetMyArticlesThisMonthRequest("$yearAndMonth%", userid, responseListener)
+        val queue = Volley.newRequestQueue(activity)
+        queue.add(getMyArticlesThisMonthRequest)
     }
 }
