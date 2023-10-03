@@ -48,7 +48,8 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
 
         val sharedPreferences = getSharedPreferences("login_info", Activity.MODE_PRIVATE)
         userid = sharedPreferences.getString("loginedId", null).toString() // 해당 게시글 수정/삭제 or 댓글들 수정/삭제 시, 권한이 있는 사용자인지 판단키 위해
-        articleNo = "2" // TODO: 해당 페이지로 넘어오기 전에, 선택한 글의 article no를 넘겨 받도록 해서 처리할 것
+        val intent = intent // 해당 페이지로 넘어오기 전에, 선택한 글의 article no를 넘겨 받음
+        articleNo = intent.getStringExtra("currentArticleNo").toString()
 
         with(binding) {
             // 댓글 어댑터 설정
