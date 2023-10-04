@@ -23,7 +23,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.klekle.MainActivity;
 import com.example.klekle.R;
 import com.example.klekle.auth.signup.RegisterActivity;
-import com.example.klekle.util.GetFcmTokenRequest;
 import com.example.klekle.util.LoginRequest;
 import com.example.klekle.util.UpdateFcmTokenRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
