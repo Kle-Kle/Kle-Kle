@@ -1,12 +1,17 @@
 package com.example.klekle
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.klekle.databinding.ActivityRegisterBinding
 import com.example.klekle.main.CalendarFragment
 import com.example.klekle.main.HomeFragment
@@ -18,6 +23,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+
+    private val requestNotificationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { ok ->
+            if (ok) {
+                // 알림권한 허용 o
+            } else {
+                // 알림권한 허용 x. 자유롭게 대응..
+            }
+        }
 
     private val fragmentManager = supportFragmentManager
     private val homeFragment = HomeFragment()
@@ -37,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         // 알림 badge (임시 고정값)
         showBadge(this, bottomNavigationView, R.id.notice, "4")
+        requestNotificationPermission() // 알림 권한 허가 묻기
 
         // bottomNavigationView의 아이템이 선택될 때, 호출될 리스너 등록
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -78,6 +95,26 @@ class MainActivity : AppCompatActivity() {
         val itemView = bottomNavigationView.findViewById<BottomNavigationItemView>(itemId)
         if (itemView.childCount == 3) {
             itemView.removeViewAt(2)
+        }
+    }
+
+    fun requestNotificationPermission() {
+        if (
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                // 다른 런타임 퍼미션이랑 비슷한 과정
+                if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                    // 왜 알림을 허용해야하는지 유저에게 알려주기를 권장
+                } else {
+                    requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            } else {
+                // 안드로이드 12 이하는 알림에 런타임 퍼미션 없으니, 설정가서 켜보라고 권해볼 수 있겠다.
+            }
         }
     }
 }
