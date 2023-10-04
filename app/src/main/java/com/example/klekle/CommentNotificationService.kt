@@ -1,19 +1,23 @@
 package com.example.klekle
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.job.JobInfo.PRIORITY_DEFAULT
 import android.content.Intent
-import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
+import com.example.klekle.util.UpdateFcmTokenRequest
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import java.util.Objects
+import org.json.JSONException
+import org.json.JSONObject
 
 class CommentNotificationService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -56,9 +60,30 @@ class CommentNotificationService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        // TODO: 일단 해놓긴 했는데, 테스트 할 방법을 모르겠다..
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             // Get new FCM registration token
-            Log.d("fcm:token", token)
+            val sharedPreferences = getSharedPreferences("login_info", Activity.MODE_PRIVATE)
+            val userid = sharedPreferences.getString("loginedId", null).toString()
+            updateFcmTokenThisUser(token, userid)
         })
+    }
+
+    private fun updateFcmTokenThisUser(token: String, userid: String) {
+        val responseListener: Response.Listener<String?> =
+            Response.Listener<String?> { response ->
+                try {
+                    val jsonResponse = JSONObject(response)
+                    val success = jsonResponse.getBoolean("success")
+                    if(success) {
+                        Log.d("fcm:token", token)
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        val updateFcmTokenRequest = UpdateFcmTokenRequest(token, userid, responseListener)
+        val queue = Volley.newRequestQueue(this)
+        queue.add(updateFcmTokenRequest)
     }
 }
