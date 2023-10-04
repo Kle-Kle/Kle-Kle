@@ -3,13 +3,17 @@ package com.example.klekle
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.klekle.databinding.ActivityArticleBinding
 import com.example.klekle.main.community.CommentAdapter
@@ -22,6 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException
 import org.json.JSONObject
 
+
 class ArticleActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityArticleBinding
     private lateinit var commentAdapter: CommentAdapter
@@ -31,6 +36,8 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var btnLike : LinearLayout
     lateinit var btnComment : Button
 
+    lateinit var authorUserFcmToken : String // article의 게시자 fcm token
+    lateinit var articleContent : String
     lateinit var userid : String
     lateinit var articleNo : String
 
@@ -112,6 +119,7 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun createComment() {
         val currentCommentContent = binding.etComment.text.toString()
+        pushComentNotification(currentCommentContent)
 
         val responseListener: Response.Listener<String?> =
             Response.Listener<String?> { response ->
@@ -177,6 +185,39 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
         queue.add(getCommentsRequest)
     }
 
+    private fun pushComentNotification(currentCommentContent: String) {
+        val notiTitle = "새 댓글이 달렸어요: ${articleContent}"
+        val notiBody = currentCommentContent
+        val url = "https://fcm.googleapis.com/fcm/send"
+
+        val jsonObject = JSONObject()
+        val notification = JSONObject()
+        notification.put("title", notiTitle)
+        notification.put("body", notiBody)
+        jsonObject.put("to", authorUserFcmToken)
+        jsonObject.put("priority", "high")
+        jsonObject.put("notification", notification)
+
+        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Request.Method.POST, url, jsonObject,
+            Response.Listener<JSONObject?> {
+                Log.d("test:D", jsonObject.toString())
+            }, Response.ErrorListener { error ->
+                error.printStackTrace()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("Content-Type", "application/json")
+                params.put("Authorization", BuildConfig.FCM_API_KEY)
+                return params
+            }
+        }
+
+        val queue = Volley.newRequestQueue(this)
+        queue.add(jsonObjectRequest)
+    }
+
     private fun getAndSetArticleDetail() {
         val responseListener: Response.Listener<String?> =
             Response.Listener<String?> { response ->
@@ -188,15 +229,17 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
                         results.getJSONObject(0).apply {
                             var bm = BitmapConverter.stringToBitmap(getString("userProfile") ?: "") // 사용자 프로필 이미지
                             binding.articleAuthorProfileImage.setImageBitmap(bm)
-
-                            binding.articleAuthorNickname.text = getString("userNickname")
-                            binding.articleAuthorUserid.text = getString("userId")
-                            binding.tvPublished.text = getString("published")
-                            binding.tvArticleContent.text = getString("articleContent")
-                            binding.tvStatusCommentAndLike.text = "댓글 ${getString("commentCount")}개 | 좋아요 0회"
-
                             bm = BitmapConverter.stringToBitmap(getString("articleImage") ?: "") // article image
                             binding.ivArticleImage.setImageBitmap(bm)
+
+                            authorUserFcmToken = getString("userFcmToken")
+
+                            binding.articleAuthorUserid.text = getString("userId")
+                            binding.articleAuthorNickname.text = getString("userNickname")
+                            binding.tvPublished.text = getString("published")
+                            articleContent = getString("articleContent")
+                            binding.tvArticleContent.text = articleContent
+                            binding.tvStatusCommentAndLike.text = "댓글 ${getString("commentCount")}개 | 좋아요 0회"
                         }
                     } else {
                         return@Listener
