@@ -38,11 +38,16 @@ class CommentNotificationService : FirebaseMessagingService() {
                 )
                 notificationManager.createNotificationChannel(channel)
             }
+            val intentList = mutableListOf<Intent>()
+            intentList.add(Intent(this, MainActivity::class.java))
+            val pendingIntent = PendingIntent.getActivities(this, 11, intentList.toTypedArray(), PendingIntent.FLAG_IMMUTABLE)
             val notification = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(it.title)
                 .setContentText(it.body)
                 .setPriority(PRIORITY_DEFAULT)
                 .setSmallIcon(R.drawable.icon_klekle)
+                .setContentIntent(pendingIntent) // 알림 클릭 시, 클클 앱 오픈
+                .setAutoCancel(true) // 알림 클릭 시, 알림 자동 삭제
                 .build()
 
             notificationManager.notify(1, notification)
