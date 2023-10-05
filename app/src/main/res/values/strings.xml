@@ -22,6 +22,10 @@
     <string name="calendar_there_is_no_content">해당 일자에 기록이 없습니다.</string>
     <string name="calendar_there_is_no_content02"><u>오늘을 기록하러 가기</u></string>
 
+    <!--  fragment_notice  -->
+    <string name="mark_as_unread"><u>(읽지 않음으로 표시)</u></string>
+    <string name="notification_guide_message">내가 작성한 글에 댓글이 달리면, 이 곳 알림 목록에 표시됩니다.\n알림 목록에서 알림을 최대 20개까지 볼 수 있습니다.</string>
+
     <!--  메뉴  -->
     <string name="menu_1_title">홈</string>
     <string name="menu_2_title">캘린더</string>
