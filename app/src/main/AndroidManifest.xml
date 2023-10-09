@@ -80,6 +80,10 @@
         <activity
             android:name=".HoldSelectActivity"
             android:exported="false" />
+        <activity android:name=".PersonalProfileActivity"
+            android:exported="false"/>
+        <activity android:name=".WritePostActivity"
+            android:exported="false"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
