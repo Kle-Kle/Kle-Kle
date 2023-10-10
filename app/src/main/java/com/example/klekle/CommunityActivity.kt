@@ -95,7 +95,6 @@ class CommunityActivity : AppCompatActivity() {
                             }
                             articleList.add(articleModel)
                         }
-                        println("NewHomeFragment: response: ${jsonResponse}, articleList: ${articleList}")
 
                         articleAdapter.submitList(articleList)
                         articleAdapter.notifyDataSetChanged()
