@@ -10,6 +10,7 @@ import android.widget.PopupMenu
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.example.klekle.ArticleActivity
 import com.example.klekle.PersonalProfileActivity
 import com.example.klekle.R
 import com.example.klekle.WritePostActivity
@@ -38,6 +39,15 @@ class ArticleAdapter: ListAdapter<ArticleModel, BaseViewHolder>(ARTICLE_LIST_COM
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         getItem(position)?.run item@ {
             with(holder.binding as ListItemArticleBinding) {
+
+                with(btnGoToArticle) {
+                    setOnClickListener {
+                        val intent = Intent(context.applicationContext, ArticleActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        intent.putExtra("currentArticleNo", article_no) // 화면 넘어가면서, 해당 글의 article no 를 같이 넘겨줌
+                        context.applicationContext.startActivity(intent)
+                    }
+                }
 
                 // 더보기 버튼 클릭
                 with(btnMore) {
