@@ -28,6 +28,7 @@ class WritePostActivity : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var bit : Bitmap
     private lateinit var base64bitmap : String
+    private var flagThereIsImage : Boolean = false // 이미지를 업로드 하지 않고도, 게시글 작성을 처리할 수 있도록
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,21 +43,20 @@ class WritePostActivity : AppCompatActivity() {
         })
 
         binding.btnPost.setOnClickListener {
-
-            if(bit !=null) {
+            base64bitmap = if (flagThereIsImage) {
                 // ByteArrayOutputStream을 사용하여 Bitmap을 ByteArray로 변환
                 val byteArrayOutputStream = ByteArrayOutputStream()
                 bit.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
                 val byteArray = byteArrayOutputStream.toByteArray()
 
-// ByteArray를 Base64로 인코딩
+                // ByteArray를 Base64로 인코딩
                 val base64String = Base64.encodeToString(byteArray, Base64.DEFAULT)
 
-                base64bitmap = base64String
-
-                PostArticle()
+                base64String
+            } else {
+                ""
             }
-
+            PostArticle()
         }
 
     }
@@ -79,6 +79,8 @@ class WritePostActivity : AppCompatActivity() {
                 bit = bitmap;
                 // ImageView에 이미지 설정
                 binding.imageView.setImageBitmap(bitmap)
+
+                flagThereIsImage = true
             } catch (e: Exception) {
                 e.printStackTrace()
             }
