@@ -51,6 +51,21 @@ class CommunityActivity : AppCompatActivity() {
         }
 
         getArticleList()
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // RecyclerView의 어댑터(Adapter)에서 사용하는 데이터 리스트를 초기화합니다.
+        val newArticleList = ArrayList<ArticleModel>()
+
+        // 어댑터에 새로운 데이터 리스트를 설정합니다.
+        articleAdapter.submitList(newArticleList)
+
+        // RecyclerView를 업데이트합니다.
+        articleAdapter.notifyDataSetChanged()
+
+        getArticleList()
     }
 
     private fun getArticleList() {
@@ -81,7 +96,7 @@ class CommunityActivity : AppCompatActivity() {
                         println("NewHomeFragment: response: ${jsonResponse}, articleList: ${articleList}")
 
                         articleAdapter.submitList(articleList)
-
+                        articleAdapter.notifyDataSetChanged()
                     } else {
                         return@Listener
                     }

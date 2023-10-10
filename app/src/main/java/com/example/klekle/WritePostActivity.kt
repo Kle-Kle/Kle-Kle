@@ -43,19 +43,19 @@ class WritePostActivity : AppCompatActivity() {
 
         binding.btnPost.setOnClickListener {
 
-        if(bit !=null) {
-            // ByteArrayOutputStream을 사용하여 Bitmap을 ByteArray로 변환
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            bit.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-            val byteArray = byteArrayOutputStream.toByteArray()
+            if(bit !=null) {
+                // ByteArrayOutputStream을 사용하여 Bitmap을 ByteArray로 변환
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bit.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                val byteArray = byteArrayOutputStream.toByteArray()
 
 // ByteArray를 Base64로 인코딩
-            val base64String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+                val base64String = Base64.encodeToString(byteArray, Base64.DEFAULT)
 
-            base64bitmap = base64String
+                base64bitmap = base64String
 
-            PostArticle()
-        }
+                PostArticle()
+            }
 
         }
 
@@ -96,9 +96,8 @@ class WritePostActivity : AppCompatActivity() {
                     val jsonResponse = JSONObject(response)
                     val success = jsonResponse.getBoolean("success")
                     if(success) {
-                        var resultIntent = Intent();
-                        resultIntent.putExtra("memo", "update")
-                        setResult(RESULT_OK, resultIntent);
+                        intent.putExtra("memo", "update")
+                        setResult(RESULT_OK, intent);
                         this.finish();
                     } else {
                         Toast.makeText(this,"업로드 실패",Toast.LENGTH_LONG);
