@@ -1,29 +1,46 @@
 package com.example.klekle.main.community
 
+import android.app.Activity
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
 import com.example.klekle.ArticleActivity
 import com.example.klekle.PersonalProfileActivity
 import com.example.klekle.R
-import com.example.klekle.WritePostActivity
 import com.example.klekle.databinding.ListItemArticleBinding
 import com.example.klekle.model.ArticleModel
 import com.example.klekle.util.BitmapConverter
+import com.example.klekle.util.DeleteArticleRequest
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 
 class ArticleAdapter: ListAdapter<ArticleModel, BaseViewHolder>(ARTICLE_LIST_COMPARATOR) {
-
+    private lateinit var activity : Activity
+    // 현재 로그인 중인 계정의 userid
+    private var currentUserid = ""
     // CommunityActivity 에서만 PersonalProfileActivity로 이동 시키게 확인 하는 flag
-    private var personProfileflag  = false;
+    private var personProfileflag = false
 
+    public fun setActivity(activity: Activity){
+        this.activity = activity
+    }
+    public fun setCurrentUserid(currentUserid : String){
+        this.currentUserid = currentUserid
+    }
     public fun setPersonProfile(flag : Boolean){
         personProfileflag = flag;
     }
@@ -51,9 +68,10 @@ class ArticleAdapter: ListAdapter<ArticleModel, BaseViewHolder>(ARTICLE_LIST_COM
 
                 // 더보기 버튼 클릭
                 with(btnMore) {
+                    if (user_id == currentUserid) isVisible = true // 현재 로그인 중인 사용자가 작성한 게시글이 아니면, more unit 안 보이게
                     setOnClickListener {
                         if(personProfileflag){
-                            showPopupMenu(it)
+                            showPopupMenu(it, article_no)
                         }else {
                             moreUnit()
                         }
@@ -166,7 +184,7 @@ class ArticleAdapter: ListAdapter<ArticleModel, BaseViewHolder>(ARTICLE_LIST_COM
         }
     }
 
-    private fun showPopupMenu(view: View) {
+    private fun showPopupMenu(view: View, article_no: String?) {
         val popupMenu = PopupMenu(view.context, view)
         popupMenu.inflate(R.menu.popup_menu) // 팝업 메뉴 리소스 파일 지정
 
@@ -175,10 +193,57 @@ class ArticleAdapter: ListAdapter<ArticleModel, BaseViewHolder>(ARTICLE_LIST_COM
             when (item.itemId) {
                 R.id.menu_item_1 -> {
                     // 메뉴 아이템 1 클릭 시 수행할 동작 추가
+                    // 게시글 삭제하기
+                    try{
+                        val str_tittle = "게시글 삭제"
+                        val str_message = "이 게시글을 삭제하시겠습니까?"
+                        val str_buttonOK = "확인"
+                        val str_buttonNO = "취소"
+
+                        val builder = AlertDialog.Builder(activity)
+                        builder.setTitle(str_tittle) // 팝업창 타이틀 지정
+                        builder.setMessage(str_message) // 팝업창 내용 지정
+                        builder.setPositiveButton(str_buttonOK, DialogInterface.OnClickListener { dialog, which ->
+                            val responseListener: Response.Listener<String?> =
+                                Response.Listener<String?> { response ->
+                                    try {
+                                        val jsonResponse = JSONObject(response)
+                                        val success = jsonResponse.getBoolean("success")
+                                    } catch (e: JSONException) {
+                                        e.printStackTrace()
+                                    }
+                                }
+                            val rqst = DeleteArticleRequest(article_no, responseListener)
+                            val queue = Volley.newRequestQueue(activity)
+                            queue.add(rqst)
+
+                            // 새로 고침
+                            refresh()
+                        })
+                        builder.setNegativeButton(str_buttonNO, DialogInterface.OnClickListener { dialog, which ->
+                            try {
+                                dialog.dismiss()
+                            }
+                            catch (e : Exception){
+                                e.printStackTrace()
+                            }
+                        })
+                        val dialog = builder.create()
+                        try {
+                            dialog.show()
+                        }
+                        catch (e : Exception){
+                            e.printStackTrace()
+                        }
+                    }
+                    catch(e : Exception){
+                        e.printStackTrace()
+                    }
                     true
                 }
                 R.id.menu_item_2 -> {
                     // 메뉴 아이템 2 클릭 시 수행할 동작 추가
+                    // TODO: 게시글 수정하기
                     true
                 }
                 else -> false
@@ -186,6 +251,14 @@ class ArticleAdapter: ListAdapter<ArticleModel, BaseViewHolder>(ARTICLE_LIST_COM
         }
 
         popupMenu.show()
+    }
+
+    private fun refresh() {
+        val intent = activity.intent // 인텐트
+        activity.finish()
+        activity.overridePendingTransition(0, 0) // 인텐트 효과 없애기
+        activity.startActivity(intent) // 액티비티 열기
+        activity.overridePendingTransition(0, 0) // 인텐트 효과 없애기
     }
 
     companion object {

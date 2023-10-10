@@ -1,6 +1,5 @@
 package com.example.klekle
 
-import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -28,12 +27,13 @@ class CommunityActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val sharedPreferences = getSharedPreferences("login_info", AppCompatActivity.MODE_PRIVATE)!!
+        val loginedId = sharedPreferences.getString("loginedId", null).toString()
+
         with(binding) {
             // 아티클 어댑터 설정
             with(rvArticleList) {
                 articleAdapter = ArticleAdapter().apply {
-
-
                     moreUnit {
                         //
                     }
@@ -41,7 +41,9 @@ class CommunityActivity : AppCompatActivity() {
                 adapter = articleAdapter
 
                 // articlAdapter 에서 Community 에서 만 다른 화면을 넘어가게 확인하는 flag 추가
-                articleAdapter.setPersonProfile(true);
+                articleAdapter.setPersonProfile(true)
+                articleAdapter.setCurrentUserid(loginedId)
+                articleAdapter.setActivity(this@CommunityActivity)
             }
         }
 
