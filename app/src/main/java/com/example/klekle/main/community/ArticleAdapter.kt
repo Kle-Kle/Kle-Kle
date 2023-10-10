@@ -163,6 +163,12 @@ class ArticleAdapter: ListAdapter<ArticleModel, BaseViewHolder>(ARTICLE_LIST_COM
                     text = published ?: ""
                 }
 
+                // 수정 여부
+                with(tvIsEdited) {
+                    text = if (is_edited == 1) "  •  (편집됨)"
+                    else ""
+                }
+
                 // 본문
                 with(tvContent) {
                     text = article_content ?: ""

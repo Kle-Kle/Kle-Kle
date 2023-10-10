@@ -8,5 +8,6 @@ data class ArticleModel(
     var published: String? = null,
     var article_content: String? = null,
     var comment_count: String? = null,
-    var article_image: String? = null
+    var article_image: String? = null,
+    var is_edited: Int? = null
 )

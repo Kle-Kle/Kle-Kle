@@ -92,6 +92,7 @@ class CommunityActivity : AppCompatActivity() {
                                 articleModel.article_content = getString("article_content")
                                 articleModel.comment_count = getString("comment_count")
                                 articleModel.article_image = getString("article_image")
+                                articleModel.is_edited = getInt("isEdited")
                             }
                             articleList.add(articleModel)
                         }

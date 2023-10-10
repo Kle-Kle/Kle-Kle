@@ -237,6 +237,10 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
                             binding.articleAuthorUserid.text = getString("userId")
                             binding.articleAuthorNickname.text = getString("userNickname")
                             binding.tvPublished.text = getString("published")
+//                            binding.tvIsEdited.text
+                            val is_edited = getInt("isEdited")
+                            binding.tvIsEdited.text = if (is_edited == 1) "  •  (편집됨)"
+                            else ""
                             articleContent = getString("articleContent")
                             binding.tvArticleContent.text = articleContent
                             binding.tvStatusCommentAndLike.text = "댓글 ${getString("commentCount")}개 | 좋아요 0회"
