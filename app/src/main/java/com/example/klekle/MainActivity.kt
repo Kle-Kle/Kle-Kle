@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -12,13 +13,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
 import com.example.klekle.databinding.ActivityRegisterBinding
 import com.example.klekle.main.CalendarFragment
 import com.example.klekle.main.HomeFragment
 import com.example.klekle.main.MypageFragment
 import com.example.klekle.main.NoticeFragment
+import com.example.klekle.util.DeleteArticleRequest
+import com.example.klekle.util.GetCountOfNotificationsRequest
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,19 +47,24 @@ class MainActivity : AppCompatActivity() {
     private val calendarFragment = CalendarFragment()
     private val noticeFragment = NoticeFragment()
     private val mypageFragment = MypageFragment()
+
+    private lateinit var bottomNavigationView : BottomNavigationView
+
+    private var countOfNotifications : Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
         bottomNavigationView.menu.findItem(R.id.home).isChecked = true // set default selection is 'home'
 
         // 첫 화면 지정
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss()
 
-        // 알림 badge (임시 고정값)
-        showBadge(this, bottomNavigationView, R.id.notice, "4")
+        // 알림 badge
+        getAndSetCountOfNotifications()
         requestNotificationPermission() // 알림 권한 허가 묻기
 
         // bottomNavigationView의 아이템이 선택될 때, 호출될 리스너 등록
@@ -74,6 +86,36 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        getAndSetCountOfNotifications()
+    }
+
+    private fun getAndSetCountOfNotifications() {
+        val sharedPreferences = getSharedPreferences("login_info", AppCompatActivity.MODE_PRIVATE)!!
+        val loginedId = sharedPreferences.getString("loginedId", null).toString()
+
+        val responseListener: Response.Listener<String?> =
+            Response.Listener<String?> { response ->
+                try {
+                    val jsonResponse = JSONObject(response)
+                    countOfNotifications = jsonResponse.getInt("count")
+
+                    if (countOfNotifications > 0) {
+                        showBadge(this, bottomNavigationView, R.id.notice, "$countOfNotifications")
+                    }
+                    else {
+                        removeBadge(bottomNavigationView, R.id.notice)
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        val rqst = GetCountOfNotificationsRequest(loginedId, responseListener)
+        val queue = Volley.newRequestQueue(this)
+        queue.add(rqst)
     }
 
     fun showBadge(
