@@ -31,6 +31,9 @@ class PersonalProfileActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val sharedPreferences = getSharedPreferences("login_info", MODE_PRIVATE)!!
+        val loginedId = sharedPreferences.getString("loginedId", null).toString()
+
         // 바이트 배열 데이터를 추출
         val Profile = intent.getByteArrayExtra("Profile")
         var NickName = intent.getStringExtra("NickName")
@@ -58,6 +61,11 @@ class PersonalProfileActivity : AppCompatActivity() {
                     }
                 }
                 adapter = articleAdapter
+
+                // articlAdapter 에서 Community 에서 만 다른 화면을 넘어가게 확인하는 flag 추가
+                articleAdapter.setPersonProfile(true)
+                articleAdapter.setCurrentUserid(loginedId)
+                articleAdapter.setActivity(this@PersonalProfileActivity)
             }
         }
         getArticleList()
@@ -87,10 +95,10 @@ class PersonalProfileActivity : AppCompatActivity() {
                                 articleModel.article_content = getString("articleContent")
                                 articleModel.comment_count = getString("commentCount")
                                 articleModel.article_image = getString("articleImage")
+                                articleModel.is_edited = getInt("isEdited")
                             }
                             articleList.add(articleModel)
                         }
-                        println("NewHomeFragment: response: ${jsonResponse}, articleList: ${articleList}")
 
                         articleAdapter.submitList(articleList)
 
