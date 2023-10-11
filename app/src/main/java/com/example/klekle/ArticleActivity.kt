@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,6 +32,7 @@ import com.example.klekle.util.GetCommentsRequest
 import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 
 
 class ArticleActivity : AppCompatActivity(), View.OnClickListener {
@@ -46,6 +48,7 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var authorUserFcmToken : String // article의 게시자 fcm token
     lateinit var articleContent : String
     lateinit var userid : String
+    lateinit var authorProfileBitmapString : String
     lateinit var articleNo : String
     lateinit var articleImage : String
 
@@ -112,11 +115,9 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.article_author_profile_image -> {
-                // todo
                 moveToUserPage()
             }
             R.id.article_author_id -> {
-                // todo
                 moveToUserPage()
             }
             R.id.btn_more -> {
@@ -255,7 +256,19 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun moveToUserPage() {
-        val intent = Intent(this, UserPageActivity::class.java)
+        val intent = Intent(this, PersonalProfileActivity::class.java)
+        intent.putExtra("NickName", binding.articleAuthorNickname.text)
+        intent.putExtra("UserId", binding.articleAuthorUserid.text)
+
+        val bm = BitmapConverter.stringToBitmap(authorProfileBitmapString ?: "")
+
+        // 이미지를 압축한 후 ByteArray로 변환
+        val stream = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+        val byteArray = stream.toByteArray()
+
+        intent.putExtra("Profile",byteArray)
+
         startActivity(intent)
     }
 
@@ -336,7 +349,8 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
                     val results = jsonResponse.getJSONArray("result")
                     if(success) {
                         results.getJSONObject(0).apply {
-                            var bm = BitmapConverter.stringToBitmap(getString("userProfile") ?: "") // 사용자 프로필 이미지
+                            authorProfileBitmapString = getString("userProfile") ?: ""
+                            var bm = BitmapConverter.stringToBitmap(authorProfileBitmapString) // 사용자 프로필 이미지
                             binding.articleAuthorProfileImage.setImageBitmap(bm)
                             articleImage = getString("articleImage") ?: "" // article image
                             bm = BitmapConverter.stringToBitmap(articleImage)
