@@ -135,55 +135,57 @@ class CalendarFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getTodayArticle(currentDate: String) {
-        binding.tvGuide.text = "${userid}님의 ${currentDate} 기록"
+        Handler().postDelayed(Runnable {
+            binding.tvGuide.text = "${userid}님의 ${currentDate} 기록"
 
-        val responseListener: Response.Listener<String> =
-            Response.Listener { response ->
-                try {
-                    val jsonObject = JSONObject(response)
-                    val success = jsonObject.getBoolean("success")
-                    if (success) {
-                        binding.layoutTodayRecord.removeViewAt(0)
-                        binding.layoutTodayRecord.addView(binding.btnGoToArticle)
+            val responseListener: Response.Listener<String> =
+                Response.Listener { response ->
+                    try {
+                        val jsonObject = JSONObject(response)
+                        val success = jsonObject.getBoolean("success")
+                        if (success) {
+                            binding.layoutTodayRecord.removeViewAt(0)
+                            binding.layoutTodayRecord.addView(binding.btnGoToArticle)
 
-                        val user_profile = BitmapConverter.stringToBitmap(jsonObject.getString("user_profile") ?: "")
-                        binding.ivProfile.setImageBitmap(user_profile)
-                        binding.tvNickName.text = jsonObject.getString("user_nickname")
-                        binding.tvUserId.text = jsonObject.getString("userid")
-                        binding.tvRegAt.text = jsonObject.getString("published")
-                        binding.tvContent.text = jsonObject.getString("article_content")
-                        val article_image = BitmapConverter.stringToBitmap(jsonObject.getString("article_image") ?: "")
-                        binding.ivContent.setImageBitmap(article_image)
-                        binding.tvComment.text = jsonObject.getString("comment_count")
-                        binding.tvFavorite.text = "0"
-                        currentArticleNo = jsonObject.getString("article_no")
-                    } else {
-                        binding.layoutTodayRecord.removeViewAt(0)
-                        binding.layoutTodayRecord.addView(binding.btnGoToPostArticle) // 오늘은 작성한 게시글이 없네요~ 작성하러 가보시겠어요? 하는 버튼을 대신 생성
-                        binding.btnGoToPostArticle.setOnClickListener {
-                            val intent = Intent(activity, CameraActivity::class.java)
-                            startActivity(intent)
+                            val user_profile = BitmapConverter.stringToBitmap(jsonObject.getString("user_profile") ?: "")
+                            binding.ivProfile.setImageBitmap(user_profile)
+                            binding.tvNickName.text = jsonObject.getString("user_nickname")
+                            binding.tvUserId.text = jsonObject.getString("userid")
+                            binding.tvRegAt.text = jsonObject.getString("published")
+                            binding.tvContent.text = jsonObject.getString("article_content")
+                            val article_image = BitmapConverter.stringToBitmap(jsonObject.getString("article_image") ?: "")
+                            binding.ivContent.setImageBitmap(article_image)
+                            binding.tvComment.text = jsonObject.getString("comment_count")
+                            binding.tvFavorite.text = "0"
+                            currentArticleNo = jsonObject.getString("article_no")
+                        } else {
+                            binding.layoutTodayRecord.removeViewAt(0)
+                            binding.layoutTodayRecord.addView(binding.btnGoToPostArticle) // 오늘은 작성한 게시글이 없네요~ 작성하러 가보시겠어요? 하는 버튼을 대신 생성
+                            binding.btnGoToPostArticle.setOnClickListener {
+                                val intent = Intent(activity, CameraActivity::class.java)
+                                startActivity(intent)
+                            }
+
+                            binding.tvRegAt.text = ""
+                            binding.tvContent.text = ""
+                            val article_image = BitmapConverter.stringToBitmap("")
+                            binding.ivContent.setImageBitmap(article_image)
+                            binding.tvComment.text = "0"
+                            binding.tvFavorite.text = "0"
                         }
-
-                        binding.tvRegAt.text = ""
-                        binding.tvContent.text = ""
-                        val article_image = BitmapConverter.stringToBitmap("")
-                        binding.ivContent.setImageBitmap(article_image)
-                        binding.tvComment.text = "0"
-                        binding.tvFavorite.text = "0"
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
                     }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
                 }
-            }
-        val getMyTodayOneArticleRequest =
-            GetMyTodayOneArticleRequest(
-                "$currentDate%",
-                userid,
-                responseListener
-            )
-        val queue = Volley.newRequestQueue(activity)
-        queue.add(getMyTodayOneArticleRequest)
+            val getMyTodayOneArticleRequest =
+                GetMyTodayOneArticleRequest(
+                    "$currentDate%",
+                    userid,
+                    responseListener
+                )
+            val queue = Volley.newRequestQueue(activity)
+            queue.add(getMyTodayOneArticleRequest)
+        }, 1000)
     }
 
     private fun getDateInMySQLFormat(selectedDate: CalendarDay): String {
