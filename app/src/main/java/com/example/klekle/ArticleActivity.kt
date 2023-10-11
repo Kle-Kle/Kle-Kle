@@ -80,6 +80,10 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
                 adapter = commentAdapter
+
+                commentAdapter.setPersonProfile(true)
+                commentAdapter.setCurrentUserid(userid)
+                commentAdapter.setActivity(this@ArticleActivity)
             }
         }
         getComments()
@@ -291,6 +295,7 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
                                 commentModel.comment_content = getString("commentContent")
                                 commentModel.commented = getString("commented")
                                 commentModel.articleNo = getString("articleNo")
+                                commentModel.is_edited = getInt("isEdited")
                             }
                             commentList.add(commentModel)
                         }

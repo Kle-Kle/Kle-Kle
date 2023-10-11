@@ -7,5 +7,6 @@ data class CommentModel(
     var comment_no: String? = null,
     var comment_content: String? = null,
     var commented: String? = null,
-    var articleNo: String? = null
+    var articleNo: String? = null,
+    var is_edited: Int? = null
 )
