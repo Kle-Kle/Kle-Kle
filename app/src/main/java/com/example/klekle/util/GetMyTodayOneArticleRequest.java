@@ -8,8 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GetMyTodayOneArticleRequest extends StringRequest {
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/main/calendar/getMyTodayOneArticle.php";
     // 서버 url(API 호출)
-    final static private String URL = "https://ywww-zzauz.run.goorm.site/klekle/main/calendar/getMyTodayOneArticle.php";
     private Map<String,String>map;
 
     public GetMyTodayOneArticleRequest(String currentDate, String userid, Response.Listener<String>listener){

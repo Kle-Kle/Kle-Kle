@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateStatusMessageRequest extends StringRequest {
-    // 서버 url(API 호출)
-    final static private String URL = "https://ywww-zzauz.run.goorm.site/klekle/main/my/updateStatusMessage.php";
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/main/my/updateStatusMessage.php";
     private Map<String,String>map;
 
     public UpdateStatusMessageRequest(String newStatusMessage, String userid, Response.Listener<String>listener){

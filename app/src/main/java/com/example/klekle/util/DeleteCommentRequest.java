@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeleteCommentRequest extends StringRequest {
-    final static private String URL = "https://ywww-zzauz.run.goorm.site/klekle/main/community/deleteComment.php";
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/main/community/deleteComment.php";
     private Map<String,String> map;
 
     public DeleteCommentRequest(String comment_no, Response.Listener<String>listener){

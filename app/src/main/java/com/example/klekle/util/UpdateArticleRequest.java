@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateArticleRequest extends StringRequest {
-    final static private String URL="https://ywww-zzauz.run.goorm.site/klekle/main/community/updateArticle.php";
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/main/community/updateArticle.php";
     private Map<String,String> map;
 
     public UpdateArticleRequest(String existingArticleNo, String image, String content, Response.Listener<String>listener){

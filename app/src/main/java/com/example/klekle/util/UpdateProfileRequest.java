@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateProfileRequest extends StringRequest {
-    // 서버 url(API 호출)
-    final static private String URL="https://ywww-zzauz.run.goorm.site/klekle/main/my/updateProfile.php";
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/main/my/updateProfile.php";
     private Map<String,String>map;
 
     public UpdateProfileRequest(String profile, String userid, Response.Listener<String>listener){

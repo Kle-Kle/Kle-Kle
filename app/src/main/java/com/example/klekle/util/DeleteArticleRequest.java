@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeleteArticleRequest extends StringRequest {
-    final static private String URL = "https://ywww-zzauz.run.goorm.site/klekle/main/community/deleteArticle.php";
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/main/community/deleteArticle.php";
     private Map<String,String> map;
 
     public DeleteArticleRequest(String article_no, Response.Listener<String>listener){

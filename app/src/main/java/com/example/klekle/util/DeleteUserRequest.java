@@ -8,8 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeleteUserRequest extends StringRequest {
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/main/my/deleteUser.php";
     // 서버 url(API 호출)
-    final static private String URL = "https://ywww-zzauz.run.goorm.site/klekle/main/my/deleteUser.php";
     private Map<String,String>map;
 
     public DeleteUserRequest(String userid, Response.Listener<String>listener){
