@@ -12,8 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
-    //서버 url 설정(php파일 연동)
-    final static  private String URL = "https://ywww-zzauz.run.goorm.site/klekle/auth/register.php";
+    static ServerBaseURL serverBaseURL = new ServerBaseURL();
+    static final String baseURL = serverBaseURL.getBaseURL();
+    final static private String URL = baseURL + "/auth/register.php";
     private Map<String,String>map;
 
     public RegisterRequest(String userid, String email, String userpw, String nickname, String height, String weight, String reach, Response.Listener<String>listener){

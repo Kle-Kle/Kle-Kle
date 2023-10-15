@@ -2,21 +2,29 @@
     <string name="app_name">클클</string>
     <string name="app_title"><strike><b><i>KLE</i></b></strike>\n<strike><b><i>KLE</i></b></strike></string>
 
-    <string name="tv_description">* 현장에서 촬영하거나 갤러리에서 선택하여 암벽장의 사진을 입력합니다.</string>
+    <string name="tv_description">* 카메라를 통해 촬영하거나 갤러리에서 선택하여 암벽장의 사진을 입력합니다.</string>
     <string name="tv_placeholder">KLEKLE\nHOLD\nDETECTOR</string>
 
     <!--  auth.signup  -->
     <string name="id_hint">영문 소문자, 숫자 조합 2 ~ 20자</string>
     <string name="password_hint">영문 대/소문자, 숫자, 특수문자(!, ?, *, @, #, $, %, ^, &amp;, +, =) 포함 8 ~ 30자</string>
-    <string name="join_guide_email">잊어버린 계정을 되찾을 때 필요합니다.</string>
+    <string name="join_guide_email">잊어버린 계정을 찾을 때 필요합니다.</string>
 
     <!--  fragment_home  -->
     <string name="main_banner_title">어서오세요!</string>
     <string name="main_banner_text">나만의 클라이밍 코치,\n클클에 오신 것을 환영합니다.</string>
-    <string name="main_content01_title">경로 추천</string>
-    <string name="main_content01_text">어지러운 홀드\n최적의 경로를 추천</string>
+    <string name="main_content01_title">문제 생성</string>
+    <string name="main_content01_text">어지러운 홀드\n새로운 문제를 생성</string>
     <string name="main_content02_title">커뮤니티</string>
     <string name="main_content02_text">더 이상\n못 움직이겠다면</string>
+
+    <!--  fragment_calendar  -->
+    <string name="calendar_there_is_no_content">해당 일자에 기록이 없습니다.</string>
+    <string name="calendar_there_is_no_content02"><u>오늘을 기록하러 가기</u></string>
+
+    <!--  fragment_notice  -->
+    <string name="mark_as_unread"><u>(읽지 않음으로 표시)</u></string>
+    <string name="notification_guide_message">내가 작성한 글에 댓글이 달리면, 이 곳 알림 목록에 표시됩니다.\n알림 목록에서 알림을 최대 20개까지 볼 수 있습니다.</string>
 
     <!--  메뉴  -->
     <string name="menu_1_title">홈</string>
@@ -27,4 +35,30 @@
     <!--  activity_community  -->
     <string name="community_title">당신의 성장을 기록하세요!</string>
     <string name="community_text">기록은 당신의 발전을 더욱 선명하게 드러내어줍니다.</string>
+
+    <!--  캘린더 커스텀  -->
+    <string-array name="custom_weekdays">
+        <item>일</item>
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+    </string-array>
+
+<!--    <string-array name="custom_months">-->
+<!--        <item>JAN</item>-->
+<!--        <item>FEB</item>-->
+<!--        <item>MAR</item>-->
+<!--        <item>APR</item>-->
+<!--        <item>MAY</item>-->
+<!--        <item>JUN</item>-->
+<!--        <item>JUL</item>-->
+<!--        <item>AUG</item>-->
+<!--        <item>SEP</item>-->
+<!--        <item>OCT</item>-->
+<!--        <item>NOV</item>-->
+<!--        <item>DEC</item>-->
+<!--    </string-array>-->
 </resources>

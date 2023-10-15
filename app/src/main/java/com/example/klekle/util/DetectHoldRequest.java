@@ -9,8 +9,7 @@ import java.util.Map;
 
 public class DetectHoldRequest extends StringRequest {
     // 서버 url(API 호출)
-//    final static private String URL="http://52.78.114.56:50143/v1/object-detection/hold";
-    final static private String URL="http://43.200.192.190:53083/v1/object-detection/hold";
+    final static private String URL = "http://43.200.192.190:53551/v1/object-detection/hold";
     private Map<String,String>map;
 
     public DetectHoldRequest(String image, Response.Listener<String>listener){

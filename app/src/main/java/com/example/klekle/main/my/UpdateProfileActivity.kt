@@ -61,7 +61,7 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         // 초기화 버튼 이벤트
         binding.btnDeleteProfile.setOnClickListener {
-            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.icon_user))
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.simple_profile_image))
 
             binding.btnUpdateProfile.isEnabled = true
             binding.btnUpdateProfile.setTextColor(ContextCompat.getColor(this, R.color.primary_600))

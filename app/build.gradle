@@ -2,7 +2,11 @@ plugins {
     id 'com.android.application'
     id 'androidx.navigation.safeargs'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 33
@@ -15,6 +19,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "FCM_API_KEY", properties['fcm_api_key']
     }
 
     buildTypes {
@@ -32,6 +38,7 @@ android {
         buildFeatures {
             // 뷰 바인딩 활성화
             viewBinding true
+            dataBinding true
         }
     }
     namespace 'com.example.klekle'
@@ -66,6 +73,19 @@ dependencies {
 
     // tensorflow
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.1' //object detection
+
+    // circle imageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:32.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging:23.2.1'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.2.1'
 }
 repositories {
 //    mavenCentral()

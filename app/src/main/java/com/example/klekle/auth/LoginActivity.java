@@ -1,11 +1,13 @@
 package com.example.klekle.auth;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +24,18 @@ import com.example.klekle.MainActivity;
 import com.example.klekle.R;
 import com.example.klekle.auth.signup.RegisterActivity;
 import com.example.klekle.util.LoginRequest;
+import com.example.klekle.util.UpdateFcmTokenRequest;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText loginId, loginPw;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생성
+
+        // 현재 기기의 fcm token 구하기
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        // Get new FCM registration token
+                        token = task.getResult();
+                    }
+                });
 
         // 계정이 없으신가요? link가 연결된 TextView 생성
         TextView goToRegister = (TextView) findViewById(R.id.go_to_register);
@@ -79,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String userid = jasonObject.getString("userid");
                                 String nickname = jasonObject.getString("nickname");
                                 String profile = jasonObject.getString("profile");
+                                String statusMessage = jasonObject.getString("message");
                                 Toast.makeText(getApplicationContext(), "어서오세요, " + nickname + "님!", Toast.LENGTH_SHORT).show();
 
                                 // 한 번이라도 로그인 한 적 있다면 -> 자동 로그인되도록
@@ -87,7 +105,11 @@ public class LoginActivity extends AppCompatActivity {
                                 autoLogin.putString("loginedId", userid);
                                 autoLogin.putString("nickname", nickname); // shared preference 에 nickname 저장
                                 autoLogin.putString("profile", profile); // shared preference 에 profile 저장
+                                autoLogin.putString("statusMessage", statusMessage); // shared preference 에 profile 저장
                                 autoLogin.apply();
+
+                                // 현재 로그인 하는 계정의 fcm token 업데이트
+                                updateFcmTokenThisUser(userid);
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("log", "user");
@@ -112,6 +134,26 @@ public class LoginActivity extends AppCompatActivity {
                 //Login php 연결 -> LoginRequest.java
             }
         });
+    }
+
+    private void updateFcmTokenThisUser(String userid) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jasonObject = new JSONObject(response);
+                    boolean success = jasonObject.getBoolean("success");
+                    if (success) {
+                        Log.d("fcm:token", token);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        UpdateFcmTokenRequest updateFcmTokenRequest = new UpdateFcmTokenRequest(token, userid, responseListener);
+        RequestQueue queue= Volley.newRequestQueue(LoginActivity.this);
+        queue.add(updateFcmTokenRequest);
     }
 
     @Override
