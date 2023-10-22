@@ -1,15 +1,22 @@
 package com.example.klekle;
 
+import static com.example.klekle.util.BitmapConverter.bitmapToByteArray;
+import static com.example.klekle.util.BitmapConverter.byteArrayToBinaryString;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ImageDecoder;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,11 +29,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.klekle.domain.Hold;
 import com.example.klekle.util.BitmapConverter;
 import com.example.klekle.util.DetectHoldRequest;
+import com.example.klekle.util.PostArticleRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,6 +46,8 @@ public class PostActivity extends AppCompatActivity {
     private ImageView ivInputImage;
     private Button btnPost;
 
+    private EditText editText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +55,7 @@ public class PostActivity extends AppCompatActivity {
 
         ivInputImage = findViewById(R.id.iv_inputImage);
         btnPost = findViewById(R.id.btn_post);
+        editText = findViewById(R.id.content);
 
         sharedPreferences = getSharedPreferences("tempData", Activity.MODE_PRIVATE);
         String wallImage = sharedPreferences.getString("tempWallImage", null);
@@ -54,20 +66,23 @@ public class PostActivity extends AppCompatActivity {
 
         int holdCount = getIntent().getIntExtra("holdCount", 0);
         ArrayList<Hold> holds = new ArrayList<>();
-        detectHoldRequest(wallImage, canvas, holdCount, holds);
 
         Hold startHold = (Hold) getIntent().getSerializableExtra("startHold");
         Hold topHold = (Hold) getIntent().getSerializableExtra("topHold");
+
+        detectHoldRequest(wallImage, canvas, holdCount, holds, startHold, topHold);
 
         Paint paint = makePaintForStartHoldAndTopHold();
         canvas.drawPoint(startHold.getXmax(), startHold.getYmax(), paint);
         canvas.drawPoint(topHold.getXmax(), topHold.getYmax(), paint);
 
         btnPost.setOnClickListener(view -> {
-            Intent intent = new Intent(PostActivity.this, ArticleActivity.class);
-            intent.putExtra("startHold", startHold);
-            intent.putExtra("topHold", topHold);
-            intent.putExtra("holds", holds);
+            Intent intent = new Intent(PostActivity.this, CommunityActivity.class);
+
+            String base64Bitmap = bitmapToByteArray(bitmapD);
+            String content = editText.getText().toString();
+            postArticle(base64Bitmap, content);
+
             finish();
             startActivity(intent);
         });
@@ -81,7 +96,7 @@ public class PostActivity extends AppCompatActivity {
         return paint;
     }
 
-    private void detectHoldRequest(String wallImage, Canvas canvas, int holdCount, List<Hold> holds) {
+    private void detectHoldRequest(String wallImage, Canvas canvas, int holdCount, List<Hold> holds, Hold startHold, Hold topHold) {
         Response.Listener<String> responseListener = response -> {
             try {
                 JSONObject jsonObject = new JSONObject(response);
@@ -100,6 +115,15 @@ public class PostActivity extends AppCompatActivity {
                         int xmax = hold.getInt("xmax");
                         int ymax = hold.getInt("ymax");
 
+                        if (xmax < startHold.getXmax() || xmax > topHold.getXmax()) {
+                            Log.d("D:ttung", "ymax:" + ymax + "startHold Ymax: " +  startHold.getYmax() + "topHold Ymax:" +  topHold.getYmax());
+                            Log.d("D:ttung", "xmax:" + xmax + "startHold Xmax: " +  startHold.getXmax() + "topHold Xmax:" +  topHold.getXmax());
+                            i--;
+                            continue;
+                        }
+
+                        Log.d("D:final xmax:", String.valueOf(xmax));
+
                         canvas.drawPoint(xmax, ymax, paint);
                         holds.add(new Hold(xmax, ymax));
                     }
@@ -114,6 +138,34 @@ public class PostActivity extends AppCompatActivity {
         DetectHoldRequest detectHoldRequest = new DetectHoldRequest(wallImage, responseListener);
         RequestQueue queue = Volley.newRequestQueue(PostActivity.this);
         queue.add(detectHoldRequest);
+    }
+
+    private void postArticle(String image, String content) {
+
+        SharedPreferences preferences = getSharedPreferences("login_info", Activity.MODE_PRIVATE);
+        String userid = preferences.getString("loginedId", null);
+
+        Response.Listener<String> responseListener = response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                Boolean success = jsonObject.getBoolean("success");
+                if (success) {
+                    Log.d("test:D", jsonObject.toString());
+                    this.finish();
+                } else {
+
+                    Toast.makeText(this, "업로드에 실패하였습니다.\n" +
+                            "잠시 뒤 다시 시도해 주세요.", Toast.LENGTH_LONG);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        };
+
+        PostArticleRequest postArticleRequest = new PostArticleRequest(image, userid, content, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(PostActivity.this);
+        queue.add(postArticleRequest);
     }
 
     @NonNull

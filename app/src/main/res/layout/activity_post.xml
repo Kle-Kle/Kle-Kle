@@ -103,6 +103,7 @@
                     android:paddingHorizontal="20dp"
                     android:textSize="20sp"
                     android:gravity="start"
+                    android:id="@+id/content"
                     android:text="오늘 핑거테이프 감는 방법부터 다시 배웠네요 ㅋㅋ" />
 
                 <TextView

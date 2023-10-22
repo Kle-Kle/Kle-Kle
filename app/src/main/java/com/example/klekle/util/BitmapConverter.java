@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 
 public class BitmapConverter {
     public static Bitmap stringToBitmap(String data){
@@ -13,6 +14,14 @@ public class BitmapConverter {
         ByteArrayInputStream stream = new ByteArrayInputStream(byteArray);
         bitmap = BitmapFactory.decodeStream(stream);
         return bitmap;
+    }
+
+    public static String bitmapToByteArray(Bitmap bitmap) {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
     // byte[] to String
