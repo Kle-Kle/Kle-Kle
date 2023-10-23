@@ -82,14 +82,9 @@ public class PostActivity extends AppCompatActivity {
         canvas.drawPoint(topHold.getXmax(), topHold.getYmax(), paint);
 
         btnPost.setOnClickListener(view -> {
-            Intent intent = new Intent(PostActivity.this, CommunityActivity.class);
-
             String base64Bitmap = bitmapToByteArray(bitmapD);
             String content = editText.getText().toString();
             postArticle(base64Bitmap, content);
-
-            finish();
-            startActivity(intent);
         });
 
         // 게시글 본문 내용 글자 수 세기
@@ -184,8 +179,9 @@ public class PostActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(response);
                 Boolean success = jsonObject.getBoolean("success");
                 if (success) {
-                    Log.d("test:D", jsonObject.toString());
                     this.finish();
+                    Intent intent = new Intent(PostActivity.this, CommunityActivity.class);
+                    startActivity(intent);
                 } else {
 
                     Toast.makeText(this, "업로드에 실패하였습니다.\n" +
