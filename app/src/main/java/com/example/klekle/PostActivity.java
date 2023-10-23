@@ -12,12 +12,15 @@ import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +37,7 @@ import com.example.klekle.util.PostArticleRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -45,7 +49,7 @@ public class PostActivity extends AppCompatActivity {
 
     private ImageView ivInputImage;
     private Button btnPost;
-
+    public TextView tvCurrentArticleLength;
     private EditText editText;
 
     @Override
@@ -55,6 +59,7 @@ public class PostActivity extends AppCompatActivity {
 
         ivInputImage = findViewById(R.id.iv_inputImage);
         btnPost = findViewById(R.id.btn_post);
+        tvCurrentArticleLength = findViewById(R.id.tv_CurrentArticleLength);
         editText = findViewById(R.id.content);
 
         sharedPreferences = getSharedPreferences("tempData", Activity.MODE_PRIVATE);
@@ -86,6 +91,35 @@ public class PostActivity extends AppCompatActivity {
             finish();
             startActivity(intent);
         });
+
+        // 게시글 본문 내용 글자 수 세기
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int currentArticleLength = editText.length();
+                tvCurrentArticleLength.setText("("+currentArticleLength+"/280)");
+
+                if (currentArticleLength == 0) {
+                    btnPost.setEnabled(false);
+                    btnPost.setAlpha(0.5F);
+                }
+                else {
+                    btnPost.setEnabled(true);
+                    btnPost.setAlpha(1F);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //
+            }
+        });
+        btnPost.setEnabled(false); // 첫 입장 시, '게시' 버튼 비활성화
     }
 
     @NonNull

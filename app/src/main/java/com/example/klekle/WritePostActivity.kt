@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.widget.addTextChangedListener
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.klekle.databinding.ActivityWritePostBinding
@@ -85,6 +86,22 @@ class WritePostActivity : AppCompatActivity() {
             else PostArticle()
         }
 
+        // 게시글 본문 내용 글자 수 세기
+        binding.content.addTextChangedListener {
+            var currentArticleLength = binding.content.length()
+            binding.tvCurrentArticleLength.text = "($currentArticleLength/280)"
+
+            if (currentArticleLength == 0) {
+                binding.btnPost.isEnabled = false
+                binding.btnPost.alpha = 0.5F
+            }
+            else {
+                binding.btnPost.isEnabled = true
+                binding.btnPost.alpha = 1F
+            }
+        }
+        binding.btnPost.isEnabled = false // 첫 입장 시 '게시하기' 버튼 비활성화
+        binding.tvCurrentArticleLength.text = "(${binding.content.length()}/280)" // 첫 입장 시 글자 수 세팅 - 업데이트 모드로 입장했을 때를 고려..
     }
 
     private fun openGallery() {

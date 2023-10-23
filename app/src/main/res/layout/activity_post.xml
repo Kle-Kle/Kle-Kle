@@ -85,7 +85,8 @@
                         android:gravity="center"
                         android:text="게시"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:alpha="0.5" />
                 </LinearLayout>
 
                 <ImageView
@@ -96,23 +97,26 @@
                     android:scaleType="centerInside"
                     android:src="@drawable/img_meal_one" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:paddingVertical="10dp"
-                    android:paddingHorizontal="20dp"
-                    android:textSize="20sp"
-                    android:gravity="start"
-                    android:id="@+id/content"
-                    android:text="오늘 핑거테이프 감는 방법부터 다시 배웠네요 ㅋㅋ" />
-
                 <TextView
+                    android:id="@+id/tv_CurrentArticleLength"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="10dp"
                     android:paddingHorizontal="20dp"
                     android:gravity="end"
-                    android:text="27 /280" />
+                    android:text="(0/280)" />
+
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="20sp"
+                    android:gravity="start"
+                    android:hint="내용을 입력하세요."
+                    android:maxLength="280"
+                    android:text="" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
