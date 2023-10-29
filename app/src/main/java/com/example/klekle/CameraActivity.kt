@@ -274,9 +274,10 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+//    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun selectFromGallery() {
-        val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+//        val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+        val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         activityResult.launch(intent)
     }
