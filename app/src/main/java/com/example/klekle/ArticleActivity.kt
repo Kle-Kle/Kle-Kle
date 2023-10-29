@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -86,8 +87,10 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener {
                 commentAdapter.setActivity(this@ArticleActivity)
             }
         }
-        getComments()
-        getAndSetArticleDetail()
+        Handler().postDelayed(Runnable {
+            getComments()
+            getAndSetArticleDetail()
+        }, 1000)
 
         // 댓글 글자 수 세기
         binding.etComment.addTextChangedListener {
